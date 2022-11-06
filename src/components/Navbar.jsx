@@ -7,6 +7,7 @@ import { useState } from "react";
 import { removeFromFav, useCartSelector } from "../redux/shoppingCartRedux";
 import { useDispatch, useSelector } from "react-redux";
 import { IoIosArrowDown } from "react-icons/io";
+import { BiSearch } from "react-icons/bi";
 
 const Navbar = () => {
   const dispatch = useDispatch();
@@ -15,6 +16,8 @@ const Navbar = () => {
 
   const { favProducts } = useSelector(useCartSelector);
 
+  const [inputValue, setInputValue] = useState("");
+
   return (
     <header>
       <div className="header-wrapper">
@@ -22,10 +25,16 @@ const Navbar = () => {
           physical point
         </Link>
 
-        <ul>
-          <Link to="/">home</Link>
-          <Link to="/productos">shop</Link>
-        </ul>
+        <div className="input-container">
+          <input
+            className="filter-input"
+            type="text"
+            value={inputValue}
+            placeholder="Search products by name"
+            onChange={(e) => setInputValue(e.target.value)}
+          />
+          <BiSearch className="search-icon" />
+        </div>
 
         <Box
           sx={{
@@ -36,30 +45,12 @@ const Navbar = () => {
             height: "100%",
           }}
         >
-          <div
-            className="fav-container"
-            onClick={() => setIsHovered((prev) => !prev)}
-          >
-            Favorites
-            <IoIosArrowDown />
-          </div>
-          {isHovered && (
-            <div className="fav-products-wrapper">
-              <h4 className="title">Favorites</h4>
-              {favProducts.map((product) => (
-                <div className="fav-product">
-                  <img src={product.pictureURL[0]} alt={product.title} />
-                  <div className="content">
-                    <h4>{product.title}</h4>
-                    <h5>{product.price}</h5>
-                    <button onClick={() => dispatch(removeFromFav(product))}>
-                      Remove
-                    </button>
-                  </div>
-                </div>
-              ))}
-            </div>
-          )}
+          <nav>
+            <ul>
+              <Link to="/">home</Link>
+              <Link to="/productos">shop</Link>
+            </ul>
+          </nav>
 
           <CartWidget />
         </Box>

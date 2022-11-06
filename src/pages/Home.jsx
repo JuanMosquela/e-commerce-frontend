@@ -29,16 +29,6 @@ const Home = () => {
             We have all kinds of higth quality products that will help you reach
             your goals, not only in the gym but in life
           </p>
-          <div className="input-container">
-            <input
-              className="filter-input"
-              type="text"
-              value={inputValue}
-              placeholder="Search products by name"
-              onChange={(e) => setInputValue(e.target.value)}
-            />
-            <BiSearch className="search-icon" />
-          </div>
         </div>
       </section>
 

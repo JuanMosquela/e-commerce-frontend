@@ -94,9 +94,19 @@ section {
   gap: 2rem;
 }
 
-.header-wrapper nav ul a {
+.header-wrapper ul a {
   color: #fff;
   text-transform: capitalize;
+  font-size: 1.4rem;
+  text-transform: uppercase;
+  font-weight: 600;
+}
+
+.filter-input {
+  border: 1px solid #ccc;
+  width: 600px;
+  height: 35px;
+  padding: 12px;
 }
 
 .header-wrapper .cart-icon {
@@ -263,13 +273,6 @@ section {
   font-size: 1.4rem;
   height: fit-content;
   width: 100%;
-}
-
-.filter-input {
-  border: 1px solid #ccc;
-  width: 100%;
-  height: 45px;
-  padding: 12px;
 }
 
 .option-group {
