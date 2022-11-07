@@ -10,24 +10,28 @@ import Products from "./pages/Products";
 import Home from "./pages/Home";
 import { Provider } from "react-redux";
 import { store } from "./redux/store";
-import Shop from "./pages/Shop";
 import CartList from "./pages/CartList";
+
+import ProductDetailPage from "./pages/ProductDetailPage";
+import SearchProductsProvider from "./context/SearchProductsProvider";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <BrowserRouter>
     <Provider store={store}>
-      <Routes>
-        <Route path="/" exact element={<App />}>
-          <Route index element={<Home />} />
-          <Route path="/users" element={<User />} />
-          <Route path="/products" element={<Products />} />
-          <Route path="/productos" element={<Shop />} />
-          <Route path="/cartList" element={<CartList />} />
-        </Route>
-        <Route path="/login" element={<Login />} />
-        <Route path="/register" element={<Register />} />
-      </Routes>
+      <SearchProductsProvider>
+        <Routes>
+          <Route path="/" exact element={<App />}>
+            <Route index element={<Home />} />
+            <Route path="/users" element={<User />} />
+            <Route path="/products" element={<Products />} />
+            <Route path="/products/:id" element={<ProductDetailPage />} />
+            <Route path="/cartList" element={<CartList />} />
+          </Route>
+          <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
+        </Routes>
+      </SearchProductsProvider>
     </Provider>
   </BrowserRouter>
 );

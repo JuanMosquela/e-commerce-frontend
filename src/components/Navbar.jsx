@@ -1,22 +1,12 @@
 import { Box } from "@mui/material";
-import { AiFillHeart, AiOutlineHeart } from "react-icons/ai";
 import { Link } from "react-router-dom";
 import CartWidget from "./CartWidget";
-import { useState } from "react";
-
-import { removeFromFav, useCartSelector } from "../redux/shoppingCartRedux";
-import { useDispatch, useSelector } from "react-redux";
-import { IoIosArrowDown } from "react-icons/io";
+import { useContext, useState } from "react";
 import { BiSearch } from "react-icons/bi";
+import { ProductsContext } from "../context/SearchProductsProvider";
 
 const Navbar = () => {
-  const dispatch = useDispatch();
-
-  const [isHovered, setIsHovered] = useState(false);
-
-  const { favProducts } = useSelector(useCartSelector);
-
-  const [inputValue, setInputValue] = useState("");
+  const { handleClick, inputValue, handleInput } = useContext(ProductsContext);
 
   return (
     <header>
@@ -31,9 +21,12 @@ const Navbar = () => {
             type="text"
             value={inputValue}
             placeholder="Search products by name"
-            onChange={(e) => setInputValue(e.target.value)}
+            onChange={(e) => handleInput(e.target.value)}
           />
-          <BiSearch className="search-icon" />
+          <BiSearch
+            className="search-icon"
+            onClick={() => handleClick(inputValue)}
+          />
         </div>
 
         <Box
@@ -48,7 +41,7 @@ const Navbar = () => {
           <nav>
             <ul>
               <Link to="/">home</Link>
-              <Link to="/productos">shop</Link>
+              <Link to="/products">shop</Link>
             </ul>
           </nav>
 

@@ -1,5 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { toast } from "react-toastify";
+import { publicRequest } from "../utils/request-methods";
 
 const initialState = {
   cart: localStorage.getItem("cart")
@@ -18,30 +19,14 @@ export const shoppingCartSlice = createSlice({
   name: "cart",
   initialState,
   reducers: {
-    addToFav: (state, action) => {
-      state.favProducts = [...state.favProducts, action.payload];
-      localStorage.setItem("favProducts", JSON.stringify(state.favProducts));
-
-      toast.success(`added ${action.payload.title} to favorites`, {
-        position: "bottom-right",
-      });
-    },
-    removeFromFav: (state, action) => {
-      const removedProduct = state.favProducts.filter((product) => {
-        return product.id !== action.payload.id;
-      });
-      if (removedProduct) {
-        state.favProducts = removedProduct;
-        localStorage.setItem("favProducts", JSON.stringify(state.favProducts));
-      }
-    },
-
     addToCart: (state, action) => {
       let counter = action.payload.counter;
 
+      let product = action.payload.product;
+
       state.quantity += counter ? counter : 1;
       const existingIndex = state.cart.findIndex(
-        (item) => item.id === action.payload.product.id
+        (item) => item.id === product.id
       );
 
       if (existingIndex >= 0) {
@@ -136,8 +121,6 @@ export const shoppingCartSlice = createSlice({
 });
 
 export const {
-  addToFav,
-  removeFromFav,
   addToCart,
   removeItem,
   decrese,

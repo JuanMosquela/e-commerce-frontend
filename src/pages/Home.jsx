@@ -1,23 +1,4 @@
-import { Button } from "@mui/material";
-import { BiSearch } from "react-icons/bi";
-import { Link } from "react-router-dom";
-// import ProductsList from "../components/ProductsList";
-import "slick-carousel/slick/slick.css";
-import "slick-carousel/slick/slick-theme.css";
-
-import { useState } from "react";
-
 const Home = () => {
-  const [inputValue, setInputValue] = useState("");
-
-  const settings = {
-    dots: true,
-    infinite: true,
-    speed: 500,
-    slidesToShow: 1,
-    slidesToScroll: 1,
-  };
-
   return (
     <>
       <section className="hero">
