@@ -5,11 +5,13 @@ import { useContext, useState } from "react";
 import { BiSearch } from "react-icons/bi";
 import { ProductsContext } from "../context/SearchProductsProvider";
 import { useAuth } from "../context/AuthProvider";
+import { FaUserCircle } from "react-icons/fa";
+import DropDownMenu from "./DropDownMenu";
 
 const Navbar = () => {
   const { handleClick, inputValue, handleInput } = useContext(ProductsContext);
 
-  const { setAuth, handleLogout } = useAuth();
+  const { auth } = useAuth();
 
   return (
     <header>
@@ -38,10 +40,9 @@ const Navbar = () => {
             gap: 3,
             justifyContent: "space-between",
             alignItems: "center",
-            height: "100%",
           }}
         >
-          <nav>
+          <nav className="navbar">
             <ul>
               <Link to="/">home</Link>
               <Link to="/products">shop</Link>
@@ -49,7 +50,7 @@ const Navbar = () => {
           </nav>
 
           <CartWidget />
-          <button onClick={handleLogout}>logout</button>
+          {auth && <DropDownMenu />}
         </Box>
       </div>
     </header>

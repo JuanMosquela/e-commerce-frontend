@@ -93,7 +93,7 @@ section {
   gap: 2rem;
 }
 
-.header-wrapper ul a {
+.header-wrapper .navbar ul a {
   color: #fff;
   text-transform: capitalize;
   font-size: 1.4rem;
@@ -127,6 +127,38 @@ section {
   position: absolute;
   top: -5px;
   right: -15px;
+}
+
+.drop-down-menu {
+  position: relative;
+  height: 70px;
+}
+
+.drop-down {
+  position: absolute;
+  top: 80px;
+  right: 0;
+  width: fit-content;
+
+  background-color: #000;
+  border-radius: 7px;
+  box-shadow: 1px 5px 15px rgba(0, 0, 0, 0.4);
+}
+
+.drop-down li a {
+  cursor: pointer;
+  padding: 1.5rem 3rem;
+  font-size: 1.4rem;
+  color: #fff;
+  display: flex;
+  align-items: center;
+
+  justify-content: center;
+  gap: 1rem;
+}
+
+.drop-down li a:hover {
+  background-color: var(--color-orange);
 }
 
 /* ---------------- hero styles ----------------------- */

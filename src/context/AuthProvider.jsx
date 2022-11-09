@@ -8,13 +8,13 @@ const AuthProvider = ({ children }) => {
   const navigate = useNavigate();
   console.log(auth);
 
-  const handleLogout = () => {
+  const logout = () => {
     setAuth(false);
     navigate("/");
   };
 
   return (
-    <AuthContext.Provider value={{ auth, setAuth, handleLogout }}>
+    <AuthContext.Provider value={{ auth, setAuth, logout }}>
       {children}
     </AuthContext.Provider>
   );

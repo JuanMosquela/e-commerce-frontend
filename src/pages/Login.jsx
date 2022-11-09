@@ -76,11 +76,17 @@ const Login = () => {
             <span className="error">{errors.password}</span>
           )}
         </div>
-        <button type="submit" disabled={loading}>
+        <button type="submit" disabled={loading} style={{ fontSize: "2rem" }}>
           {loading ? (
-            <CircularProgress sx={{ color: "rgba(255,255,255,.5)" }} />
+            <>
+              <span style={{ marginRight: "10px" }}>Loading</span>
+              <CircularProgress
+                sx={{ color: "rgba(255,255,255,.8)" }}
+                size="2rem"
+              />
+            </>
           ) : (
-            "Login"
+            <span>Login</span>
           )}
         </button>
         <p>
