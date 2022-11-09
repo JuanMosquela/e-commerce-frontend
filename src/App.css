@@ -132,9 +132,9 @@ section {
 /* ---------------- hero styles ----------------------- */
 .hero {
   background-color: #1d354d;
-  min-height: 65vh;
+  min-height: 75vh;
   background: url(./img/slide.jpg) no-repeat;
-  background-size: contain;
+  background-size: cover;
   display: flex;
   align-items: center;
   justify-content: left;
@@ -495,6 +495,57 @@ span:nth-child(3) {
 .carrusel-container h3 {
   font-size: 2rem;
   margin-bottom: 3rem;
+}
+
+/* ------------------   form ------------------------- */
+
+.form-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.form-container form {
+  width: 400px;
+
+  background-color: #1d354d;
+  padding: 2rem;
+}
+
+.form-container p {
+  background-color: #1d354d;
+  color: #fff;
+}
+
+.form-container p .line a {
+  color: #faba42;
+}
+
+.form-container form .input-group {
+  margin-bottom: 15px;
+}
+
+.form-container form .input-group label {
+  display: block;
+  color: #fff;
+  font-size: 1.2rem;
+  margin-bottom: 10px;
+}
+.form-container form .input-group input {
+  width: 100%;
+  border-radius: 5px;
+  padding: 1rem;
+}
+.form-container button {
+  display: block;
+  width: 100%;
+  background-color: #faba42;
+  color: #fff;
+  border-radius: 5px;
+  padding: 15px;
+  margin-bottom: 2rem;
 }
 
 /* ----------------- cart section --------------------- */
@@ -950,11 +1001,17 @@ footer .flex-container {
   justify-content: space-between;
 }
 @media (max-width: 800px) {
+  html {
+    font-size: 58.5%;
+  }
   footer .flex-container {
     flex-wrap: wrap;
   }
 }
 @media (max-width: 600px) {
+  html {
+    font-size: 55.5%;
+  }
   footer .flex-container {
     justify-content: center;
     text-align: center;

@@ -4,9 +4,12 @@ import CartWidget from "./CartWidget";
 import { useContext, useState } from "react";
 import { BiSearch } from "react-icons/bi";
 import { ProductsContext } from "../context/SearchProductsProvider";
+import { useAuth } from "../context/AuthProvider";
 
 const Navbar = () => {
   const { handleClick, inputValue, handleInput } = useContext(ProductsContext);
+
+  const { setAuth, handleLogout } = useAuth();
 
   return (
     <header>
@@ -46,6 +49,7 @@ const Navbar = () => {
           </nav>
 
           <CartWidget />
+          <button onClick={handleLogout}>logout</button>
         </Box>
       </div>
     </header>

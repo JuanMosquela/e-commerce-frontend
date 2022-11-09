@@ -1,9 +1,12 @@
 import { createContext, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { publicRequest } from "../utils/request-methods";
 
 export const ProductsContext = createContext();
 
 const SearchProductsProvider = ({ children }) => {
+  const navigate = useNavigate();
+
   const [inputValue, setInputValue] = useState("");
 
   const [loading, setLoading] = useState(true);
@@ -25,6 +28,7 @@ const SearchProductsProvider = ({ children }) => {
     } finally {
       setLoading(false);
       setInputValue("");
+      navigate("/products");
     }
   };
 

@@ -7,7 +7,7 @@ const CartWidget = () => {
   const state = useSelector(useCartSelector);
 
   return (
-    <Link to="/cartlist" className="cart-icon">
+    <Link to="cartList" className="cart-icon">
       <AiOutlineShoppingCart />
       <span>{state.quantity}</span>
     </Link>

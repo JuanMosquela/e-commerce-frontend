@@ -4,6 +4,9 @@ import { useDispatch, useSelector } from "react-redux";
 import { addToCart } from "../redux/shoppingCartRedux";
 
 const ProductDetail = ({ productDetail }) => {
+
+  
+
   const cart = useSelector((state) => state);
 
   const [pictureIndex, setPictureIndex] = useState(0);
