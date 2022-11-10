@@ -13,6 +13,7 @@ const DropDownMenu = () => {
   const handleLogout = (e) => {
     e.stopPropagation();
     dispatch(logout());
+    setIsOpen(false);
   };
 
   return (

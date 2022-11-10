@@ -537,18 +537,51 @@ span:nth-child(3) {
   align-items: center;
   flex-direction: column;
   min-height: 100vh;
+  background-color: #1f2023;
+}
+
+.form-container .form-wrapper {
+  opacity: 0;
+  display: flex;
+  height: 600px;
+  border-radius: 12px;
+  overflow: hidden;
+  animation: fade-up 0.2s ease-in-out 1s forwards;
+}
+
+@keyframes fade-up {
+  0% {
+    transform: translateY(15px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.form-container .form-wrapper figure {
+  height: 100%;
+}
+
+.form-wrapper figure img {
+  height: 100%;
+  width: 100%;
 }
 
 .form-container form {
   width: 400px;
+  padding: 6rem 3rem;
+  background-color: #fff;
+}
 
-  background-color: #1d354d;
-  padding: 2rem;
+.form-container h2 {
+  color: #000;
+  font-size: 3rem;
+  margin-bottom: 2rem;
 }
 
 .form-container p {
-  background-color: #1d354d;
-  color: #fff;
+  color: #000;
 }
 
 .form-container p .line a {
@@ -558,18 +591,14 @@ span:nth-child(3) {
 .form-container form .input-group {
   margin-bottom: 15px;
   position: relative;
+  min-height: 60px;
 }
 
-.form-container form .input-group label {
-  display: block;
-  color: #fff;
-  font-size: 1.2rem;
-  margin-bottom: 10px;
-}
 .form-container form .input-group input {
   width: 100%;
-  border-radius: 5px;
-  padding: 1rem;
+  padding: 1rem 0;
+  font-size: 1.4rem;
+  border-bottom: var(--color-orange) 2px solid;
 }
 .form-container button {
   display: block;
@@ -578,7 +607,8 @@ span:nth-child(3) {
   color: #fff;
   border-radius: 5px;
   padding: 15px;
-  margin-bottom: 2rem;
+
+  cursor: pointer;
 }
 
 .eye-icon {
@@ -586,6 +616,20 @@ span:nth-child(3) {
   right: 15px;
   top: 50%;
   font-size: 2rem;
+}
+
+.form-container .error {
+  padding-top: 10px;
+  color: rgb(236, 126, 126);
+  font-size: 1.2rem;
+  font-weight: 600;
+}
+
+form .google {
+  padding: 3rem 0;
+  text-align: center;
+  color: #333;
+  font-size: 1.2rem;
 }
 
 /* ----------------- cart section --------------------- */

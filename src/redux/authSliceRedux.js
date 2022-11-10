@@ -2,6 +2,7 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { AiOutlineConsoleSql } from "react-icons/ai";
 import publicRequest, { BASE_URL } from "../utils/request-methods";
 import jwtDecode from "jwt-decode";
+import { toast } from "react-toastify";
 
 const initialState = {
   token: localStorage.getItem("token"),
@@ -19,17 +20,18 @@ export const signUpUser = createAsyncThunk(
   "auth/register",
   async (values, { rejectWithValue }) => {
     try {
-      const data = await publicRequest.register({
+      const { user } = await publicRequest.register({
         name: values.name,
         email: values.email,
         password: values.password,
       });
 
-      console.log(data);
-      return data;
+      console.log(user);
+      return user;
     } catch (error) {
-      console.log(error.response.data);
-      return rejectWithValue(error.response.data);
+      const { msg } = error.response.data;
+      toast.error(`${msg}`, { position: "top-right" });
+      return rejectWithValue(msg);
     }
   }
 );
@@ -46,11 +48,14 @@ export const signIn = createAsyncThunk(
 
       if (data?.token) {
         localStorage.setItem("token", JSON.stringify(data.token));
+        toast.success("User login correctly", { position: "top-right" });
       }
+
       return data;
     } catch (error) {
-      console.log(error.response.data);
-      return rejectWithValue(error.response.data);
+      const { msg } = error.response.data;
+      toast.error(`${msg}`, { position: "top-right" });
+      return rejectWithValue(msg);
     }
   }
 );

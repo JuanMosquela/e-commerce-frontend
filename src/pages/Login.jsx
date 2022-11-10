@@ -1,24 +1,27 @@
 import { CircularProgress } from "@mui/material";
 import { useFormik } from "formik";
-import { useState } from "react";
+import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useLocation, useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 import { signIn } from "../redux/authSliceRedux";
-
 import { loginSchemas } from "../schemas/loginSchemas";
-import publicRequest from "../utils/request-methods.js";
+import loginBackground from "../img/login.jpg";
 
 const Login = () => {
-  const [loading, setLoading] = useState(false);
   const location = useLocation();
   const navigate = useNavigate();
   const from = location.state?.from?.pathname || "/";
 
   const auth = useSelector((state) => state.auth);
   const dispatch = useDispatch();
+  const loading = auth.loginStatus === "pending";
+
+  useEffect(() => {
+    if (auth.token) navigate(from);
+  }, []);
 
   const onSubmit = async () => {
-    setLoading(true);
     try {
       const data = await dispatch(signIn(values));
       console.log(data);
@@ -26,11 +29,7 @@ const Login = () => {
         navigate(from, { replace: true });
       }
     } catch (error) {
-      const {
-        response: { data },
-      } = error;
-    } finally {
-      setLoading(false);
+      console.log(error);
     }
   };
 
@@ -46,54 +45,63 @@ const Login = () => {
 
   return (
     <div className="form-container">
-      <form method="post" onSubmit={handleSubmit}>
-        <div className="input-group">
-          <label htmlFor="email">Email</label>
-          <input
-            onChange={handleChange}
-            onBlur={handleBlur}
-            value={values.email}
-            type="text"
-            name="email"
-          />
-          {errors.email && touched.email && (
-            <span className="error">{errors.email}</span>
-          )}
-        </div>
-        <div className="input-group">
-          <label htmlFor="password">Password</label>
-          <input
-            onChange={handleChange}
-            onBlur={handleBlur}
-            value={values.password}
-            type="text"
-            name="password"
-          />
-          {errors.password && touched.password && (
-            <span className="error">{errors.password}</span>
-          )}
-        </div>
-        <button type="submit" disabled={loading} style={{ fontSize: "2rem" }}>
-          {loading ? (
-            <>
-              <span style={{ marginRight: "10px" }}>Loading</span>
-              <CircularProgress
-                sx={{ color: "rgba(255,255,255,.8)" }}
-                size="2rem"
-              />
-            </>
-          ) : (
-            <span>Login</span>
-          )}
-        </button>
-        <p>
-          Need an Account?
-          <br />
-          <span className="line">
-            <Link to="/register">Sign Up</Link>
-          </span>
-        </p>
-      </form>
+      <div className="form-wrapper">
+        <figure>
+          <img src={loginBackground} alt="" />
+        </figure>
+        <form method="post" onSubmit={handleSubmit}>
+          <h2>Sign In</h2>
+          <div className="input-group">
+            <input
+              onChange={handleChange}
+              onBlur={handleBlur}
+              value={values.email}
+              type="text"
+              name="email"
+              placeholder="Email Adress"
+            />
+            {errors.email && touched.email && (
+              <p className="error">{errors.email}</p>
+            )}
+          </div>
+          <div className="input-group">
+            <input
+              onChange={handleChange}
+              onBlur={handleBlur}
+              value={values.password}
+              type="text"
+              name="password"
+              placeholder="Password"
+            />
+            {errors.password && touched.password && (
+              <p className="error">{errors.password}</p>
+            )}
+          </div>
+          <button type="submit" disabled={loading} style={{ fontSize: "2rem" }}>
+            {loading ? (
+              <>
+                <span style={{ marginRight: "10px" }}>Loading</span>
+                <CircularProgress
+                  sx={{ color: "rgba(255,255,255,.8)" }}
+                  size="2rem"
+                />
+              </>
+            ) : (
+              <span>Login</span>
+            )}
+          </button>
+
+          <p className="google">Or signIn with google account</p>
+
+          <p>
+            Need an Account?
+            <br />
+            <span className="line">
+              <Link to="/register">Sign Up</Link>
+            </span>
+          </p>
+        </form>
+      </div>
     </div>
   );
 };

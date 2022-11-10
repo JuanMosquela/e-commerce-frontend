@@ -7,25 +7,36 @@ import { useDispatch, useSelector } from "react-redux";
 import { signUpUser } from "../redux/authSliceRedux";
 import { CircularProgress } from "@mui/material";
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { isAllOf } from "@reduxjs/toolkit";
+import { toast } from "react-toastify";
 
 const Register = () => {
   const [visible, setVisible] = useState(false);
   const dispatch = useDispatch();
   const location = useLocation();
   const navigate = useNavigate();
-  const from = location.state?.from?.pathname || "/";
   const auth = useSelector((state) => state.auth);
+  const from = location.state?.from?.pathname || "/";
+
+  useEffect(() => {
+    if (auth.token) navigate(from);
+  }, []);
 
   const onSubmit = async () => {
     try {
       const data = await dispatch(signUpUser(values));
+
       console.log(auth.registerStatus);
-      if (auth.registerStatus === "success") {
+
+      console.log(data);
+
+      if (data.type === "success" || "success") {
         navigate("/login", { replace: true });
       }
     } catch (error) {
       console.log(error);
+      toast.error(`${auth.loginError.msg}`, { position: "top-right" });
     }
   };
 
@@ -44,7 +55,6 @@ const Register = () => {
     <div className="form-container">
       <form method="post" onSubmit={handleSubmit}>
         <div className="input-group">
-          <label htmlFor="name">Username</label>
           <input
             onChange={handleChange}
             onBlur={handleBlur}
@@ -57,7 +67,6 @@ const Register = () => {
           )}
         </div>
         <div className="input-group">
-          <label htmlFor="email">Email</label>
           <input
             onChange={handleChange}
             onBlur={handleBlur}
@@ -70,7 +79,6 @@ const Register = () => {
           )}
         </div>
         <div className="input-group">
-          <label htmlFor="password">Password</label>
           <input
             onChange={handleChange}
             onBlur={handleBlur}
@@ -106,6 +114,7 @@ const Register = () => {
             <span>Submit</span>
           )}
         </button>
+
         <p>
           Already have and account?
           <br />
