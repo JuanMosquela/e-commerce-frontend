@@ -1,6 +1,6 @@
 import { createContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { publicRequest } from "../utils/request-methods";
+import publicRequest from "../utils/request-methods";
 
 export const ProductsContext = createContext();
 

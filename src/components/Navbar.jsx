@@ -4,14 +4,12 @@ import CartWidget from "./CartWidget";
 import { useContext, useState } from "react";
 import { BiSearch } from "react-icons/bi";
 import { ProductsContext } from "../context/SearchProductsProvider";
-import { useAuth } from "../context/AuthProvider";
+
 import { FaUserCircle } from "react-icons/fa";
 import DropDownMenu from "./DropDownMenu";
 
 const Navbar = () => {
   const { handleClick, inputValue, handleInput } = useContext(ProductsContext);
-
-  const { auth } = useAuth();
 
   return (
     <header>
@@ -50,7 +48,7 @@ const Navbar = () => {
           </nav>
 
           <CartWidget />
-          {auth && <DropDownMenu />}
+          {<DropDownMenu />}
         </Box>
       </div>
     </header>

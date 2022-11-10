@@ -3,7 +3,7 @@ import { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import CardProduct from "../components/CardProduct";
 import { ProductsContext } from "../context/SearchProductsProvider";
-import { publicRequest } from "../utils/request-methods";
+import publicRequest from "../utils/request-methods";
 
 const Products = () => {
   const { searchedProducts, inputValue } = useContext(ProductsContext);

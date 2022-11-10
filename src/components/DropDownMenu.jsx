@@ -1,17 +1,18 @@
 import { useState } from "react";
 import { FaUserCircle } from "react-icons/fa";
-import { useAuth } from "../context/AuthProvider";
 import { CgProfile } from "react-icons/cg";
 import { MdOutlineLogout } from "react-icons/md";
 import { Link } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { logout } from "../redux/authSliceRedux";
 
 const DropDownMenu = () => {
-  const { logout } = useAuth();
   const [isOpen, setIsOpen] = useState(false);
+  const dispatch = useDispatch();
 
   const handleLogout = (e) => {
     e.stopPropagation();
-    logout();
+    dispatch(logout());
   };
 
   return (
@@ -25,7 +26,7 @@ const DropDownMenu = () => {
             </Link>
           </li>
 
-          <li onClick={(e) => handleLogout(e)}>
+          <li onClick={handleLogout}>
             <Link to="">
               <MdOutlineLogout />
               Logout

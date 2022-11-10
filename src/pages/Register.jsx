@@ -1,28 +1,29 @@
 import { useFormik } from "formik";
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import { useAuth } from "../context/AuthProvider";
+
 import { registerSchemas } from "../schemas/registerSchemas";
-import { publicRequest } from "../utils/request-methods";
+
+import { useDispatch, useSelector } from "react-redux";
+import { signUpUser } from "../redux/authSliceRedux";
+import { CircularProgress } from "@mui/material";
+import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
+import { useState } from "react";
 
 const Register = () => {
-  const { setAuth, auth, handleLogin } = useAuth();
+  const [visible, setVisible] = useState(false);
+  const dispatch = useDispatch();
   const location = useLocation();
   const navigate = useNavigate();
   const from = location.state?.from?.pathname || "/";
+  const auth = useSelector((state) => state.auth);
 
   const onSubmit = async () => {
-    // handleLogin();
-    console.log(values);
-
     try {
-      const { data } = await publicRequest.post(`/auth/register`, {
-        name: values.name,
-        email: values.email,
-        password: values.password,
-      });
-
-      console.log(data);
-      if (data) navigate("/login", { replace: true });
+      const data = await dispatch(signUpUser(values));
+      console.log(auth.registerStatus);
+      if (auth.registerStatus === "success") {
+        navigate("/login", { replace: true });
+      }
     } catch (error) {
       console.log(error);
     }
@@ -74,15 +75,36 @@ const Register = () => {
             onChange={handleChange}
             onBlur={handleBlur}
             value={values.password}
-            type="text"
+            type={visible ? "text" : "password"}
             name="password"
           />
+          {visible ? (
+            <AiOutlineEye
+              className="eye-icon"
+              onClick={() => setVisible(!visible)}
+            />
+          ) : (
+            <AiOutlineEyeInvisible
+              className="eye-icon"
+              onClick={() => setVisible(!visible)}
+            />
+          )}
           {errors.password && touched.password && (
             <span className="error">{errors.password}</span>
           )}
         </div>
-        <button onClick={() => onSubmit()} type="submit">
-          Register
+        <button type="submit">
+          {auth.registerStatus === "pending" ? (
+            <span>
+              Submiting
+              <CircularProgress
+                size="2rem"
+                sx={{ color: "rgba(255,255,255,.7)" }}
+              />
+            </span>
+          ) : (
+            <span>Submit</span>
+          )}
         </button>
         <p>
           Already have and account?

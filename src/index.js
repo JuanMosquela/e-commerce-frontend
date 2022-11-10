@@ -15,30 +15,27 @@ import CartList from "./pages/CartList";
 import ProductDetailPage from "./pages/ProductDetailPage";
 import SearchProductsProvider from "./context/SearchProductsProvider";
 import ProtectedRoute from "./components/ProtectedRoute";
-import AuthProvider from "./context/AuthProvider";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <BrowserRouter>
     <Provider store={store}>
-      <AuthProvider>
-        <SearchProductsProvider>
-          <Routes>
-            <Route path="/" exact element={<App />}>
-              <Route index element={<Home />} />
-              <Route path="/users" element={<User />} />
-              <Route path="/products" element={<Products />} />
-              <Route path="/products/:id" element={<ProductDetailPage />} />
+      <SearchProductsProvider>
+        <Routes>
+          <Route path="/" exact element={<App />}>
+            <Route index element={<Home />} />
+            <Route path="/users" element={<User />} />
+            <Route path="/products" element={<Products />} />
+            <Route path="/products/:id" element={<ProductDetailPage />} />
 
-              <Route element={<ProtectedRoute />}>
-                <Route path="/cartList" element={<CartList />} />
-              </Route>
+            <Route element={<ProtectedRoute />}>
+              <Route path="/cartList" element={<CartList />} />
             </Route>
-            <Route path="/login" element={<Login />} />
-            <Route path="/register" element={<Register />} />
-          </Routes>
-        </SearchProductsProvider>
-      </AuthProvider>
+          </Route>
+          <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
+        </Routes>
+      </SearchProductsProvider>
     </Provider>
   </BrowserRouter>
 );

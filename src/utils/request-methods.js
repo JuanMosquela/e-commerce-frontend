@@ -1,15 +1,34 @@
 import axios from "axios";
 
-const BASE_URL = "https://fit-commerce-api.onrender.com/api";
+export const BASE_URL = "https://fit-commerce-api.onrender.com/api";
 
-const TOKEN =
-  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzNjE3NzFlZDVlMTBiNmNhYTczMzc3NCIsImlhdCI6MTY2NzMzMTg3NywiZXhwIjoxNjY4MTk1ODc3fQ.TFwkeIRg6imAubmsqlmxKtdlPOY2eKwM1MA4v9v4lp4";
+const register = async (values) => {
+  const { data } = await axios.post(`${BASE_URL}/auth/register`, {
+    name: values.name,
+    email: values.email,
+    password: values.password,
+  });
 
-export const publicRequest = axios.create({
-  baseURL: BASE_URL,
-});
+  // if (data) localStorage.setItem("user", JSON.stringify(data));
 
-export const userRequest = axios.create({
-  baseURL: BASE_URL,
-  token: { TOKEN },
-});
+  return data;
+};
+
+const login = async (values) => {
+  const { data } = await axios.post(`${BASE_URL}/auth/login`, {
+    email: values.email,
+    password: values.password,
+  });
+
+  console.log(data);
+
+  // if (token) localStorage.setItem("token", JSON.stringify(token));
+  return data;
+};
+
+const publicRequest = {
+  register,
+  login,
+};
+
+export default publicRequest;

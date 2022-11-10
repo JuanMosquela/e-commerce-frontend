@@ -1,36 +1,34 @@
 import { CircularProgress } from "@mui/material";
 import { useFormik } from "formik";
 import { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import { useAuth } from "../context/AuthProvider";
+import { signIn } from "../redux/authSliceRedux";
+
 import { loginSchemas } from "../schemas/loginSchemas";
-import { publicRequest } from "../utils/request-methods";
+import publicRequest from "../utils/request-methods.js";
 
 const Login = () => {
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState("");
-  const { setAuth } = useAuth();
   const location = useLocation();
   const navigate = useNavigate();
   const from = location.state?.from?.pathname || "/";
 
+  const auth = useSelector((state) => state.auth);
+  const dispatch = useDispatch();
+
   const onSubmit = async () => {
     setLoading(true);
     try {
-      const { data } = await publicRequest.post("/auth/login", {
-        email: values.email,
-        password: values.password,
-      });
-
-      if (data.token) {
-        setAuth(data.token);
+      const data = await dispatch(signIn(values));
+      console.log(data);
+      if (data.payload?.token) {
         navigate(from, { replace: true });
       }
     } catch (error) {
       const {
         response: { data },
       } = error;
-      setError(data.msg);
     } finally {
       setLoading(false);
     }
@@ -49,7 +47,6 @@ const Login = () => {
   return (
     <div className="form-container">
       <form method="post" onSubmit={handleSubmit}>
-        {error && <p>{error}</p>}
         <div className="input-group">
           <label htmlFor="email">Email</label>
           <input

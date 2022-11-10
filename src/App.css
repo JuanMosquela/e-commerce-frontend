@@ -557,6 +557,7 @@ span:nth-child(3) {
 
 .form-container form .input-group {
   margin-bottom: 15px;
+  position: relative;
 }
 
 .form-container form .input-group label {
@@ -578,6 +579,13 @@ span:nth-child(3) {
   border-radius: 5px;
   padding: 15px;
   margin-bottom: 2rem;
+}
+
+.eye-icon {
+  position: absolute;
+  right: 15px;
+  top: 50%;
+  font-size: 2rem;
 }
 
 /* ----------------- cart section --------------------- */
