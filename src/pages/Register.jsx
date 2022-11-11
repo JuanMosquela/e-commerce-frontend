@@ -20,6 +20,7 @@ const Register = () => {
   const from = location.state?.from?.pathname || "/";
 
   useEffect(() => {
+    console.log(auth);
     if (auth.token) navigate(from);
   }, []);
 

@@ -20,14 +20,15 @@ export const shoppingCartSlice = createSlice({
   initialState,
   reducers: {
     addToCart: (state, action) => {
+      console.log(action);
       let counter = action.payload.counter;
-
-      let product = action.payload.product;
 
       state.quantity += counter ? counter : 1;
       const existingIndex = state.cart.findIndex(
-        (item) => item.id === product.id
+        (item) => item._id === action.payload.product._id
       );
+
+      console.log(existingIndex);
 
       if (existingIndex >= 0) {
         state.cart[existingIndex] = {
@@ -53,14 +54,14 @@ export const shoppingCartSlice = createSlice({
     },
     removeItem: (state, action) => {
       const itemIndex = state.cart.findIndex((item) => {
-        return item.id === action.payload.id;
+        return item._id === action.payload._id;
       });
 
       state.quantity -= state.cart[itemIndex].amount;
       localStorage.setItem("cartQuantity", JSON.stringify(state.quantity));
 
       const newArray = state.cart.filter((product) => {
-        return product.id !== action.payload.id;
+        return product._id !== action.payload._id;
       });
       state.cart = newArray;
 
@@ -71,14 +72,14 @@ export const shoppingCartSlice = createSlice({
       localStorage.setItem("cartQuantity", JSON.stringify(state.quantity));
 
       const itemIndex = state.cart.findIndex((item) => {
-        return item.id === action.payload.id;
+        return item._id === action.payload._id;
       });
 
       if (state.cart[itemIndex].amount > 1) {
         state.cart[itemIndex].amount -= 1;
       } else {
         const newArray = state.cart.filter((product) => {
-          return product.id !== action.payload.id;
+          return product._id !== action.payload._id;
         });
         state.cart = newArray;
 
@@ -87,7 +88,7 @@ export const shoppingCartSlice = createSlice({
     },
     increse: (state, action) => {
       const itemIndex = state.cart.findIndex((item) => {
-        return item.id === action.payload.id;
+        return item._id === action.payload._id;
       });
 
       state.cart[itemIndex].amount += 1;

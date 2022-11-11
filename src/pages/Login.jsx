@@ -18,6 +18,7 @@ const Login = () => {
   const loading = auth.loginStatus === "pending";
 
   useEffect(() => {
+    console.log(auth.token);
     if (auth.token) navigate(from);
   }, []);
 

@@ -31,21 +31,21 @@ const DropDownMenu = () => {
         <ul className="drop-down">
           <li>
             <Link to="/profile">
-              <CgProfile /> Profile
+              <CgProfile /> <p>Profile</p>
             </Link>
           </li>
           {auth.token ? (
             <li onClick={handleLogout}>
               <Link to="">
                 <MdOutlineLogout />
-                Logout
+                <p>Logout</p>
               </Link>
             </li>
           ) : (
             <li onClick={handleLogIn}>
               <Link to="/login">
                 <MdOutlineLogin />
-                LogIn
+                <p>Login</p>
               </Link>
             </li>
           )}

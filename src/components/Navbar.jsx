@@ -35,7 +35,7 @@ const Navbar = () => {
         <Box
           sx={{
             display: "flex",
-            gap: 3,
+            gap: 5,
             justifyContent: "space-between",
             alignItems: "center",
           }}
@@ -47,8 +47,8 @@ const Navbar = () => {
             </ul>
           </nav>
 
-          <DropDownMenu />
           <CartWidget />
+          <DropDownMenu />
         </Box>
       </div>
     </header>

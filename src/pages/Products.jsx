@@ -8,16 +8,7 @@ import { useFetchAllProductsQuery } from "../redux/productsApi";
 const Products = () => {
   const { searchedProducts, inputValue } = useContext(ProductsContext);
 
-  // const [dataProducts, setDataProducts] = useState([]);
-
-  // const [loading, setLoading] = useState(true);
-
-  // const products = useSelector((state) => state.products);
-
-  // const dispatch = useDispatch();
   const { data, error, isLoading } = useFetchAllProductsQuery();
-
-  console.log(data);
 
   return (
     <section className="container-products">

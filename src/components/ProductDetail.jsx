@@ -1,14 +1,9 @@
 import { useState } from "react";
 import { BsFillCartPlusFill } from "react-icons/bs";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { addToCart } from "../redux/shoppingCartRedux";
 
 const ProductDetail = ({ productDetail }) => {
-
-  
-
-  const cart = useSelector((state) => state);
-
   const [pictureIndex, setPictureIndex] = useState(0);
 
   const [counter, setCounter] = useState(1);
@@ -27,6 +22,7 @@ const ProductDetail = ({ productDetail }) => {
   };
 
   const handleClick = (obj) => {
+    console.log(obj.counter);
     dispatch(addToCart(obj));
   };
   const productStock = [];
@@ -44,7 +40,7 @@ const ProductDetail = ({ productDetail }) => {
         <div className="picture-options">
           {productDetail.pictureURL.map((picture, index) => (
             <img
-              key={index}
+              key={picture}
               onMouseOver={() => setPictureIndex(index)}
               src={picture}
               alt="product"
