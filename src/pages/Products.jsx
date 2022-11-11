@@ -1,4 +1,7 @@
+import { CircularProgress } from "@mui/material";
 import { useContext } from "react";
+import CardProduct from "../components/CardProduct";
+import { Link } from "react-router-dom";
 import { ProductsContext } from "../context/SearchProductsProvider";
 import { useFetchAllProductsQuery } from "../redux/productsApi";
 
@@ -12,14 +15,13 @@ const Products = () => {
   // const products = useSelector((state) => state.products);
 
   // const dispatch = useDispatch();
-
-  const { data } = useFetchAllProductsQuery();
+  const { data, error, isLoading } = useFetchAllProductsQuery();
 
   console.log(data);
 
   return (
     <section className="container-products">
-      {/* {loading ? (
+      {isLoading ? (
         <CircularProgress />
       ) : (
         <div className="grid-container">
@@ -35,7 +37,7 @@ const Products = () => {
                 </Link>
               ))}
         </div>
-      )} */}
+      )}
     </section>
   );
 };
