@@ -20,15 +20,18 @@ const login = async (values) => {
     password: values.password,
   });
 
-  console.log(data);
-
-  // if (token) localStorage.setItem("token", JSON.stringify(token));
   return data;
+};
+
+const getProducts = async () => {
+  const response = await axios.get(`${BASE_URL}/products`);
+  return response;
 };
 
 const publicRequest = {
   register,
   login,
+  getProducts,
 };
 
 export default publicRequest;

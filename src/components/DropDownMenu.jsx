@@ -24,7 +24,7 @@ const DropDownMenu = () => {
   return (
     <div className="dropdown-menu" onClick={() => setIsOpen((prev) => !prev)}>
       <div className="user-container">
-        {auth.token.name && <p>{`Welcome ${auth.token.name}`}</p>}
+        {auth.token && <p>{`Welcome ${auth.token.name}`}</p>}
         <FaUserCircle style={{ color: "#FFF", fontSize: "3.5rem" }} />
       </div>
       {isOpen && (

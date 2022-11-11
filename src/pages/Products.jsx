@@ -1,40 +1,30 @@
-import { CircularProgress } from "@mui/material";
-import { useContext, useEffect, useState } from "react";
-import { Link } from "react-router-dom";
-import CardProduct from "../components/CardProduct";
+import { useContext } from "react";
 import { ProductsContext } from "../context/SearchProductsProvider";
-import publicRequest from "../utils/request-methods";
+import { useFetchAllProductsQuery } from "../redux/productsApi";
 
 const Products = () => {
   const { searchedProducts, inputValue } = useContext(ProductsContext);
 
-  const [dataProducts, setDataProducts] = useState([]);
+  // const [dataProducts, setDataProducts] = useState([]);
 
-  const [loading, setLoading] = useState(true);
+  // const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const { data } = await publicRequest.get(`/products`);
-        setDataProducts(data);
-      } catch (error) {
-        console.log(error);
-      } finally {
-        setLoading(false);
-      }
-    };
+  // const products = useSelector((state) => state.products);
 
-    fetchData();
-  }, []);
+  // const dispatch = useDispatch();
+
+  const { data } = useFetchAllProductsQuery();
+
+  console.log(data);
 
   return (
     <section className="container-products">
-      {loading ? (
+      {/* {loading ? (
         <CircularProgress />
       ) : (
         <div className="grid-container">
           {!searchedProducts
-            ? dataProducts?.products?.map((product) => (
+            ? data?.products?.map((product) => (
                 <Link key={product._id} to={`/products/${product._id}`}>
                   <CardProduct product={product} />
                 </Link>
@@ -45,7 +35,7 @@ const Products = () => {
                 </Link>
               ))}
         </div>
-      )}
+      )} */}
     </section>
   );
 };
