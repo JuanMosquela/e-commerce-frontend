@@ -12,7 +12,7 @@ const Navbar = () => {
   const { handleClick, inputValue, handleInput } = useContext(ProductsContext);
 
   return (
-    <header>
+    <header className="bg-teal-700">
       <div className="header-wrapper">
         <Link className="logo" to="/">
           physical point
@@ -47,8 +47,8 @@ const Navbar = () => {
             </ul>
           </nav>
 
+          <DropDownMenu />
           <CartWidget />
-          {<DropDownMenu />}
         </Box>
       </div>
     </header>

@@ -6,7 +6,7 @@ import { toast } from "react-toastify";
 
 const initialState = {
   token: localStorage.getItem("token"),
-  name: "",
+  name: localStorage.getItem("user"),
   email: "",
   _id: "",
   registerStatus: "",
@@ -48,6 +48,7 @@ export const signIn = createAsyncThunk(
 
       if (data?.token) {
         localStorage.setItem("token", JSON.stringify(data.token));
+        localStorage.setItem("name", JSON.stringify(data.name));
         toast.success("User login correctly", { position: "top-right" });
       }
 

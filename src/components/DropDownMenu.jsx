@@ -1,14 +1,15 @@
 import { useState } from "react";
 import { FaUserCircle } from "react-icons/fa";
 import { CgProfile } from "react-icons/cg";
-import { MdOutlineLogout } from "react-icons/md";
+import { MdOutlineLogin, MdOutlineLogout } from "react-icons/md";
 import { Link } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../redux/authSliceRedux";
 
 const DropDownMenu = () => {
   const [isOpen, setIsOpen] = useState(false);
   const dispatch = useDispatch();
+  const auth = useSelector((state) => state.auth);
 
   const handleLogout = (e) => {
     e.stopPropagation();
@@ -16,9 +17,16 @@ const DropDownMenu = () => {
     setIsOpen(false);
   };
 
+  const handleLogIn = (e) => {
+    e.stopPropagation();
+  };
+
   return (
     <div className="dropdown-menu" onClick={() => setIsOpen((prev) => !prev)}>
-      <FaUserCircle style={{ color: "#FFF", fontSize: "3.5rem" }} />
+      <div className="user-container">
+        {auth.token.name && <p>{`Welcome ${auth.token.name}`}</p>}
+        <FaUserCircle style={{ color: "#FFF", fontSize: "3.5rem" }} />
+      </div>
       {isOpen && (
         <ul className="drop-down">
           <li>
@@ -26,13 +34,21 @@ const DropDownMenu = () => {
               <CgProfile /> Profile
             </Link>
           </li>
-
-          <li onClick={handleLogout}>
-            <Link to="">
-              <MdOutlineLogout />
-              Logout
-            </Link>
-          </li>
+          {auth.token ? (
+            <li onClick={handleLogout}>
+              <Link to="">
+                <MdOutlineLogout />
+                Logout
+              </Link>
+            </li>
+          ) : (
+            <li onClick={handleLogIn}>
+              <Link to="/login">
+                <MdOutlineLogin />
+                LogIn
+              </Link>
+            </li>
+          )}
         </ul>
       )}
     </div>

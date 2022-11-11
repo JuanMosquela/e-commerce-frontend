@@ -60,7 +60,8 @@ body {
 header {
   height: 80px;
   width: 100vw;
-  background-color: black;
+  background-color: #000;
+
   z-index: 1000;
 }
 
@@ -127,6 +128,13 @@ section {
   position: absolute;
   top: -5px;
   right: -15px;
+}
+
+.user-container {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  color: #fff;
 }
 
 .drop-down-menu {
@@ -862,13 +870,13 @@ span {
     flex-direction: column;
   }
   .filter-options-container
-
-
-
-  /* ----cartlist ---- */
   
-
-  .container, section {
+  
+  
+    /* ----cartlist ---- */
+    
+  
+    .container, section {
     padding: 3rem 2%;
   }
 

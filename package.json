@@ -28,6 +28,7 @@
   },
   "scripts": {
     "start": "react-scripts start",
+    "tailwind": "npx tailwind -i ./src/input.css -o ./public/css/style.css --watch",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
@@ -49,5 +50,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "tailwindcss": "^3.2.3"
   }
 }
