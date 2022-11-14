@@ -50,7 +50,12 @@ const Register = () => {
 
   return (
     <div className="form-container">
-      <form method="post" onSubmit={handleSubmit}>
+      <form
+        className="form-wrapper register"
+        method="post"
+        onSubmit={handleSubmit}
+      >
+        <h2>Register</h2>
         <div className="input-group">
           <input
             onChange={handleChange}
@@ -58,6 +63,7 @@ const Register = () => {
             value={values.name}
             type="text"
             name="name"
+            placeholder="UserName"
           />
           {errors.name && touched.name && (
             <span className="error">{errors.name}</span>
@@ -70,6 +76,7 @@ const Register = () => {
             value={values.email}
             type="text"
             name="email"
+            placeholder="Email Adress"
           />
           {errors.email && touched.email && (
             <span className="error">{errors.email}</span>
@@ -82,6 +89,7 @@ const Register = () => {
             value={values.password}
             type={visible ? "text" : "password"}
             name="password"
+            placeholder="Password"
           />
           {visible ? (
             <AiOutlineEye

@@ -1,14 +1,16 @@
 import { CircularProgress } from "@mui/material";
 import { useFormik } from "formik";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 
 import { signIn } from "../redux/authSliceRedux";
 import { loginSchemas } from "../schemas/loginSchemas";
 import loginBackground from "../img/login.jpg";
+import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
 
 const Login = () => {
+  const [visible, setVisible] = useState(false);
   const location = useLocation();
   const navigate = useNavigate();
   const from = location.state?.from?.pathname || "/";
@@ -48,7 +50,7 @@ const Login = () => {
 
   return (
     <div className="form-container">
-      <div className="form-wrapper">
+      <div className="form-wrapper login">
         <figure>
           <img src={loginBackground} alt="" />
         </figure>
@@ -76,6 +78,17 @@ const Login = () => {
               name="password"
               placeholder="Password"
             />
+            {visible ? (
+              <AiOutlineEye
+                className="eye-icon"
+                onClick={() => setVisible(!visible)}
+              />
+            ) : (
+              <AiOutlineEyeInvisible
+                className="eye-icon"
+                onClick={() => setVisible(!visible)}
+              />
+            )}
             {errors.password && touched.password && (
               <p className="error">{errors.password}</p>
             )}
