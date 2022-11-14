@@ -1,3 +1,7 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 * {
   padding: 0;
   margin: 0;
@@ -8,7 +12,6 @@
   border: none;
   transition: 0.3s;
 }
-
 html {
   font-family: "Montserrat", sans-serif;
   overflow-x: hidden;
@@ -19,7 +22,6 @@ body {
   overflow-x: hidden;
   background-color: rgba(238, 238, 238, 0.4);
 }
-
 :root {
   --color-orange: #faba42;
   --color-pink: #bb84ee;
@@ -61,7 +63,6 @@ header {
   height: 80px;
   width: 100vw;
   background-color: #000;
-
   z-index: 1000;
 }
 
@@ -183,7 +184,6 @@ section {
 
 /* ---------------- hero styles ----------------------- */
 .hero {
-  background-color: #1d354d;
   min-height: 65vh;
   background: url(./img/slide.jpg) no-repeat;
   background-size: cover;
@@ -384,8 +384,6 @@ h5 {
 .product-card.hovered {
   box-shadow: 1px 5px 20px rgba(0, 0, 0, 0.1);
 }
-
-/* product details styles */
 
 .product-detail-container {
   display: flex;

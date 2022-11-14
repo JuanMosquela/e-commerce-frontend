@@ -3,9 +3,9 @@ import { useLocation, Navigate, Outlet } from "react-router-dom";
 
 const ProtectedRoute = () => {
   const location = useLocation();
-  const auth = useSelector((state) => state.auth);
+  const user = useSelector((state) => state.auth.userLogin);
 
-  return auth.token ? (
+  return user.token ? (
     <Outlet />
   ) : (
     <Navigate to="/login" state={{ from: location }} replace />

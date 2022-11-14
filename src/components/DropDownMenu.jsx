@@ -9,7 +9,9 @@ import { logout } from "../redux/authSliceRedux";
 const DropDownMenu = () => {
   const [isOpen, setIsOpen] = useState(false);
   const dispatch = useDispatch();
-  const auth = useSelector((state) => state.auth);
+  const user = useSelector((state) => state.auth.userLogin);
+
+  console.log(user);
 
   const handleLogout = (e) => {
     e.stopPropagation();
@@ -24,7 +26,7 @@ const DropDownMenu = () => {
   return (
     <div className="dropdown-menu" onClick={() => setIsOpen((prev) => !prev)}>
       <div className="user-container">
-        {auth.token && <p>{`Welcome ${auth.token.name}`}</p>}
+        {user ? <p>{`${user.name}`}</p> : null}
         <FaUserCircle style={{ color: "#FFF", fontSize: "3.5rem" }} />
       </div>
       {isOpen && (
@@ -34,7 +36,7 @@ const DropDownMenu = () => {
               <CgProfile /> <p>Profile</p>
             </Link>
           </li>
-          {auth.token ? (
+          {user ? (
             <li onClick={handleLogout}>
               <Link to="">
                 <MdOutlineLogout />

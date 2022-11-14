@@ -67,8 +67,10 @@ const ProductDetail = ({ productDetail }) => {
             <div>no hay stock</div>
           ) : (
             <select onChange={(e) => handleChange(e)} className="button-group">
-              {productStock.map((qty) => (
-                <option value={qty}>{qty}</option>
+              {productStock.map((qty, index) => (
+                <option key={index} value={qty}>
+                  {qty}
+                </option>
               ))}
             </select>
           )}

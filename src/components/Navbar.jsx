@@ -12,25 +12,11 @@ const Navbar = () => {
   const { handleClick, inputValue, handleInput } = useContext(ProductsContext);
 
   return (
-    <header className="bg-teal-700">
+    <header>
       <div className="header-wrapper">
         <Link className="logo" to="/">
           physical point
         </Link>
-
-        <div className="input-container">
-          <input
-            className="filter-input"
-            type="text"
-            value={inputValue}
-            placeholder="Search products by name"
-            onChange={(e) => handleInput(e.target.value)}
-          />
-          <BiSearch
-            className="search-icon"
-            onClick={() => handleClick(inputValue)}
-          />
-        </div>
 
         <Box
           sx={{

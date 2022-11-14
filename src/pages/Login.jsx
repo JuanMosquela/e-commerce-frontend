@@ -3,7 +3,7 @@ import { useFormik } from "formik";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import { toast } from "react-toastify";
+
 import { signIn } from "../redux/authSliceRedux";
 import { loginSchemas } from "../schemas/loginSchemas";
 import loginBackground from "../img/login.jpg";
@@ -15,11 +15,13 @@ const Login = () => {
 
   const auth = useSelector((state) => state.auth);
   const dispatch = useDispatch();
-  const loading = auth.loginStatus === "pending";
+
+  console.log(auth);
+
+  const loading = auth.isLoading;
 
   useEffect(() => {
-    console.log(auth.token);
-    if (auth.token) navigate(from);
+    if (auth.userLogin) navigate(from);
   }, []);
 
   const onSubmit = async () => {

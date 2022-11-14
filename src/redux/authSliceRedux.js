@@ -1,19 +1,17 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import { AiOutlineConsoleSql } from "react-icons/ai";
-import publicRequest, { BASE_URL } from "../utils/request-methods";
-import jwtDecode from "jwt-decode";
+import publicRequest from "../utils/request-methods";
+
 import { toast } from "react-toastify";
 
+const user = JSON.parse(localStorage.getItem("user"));
+
 const initialState = {
-  token: localStorage.getItem("token"),
-  name: localStorage.getItem("user"),
-  email: "",
-  _id: "",
-  registerStatus: "",
-  registerError: "",
-  loginStatus: "",
-  loginError: "",
-  userLoaded: false,
+  userLogin: user ? user : null,
+  userRegister: null,
+  isError: false,
+  isSuccess: false,
+  isLoading: false,
+  message: "",
 };
 
 export const signUpUser = createAsyncThunk(
@@ -29,7 +27,12 @@ export const signUpUser = createAsyncThunk(
       console.log(user);
       return user;
     } catch (error) {
-      const { msg } = error.response.data;
+      const msg =
+        (error.response.data &&
+          error.response.data &&
+          error.response.data.msg) ||
+        error.msg ||
+        error.toString();
       toast.error(`${msg}`, { position: "top-right" });
       return rejectWithValue(msg);
     }
@@ -46,9 +49,10 @@ export const signIn = createAsyncThunk(
         password: values.password,
       });
 
+      console.log(data);
+
       if (data?.token) {
-        localStorage.setItem("token", JSON.stringify(data.token));
-        localStorage.setItem("name", JSON.stringify(data.name));
+        localStorage.setItem("user", JSON.stringify(data));
         toast.success("User login correctly", { position: "top-right" });
       }
 
@@ -70,71 +74,57 @@ const authSlice = createSlice({
       state.user = user;
       state.token = token;
     },
-    logout(state, action) {
-      localStorage.removeItem("name");
-      localStorage.removeItem("token");
-
-      return {
-        ...state,
-        token: "",
-        name: "",
-        email: "",
-        _id: "",
-        registerStatus: "",
-        registerError: "",
-        loginStatus: "",
-        loginError: "",
-      };
+    logout(state) {
+      localStorage.removeItem("user");
+      state.userLogin = null;
+      state.userRegister = false;
+      state.isLoading = false;
+      state.isSuccess = false;
+      state.isError = false;
+      state.message = "";
     },
   },
   extraReducers: (builder) => {
     builder.addCase(signUpUser.pending, (state, action) => {
-      return { ...state, registerStatus: "pending" };
+      return { ...state, isLoading: true };
     });
     builder.addCase(signUpUser.fulfilled, (state, action) => {
-      if (action.payload) {
-        // const user = jwtDecode(action.payload);
-
-        return {
-          ...state,
-          //   token: action.payload,
-          name: action.name,
-          email: action.email,
-          _id: action._id,
-          registerStatus: "success",
-        };
-      } else {
-        return state;
-      }
+      return {
+        ...state,
+        isLoading: false,
+        isSuccess: true,
+        isError: false,
+        userRegister: action.payload,
+      };
     });
     builder.addCase(signUpUser.rejected, (state, action) => {
       return {
         ...state,
-        registerStatus: "rejected",
-        registerError: action.payload,
+        isLoading: false,
+        isError: true,
+        isSuccess: false,
+        msg: action.payload,
+        userRegister: null,
       };
     });
     builder.addCase(signIn.pending, (state, action) => {
-      return { ...state, loginStatus: "pending" };
+      return { ...state, isLoading: true };
     });
     builder.addCase(signIn.fulfilled, (state, action) => {
-      if (action.payload) {
-        // const user = jwtDecode(action.payload);
-        return {
-          ...state,
-          token: action.payload,
-          name: action.name,
-          email: action.email,
-          _id: action._id,
-          loginStatus: "success",
-        };
-      } else return state;
+      return {
+        ...state,
+        isLoading: false,
+        isSuccess: true,
+        userLogin: action.payload,
+      };
     });
     builder.addCase(signIn.rejected, (state, action) => {
       return {
         ...state,
-        loginStatus: "rejected",
-        loginError: action.payload,
+        isLoading: false,
+        isError: true,
+        msg: action.payload,
+        userLogin: null,
       };
     });
   },
@@ -143,6 +133,3 @@ const authSlice = createSlice({
 export const { setCredentials, logout } = authSlice.actions;
 
 export default authSlice.reducer;
-
-export const currentUser = (state) => state.auth.user;
-export const currenToken = (state) => state.auth.token;

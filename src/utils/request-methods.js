@@ -9,8 +9,6 @@ const register = async (values) => {
     password: values.password,
   });
 
-  // if (data) localStorage.setItem("user", JSON.stringify(data));
-
   return data;
 };
 

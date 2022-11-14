@@ -4,7 +4,7 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import { registerSchemas } from "../schemas/registerSchemas";
 
 import { useDispatch, useSelector } from "react-redux";
-import { signUpUser } from "../redux/authSliceRedux";
+import { currentUser, signUpUser } from "../redux/authSliceRedux";
 import { CircularProgress } from "@mui/material";
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
 import { useEffect, useState } from "react";
@@ -19,25 +19,21 @@ const Register = () => {
   const auth = useSelector((state) => state.auth);
   const from = location.state?.from?.pathname || "/";
 
+  console.log(auth.isSuccess);
+
   useEffect(() => {
-    console.log(auth);
-    if (auth.token) navigate(from);
-  }, []);
+    if (auth.isSuccess) navigate("/login");
+    if (auth.userLogin) navigate(from);
+  }, [auth]);
+
+  useEffect(() => {}, []);
 
   const onSubmit = async () => {
     try {
-      const data = await dispatch(signUpUser(values));
-
-      console.log(auth.registerStatus);
-
-      console.log(data);
-
-      if (data.type === "success" || "success") {
-        navigate("/login", { replace: true });
-      }
+      await dispatch(signUpUser(values));
     } catch (error) {
       console.log(error);
-      toast.error(`${auth.loginError.msg}`, { position: "top-right" });
+      toast.error(`${error}`, { position: "top-right" });
     }
   };
 
@@ -103,7 +99,7 @@ const Register = () => {
           )}
         </div>
         <button type="submit">
-          {auth.registerStatus === "pending" ? (
+          {auth.isLoading ? (
             <span>
               Submiting
               <CircularProgress
