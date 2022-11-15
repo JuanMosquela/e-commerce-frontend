@@ -33,7 +33,12 @@ const DropDownMenu = () => {
         <ul className="drop-down">
           <li>
             <Link to="/profile">
-              <CgProfile /> <p>Profile</p>
+              <CgProfile /> <p>My Profile</p>
+            </Link>
+          </li>
+          <li>
+            <Link to="/wishList">
+              <CgProfile /> <p>My WishList</p>
             </Link>
           </li>
           {user ? (

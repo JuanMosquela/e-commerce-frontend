@@ -74,7 +74,7 @@ const Login = () => {
               onChange={handleChange}
               onBlur={handleBlur}
               value={values.password}
-              type="text"
+              type={visible ? "text" : "password"}
               name="password"
               placeholder="Password"
             />
