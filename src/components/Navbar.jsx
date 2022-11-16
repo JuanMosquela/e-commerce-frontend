@@ -12,30 +12,36 @@ const Navbar = () => {
   const { handleClick, inputValue, handleInput } = useContext(ProductsContext);
 
   return (
-    <header>
-      <div className="header-wrapper">
-        <Link className="logo" to="/">
+    <header className="bg-black w-full ">
+      <div className="flex justify-between items-center py-4 px-[2%] md:px-[10%]  ">
+        <Link
+          className="border-4 border-orange-500  px-4 py-1  font-bold uppercase text-sm md:text-md lg:text-xl text-white  "
+          to="/"
+        >
           physical point
         </Link>
 
-        <Box
-          sx={{
-            display: "flex",
-            gap: 5,
-            justifyContent: "space-between",
-            alignItems: "center",
-          }}
-        >
+        <div className="flex justify-center items-center gap-8">
           <nav className="navbar">
-            <ul>
-              <Link to="/">home</Link>
-              <Link to="/products">shop</Link>
+            <ul className="flex gap-8">
+              <Link
+                className="text-white/80 hover:text-white hidden md:block text-xl capitalize font-semibold "
+                to="/"
+              >
+                home
+              </Link>
+              <Link
+                className="text-white/80 hover:text-white hidden md:block text-xl capitalize font-semibold "
+                to="/products"
+              >
+                shop
+              </Link>
             </ul>
           </nav>
 
           <CartWidget />
           <DropDownMenu />
-        </Box>
+        </div>
       </div>
     </header>
   );

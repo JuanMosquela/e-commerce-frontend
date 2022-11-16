@@ -11,11 +11,11 @@ const Products = () => {
   const { data, error, isLoading } = useFetchAllProductsQuery();
 
   return (
-    <section className="container-products">
+    <section className="flex justify-center items-center min-h-screen mt-6">
       {isLoading ? (
         <CircularProgress />
       ) : (
-        <div className="grid-container">
+        <div className="grid grid-cols-1 gap-4 px-[2%] md:px-[5%] lg:px-[10%]  sm:grid-cols-2  md:grid-cols-3 lg:grid-cols-4  ">
           {!searchedProducts
             ? data?.products?.map((product) => (
                 <Link key={product._id} to={`/products/${product._id}`}>

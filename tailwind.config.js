@@ -3,9 +3,14 @@ module.exports = {
   content: ["./src/**/*.{js,jsx,ts,tsx}"],
   theme: {
     extend: {
-      // backgroundImage: {
-      //   hero: "url('./src/img/hero.jpg')",
-      // },
+      screens: {
+        widescreen: { raw: "(min-aspect-ratio: 3/2)" },
+        // tallscreen: { raw: "(min-aspect-ratio: 1/2)" },
+      },
+
+      backgroundImage: {
+        hero: "url('./img/hero.jpg')",
+      },
     },
   },
   plugins: [],

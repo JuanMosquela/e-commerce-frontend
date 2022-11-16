@@ -1,4 +1,6 @@
 import { useState } from "react";
+import { AiOutlineHeart } from "react-icons/ai";
+import { BiSearch } from "react-icons/bi";
 
 const CardProduct = ({ product }) => {
   const [isHovered, setIsHovered] = useState(false);
@@ -6,26 +8,29 @@ const CardProduct = ({ product }) => {
   return (
     <div
       // className={isHovered ? "product-card hovered" : "product-card"}
-      className=" h-[400px]   rounded-sm shadow-md flex flex-col m-5 "
+      className="bg-white  shadow rounded overflow-hidden"
       onMouseEnter={() => setIsHovered((prev) => !prev)}
       onMouseLeave={() => setIsHovered((prev) => !prev)}
     >
-      <img
-        className=" object-contain h-[260px] m-auto "
-        src={product.pictureURL[0]}
-        alt={product.title}
-      />
-      {/* <img
-        className=" object-contain absolute top-0 left-0 opacity-0 hover:opacity-100"
-        src={product.pictureURL[1]}
-        alt={product.title}
-      /> */}
+      <div className="relative">
+        <img
+          className="object-contain h-[280px] w-48 m-auto"
+          src={product.pictureURL[0]}
+          alt={product.title}
+        />
+        <div className=" flex items-center justify-center gap-2 absolute hover:bg-black inset-0 hover:bg-opacity-40 opacity-0 hover:opacity-100  ease-in duration-200">
+          <AiOutlineHeart className="bg-orange-500 hover:bg-orange-700 ease-in duration-100 rounded-full h-8 w-9 text-white flex items-center justify-center p-2  " />
+          <BiSearch className="bg-orange-500 hover:bg-orange-700 ease-in duration-100 rounded-full h-8 w-9 text-white flex items-center justify-center p-2  " />
+        </div>
+      </div>
 
-      <div className=" p-5  ">
-        <h4 className=" text-[14px] sm:text-[18px] md:text-[14px] lg:text-[14px] font-bold text-slate-900 ">
+      <div className="px-4 py-2">
+        <h4 className=" md:min-h-[40px] text-sm md:text-md lg:text-[16px] mb-2 font-semibold text-slate-900 ">
           {product.title.toLowerCase()}
         </h4>
-        <h5 className="  ">$ {product.price}</h5>
+        <h5 className=" text-sm text-gray-600 font-semibold ">
+          $ {product.price}
+        </h5>
       </div>
     </div>
   );

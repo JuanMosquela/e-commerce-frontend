@@ -5,7 +5,7 @@ import { registerSchemas } from "../schemas/registerSchemas";
 
 import { useDispatch, useSelector } from "react-redux";
 import { currentUser, signUpUser } from "../redux/authSliceRedux";
-import { CircularProgress } from "@mui/material";
+import { CardActions, CircularProgress } from "@mui/material";
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
 import { useEffect, useState } from "react";
 import { isAllOf } from "@reduxjs/toolkit";
@@ -28,25 +28,35 @@ const Register = () => {
 
   useEffect(() => {}, []);
 
-  const onSubmit = async () => {
+  const onSubmit = async (values) => {
     try {
       await dispatch(signUpUser(values));
     } catch (error) {
       console.log(error);
       toast.error(`${error}`, { position: "top-right" });
+    } finally {
+      resetForm();
     }
   };
 
-  const { values, handleChange, handleSubmit, handleBlur, errors, touched } =
-    useFormik({
-      initialValues: {
-        name: "",
-        email: "",
-        password: "",
-      },
-      validationSchema: registerSchemas,
-      onSubmit,
-    });
+  const {
+    values,
+    handleChange,
+    handleSubmit,
+    handleBlur,
+    isSubmitting,
+    resetForm,
+    errors,
+    touched,
+  } = useFormik({
+    initialValues: {
+      name: "",
+      email: "",
+      password: "",
+    },
+    validationSchema: registerSchemas,
+    onSubmit,
+  });
 
   return (
     <div className="form-container">
@@ -106,8 +116,8 @@ const Register = () => {
             <span className="error">{errors.password}</span>
           )}
         </div>
-        <button type="submit">
-          {auth.isLoading ? (
+        <button type="submit" disabled={isSubmitting}>
+          {isSubmitting ? (
             <span>
               Submiting
               <CircularProgress

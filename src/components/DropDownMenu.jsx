@@ -24,33 +24,45 @@ const DropDownMenu = () => {
   };
 
   return (
-    <div className="dropdown-menu" onClick={() => setIsOpen((prev) => !prev)}>
-      <div className="user-container">
+    <div className="relative" onClick={() => setIsOpen((prev) => !prev)}>
+      <div className="flex items-center text-white gap-2">
         {user ? <p>{`${user.name}`}</p> : null}
-        <FaUserCircle style={{ color: "#FFF", fontSize: "3.5rem" }} />
+        <FaUserCircle className="text-white text-4xl" />
       </div>
       {isOpen && (
-        <ul className="drop-down">
+        <ul className="absolute top-[60px] right-0 w-[200px] px-6 py-2 bg-white rounded-md z-40  ">
           <li>
-            <Link to="/profile">
+            <Link
+              className="flex gap-6 items-center  hover:cursor-pointer hover:text-orange-500  "
+              to="/profile"
+            >
               <CgProfile /> <p>My Profile</p>
             </Link>
           </li>
           <li>
-            <Link to="/wishList">
+            <Link
+              className="flex gap-6 items-center hover:cursor-pointer hover:text-orange-500    "
+              to="/wishList"
+            >
               <CgProfile /> <p>My WishList</p>
             </Link>
           </li>
           {user ? (
             <li onClick={handleLogout}>
-              <Link to="">
+              <Link
+                className="flex gap-6 items-center hover:cursor-pointer hover:text-orange-500    "
+                to=""
+              >
                 <MdOutlineLogout />
                 <p>Logout</p>
               </Link>
             </li>
           ) : (
             <li onClick={handleLogIn}>
-              <Link to="/login">
+              <Link
+                className="flex gap-6 items-center  hover:cursor-pointer hover:text-orange-500  "
+                to="/login"
+              >
                 <MdOutlineLogin />
                 <p>Login</p>
               </Link>
