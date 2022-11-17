@@ -16,6 +16,9 @@ import SearchProductsProvider from "./context/SearchProductsProvider";
 import ProtectedRoute from "./components/ProtectedRoute";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import WishList from "./components/WishList";
+import About from "./pages/About";
+import Contact from "./pages/Contact";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
@@ -29,6 +32,8 @@ root.render(
             <Route path="/users" element={<User />} />
             <Route path="/products" element={<Products />} />
             <Route path="/products/:id" element={<ProductDetailPage />} />
+            <Route path="/contact" element={<Contact />} />
+            <Route path="/about" element={<About />} />
 
             <Route element={<ProtectedRoute />}>
               <Route path="/cartList" element={<CartList />} />

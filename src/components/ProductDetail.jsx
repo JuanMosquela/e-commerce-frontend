@@ -33,9 +33,9 @@ const ProductDetail = ({ productDetail }) => {
   return (
     <div className="container grid grid-cols-2 min-h-full justify-center mt-[8rem] gap-4 ">
       <div className="flex flex-col gap-4">
-        <figure className="bg-slate-500">
+        <figure className="w-full">
           <img
-            className="w-full h-[500px] object-cover rounded-sm shadow-md"
+            className="m-auto h-[500px] object-contain rounded-sm shadow-md"
             src={productDetail.pictureURL[pictureIndex]}
             alt=""
           />
@@ -43,7 +43,7 @@ const ProductDetail = ({ productDetail }) => {
         <div className="grid grid-cols-4 items-center gap-1 ">
           {productDetail.pictureURL.map((picture, index) => (
             <img
-              className="gap-2 object-cover hover:scale-[1.1] p-1 ease-in duration-100 hover:shadow-md"
+              className="gap-2 object-contain h-[200px] hover:scale-[1.1] p-1 ease-in duration-100 hover:shadow-md"
               key={picture}
               onMouseOver={() => setPictureIndex(index)}
               src={picture}

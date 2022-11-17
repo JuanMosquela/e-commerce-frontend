@@ -5,6 +5,7 @@ import { MdOutlineLogin, MdOutlineLogout } from "react-icons/md";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../redux/authSliceRedux";
+import { AiOutlineUser } from "react-icons/ai";
 
 const DropDownMenu = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -24,13 +25,16 @@ const DropDownMenu = () => {
   };
 
   return (
-    <div className="relative" onClick={() => setIsOpen((prev) => !prev)}>
+    <div
+      className="relative hover:cursor-pointer "
+      onClick={() => setIsOpen((prev) => !prev)}
+    >
       <div className="flex items-center text-white gap-2">
-        {user ? <p>{`${user.name}`}</p> : null}
-        <FaUserCircle className="text-white text-4xl" />
+        {/* {user ? <p>{`${user.name}`}</p> : null} */}
+        <AiOutlineUser className="text-slate-900 text-3xl" />
       </div>
       {isOpen && (
-        <ul className="absolute top-[60px] right-0 w-[200px] px-6 py-2 bg-white rounded-md z-40  ">
+        <ul className="absolute top-[42px] right-[-15px] w-[200px] px-6 py-2 bg-white rounded-sm z-40 shadow-lg ">
           <li>
             <Link
               className="flex gap-6 items-center  hover:cursor-pointer hover:text-orange-500  "

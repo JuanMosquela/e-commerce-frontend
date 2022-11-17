@@ -7,42 +7,60 @@ import { ProductsContext } from "../context/SearchProductsProvider";
 
 import { FaUserCircle } from "react-icons/fa";
 import DropDownMenu from "./DropDownMenu";
+import { AiOutlineHeart } from "react-icons/ai";
+import WishList from "./WishList";
+import Search from "./Search";
 
 const Navbar = () => {
   const { handleClick, inputValue, handleInput } = useContext(ProductsContext);
 
   return (
-    <header className="bg-black w-full fixed z-50 top-0 py-3 ">
-      <div className="container flex justify-between items-center   ">
+    <header className=" w-full z-50 top-0  ">
+      <div className="container flex justify-between items-center py-2   ">
         <Link
-          className="border-4 border-orange-500  px-4 py-1  font-bold uppercase text-sm md:text-md lg:text-xl text-white  "
+          className=" py-1  font-bold uppercase text-sm md:text-md lg:text-xl text-black  "
           to="/"
         >
-          physical point
+          <span className="text-orange-400 text-xl font-bold">physical </span>
+          point
         </Link>
 
-        <div className="flex justify-center items-center gap-8">
-          <nav className="navbar">
-            <ul className="flex gap-8">
-              <Link
-                className="text-white/80 hover:text-white hidden md:block text-xl capitalize font-semibold "
-                to="/"
-              >
-                home
-              </Link>
-              <Link
-                className="text-white/80 hover:text-white hidden md:block text-xl capitalize font-semibold "
-                to="/products"
-              >
-                shop
-              </Link>
-            </ul>
-          </nav>
+        <Search />
 
+        <div className="flex justify-center items-center gap-8">
+          <WishList />
           <CartWidget />
           <DropDownMenu />
         </div>
       </div>
+      <nav className="bg-black m-right bg-black ">
+        <ul className="container flex justify gap-8 py-2">
+          <Link
+            className="text-white/80 hover:text-white hidden md:block text-lg  capitalize font-thin "
+            to="/"
+          >
+            home
+          </Link>
+          <Link
+            className="text-white/80 hover:text-white hidden md:block text-lg  capitalize font-thin "
+            to="/products"
+          >
+            shop
+          </Link>
+          <Link
+            className="text-white/80 hover:text-white hidden md:block text-lg  capitalize font-thin "
+            to="/about"
+          >
+            about us
+          </Link>
+          <Link
+            className="text-white/80 hover:text-white hidden md:block text-lg  capitalize font-thin "
+            to="/contact"
+          >
+            contact us
+          </Link>
+        </ul>
+      </nav>
     </header>
   );
 };

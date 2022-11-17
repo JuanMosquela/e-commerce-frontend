@@ -12,7 +12,7 @@ const Products = () => {
   const { data, error, isLoading } = useFetchAllProductsQuery();
 
   return (
-    <section className=" min-height flex justify-center items-center mt-[5rem] ">
+    <section className="min-height flex justify-center items-center mt-7 ">
       {isLoading ? (
         <CircularProgress />
       ) : (
