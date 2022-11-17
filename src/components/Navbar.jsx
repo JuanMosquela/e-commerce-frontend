@@ -12,8 +12,8 @@ const Navbar = () => {
   const { handleClick, inputValue, handleInput } = useContext(ProductsContext);
 
   return (
-    <header className="bg-black w-full ">
-      <div className="flex justify-between items-center py-4 px-[2%] md:px-[10%]  ">
+    <header className="bg-black w-full fixed z-50 top-0 py-3 ">
+      <div className="container flex justify-between items-center   ">
         <Link
           className="border-4 border-orange-500  px-4 py-1  font-bold uppercase text-sm md:text-md lg:text-xl text-white  "
           to="/"

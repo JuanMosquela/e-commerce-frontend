@@ -4,7 +4,7 @@
 
 @layer utilities {
   .min-height {
-    min-height: calc(100vh - 40px);
+    min-height: calc(100vh);
   }
 }
 
@@ -101,40 +101,6 @@ section {
   width: 600px;
   height: 35px;
   padding: 12px;
-}
-
-.header-wrapper .cart-icon {
-  color: #fff;
-  font-size: 4rem;
-  position: relative;
-}
-
-.header-wrapper .cart-icon span {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-color: var(--color-orange);
-  border-radius: 99%;
-  height: 25px;
-  width: 25px;
-  font-size: 1.2rem;
-  padding: 7px;
-  position: absolute;
-  top: -5px;
-  right: -15px;
-}
-
-.user-container {
-  display: flex;
-  align-items: center;
-
-  gap: 1rem;
-  color: #fff;
-}
-
-.drop-down-menu {
-  position: relative;
-  height: 70px;
 }
 
 .drop-down {
@@ -600,16 +566,6 @@ span:nth-child(3) {
   padding: 1rem 0;
   font-size: 1.4rem;
   border-bottom: var(--color-orange) 2px solid;
-}
-.form-container button {
-  display: block;
-  width: 100%;
-  background-color: #faba42;
-  color: #fff;
-  border-radius: 5px;
-  padding: 15px;
-
-  cursor: pointer;
 }
 
 .eye-icon {

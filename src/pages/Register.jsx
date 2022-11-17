@@ -59,15 +59,16 @@ const Register = () => {
   });
 
   return (
-    <div className="form-container">
+    <div className="flex justify-center items-center min-h-[100vh] bg-black">
       <form
-        className="form-wrapper register"
+        className="w-[400px] bg-white py-10 px-5"
         method="post"
         onSubmit={handleSubmit}
       >
-        <h2>Register</h2>
-        <div className="input-group">
+        <h2 className="text-slate-900 text-5xl mb-8">Register</h2>
+        <div className="relative mb-4 min-h-[60px]">
           <input
+            className="w-full py-1 text-md outline-none border-orange-200 border-b-2 "
             onChange={handleChange}
             onBlur={handleBlur}
             value={values.name}
@@ -76,11 +77,14 @@ const Register = () => {
             placeholder="UserName"
           />
           {errors.name && touched.name && (
-            <span className="error">{errors.name}</span>
+            <p className="pt-2 text-red-500 text-sm font-semibold">
+              {errors.name}
+            </p>
           )}
         </div>
-        <div className="input-group">
+        <div className="relative mb-4 min-h-[60px]">
           <input
+            className="w-full py-1 text-md outline-none border-orange-200 border-b-2 "
             onChange={handleChange}
             onBlur={handleBlur}
             value={values.email}
@@ -89,11 +93,14 @@ const Register = () => {
             placeholder="Email Adress"
           />
           {errors.email && touched.email && (
-            <span className="error">{errors.email}</span>
+            <p className="pt-2 text-red-500 text-sm font-semibold">
+              {errors.email}
+            </p>
           )}
         </div>
-        <div className="input-group">
+        <div className="relative mb-4 min-h-[60px]">
           <input
+            className="w-full py-1 text-md outline-none border-orange-200 border-b-2 "
             onChange={handleChange}
             onBlur={handleBlur}
             value={values.password}
@@ -103,22 +110,28 @@ const Register = () => {
           />
           {visible ? (
             <AiOutlineEye
-              className="eye-icon"
+              className="absolute right-[15px] top-2"
               onClick={() => setVisible(!visible)}
             />
           ) : (
             <AiOutlineEyeInvisible
-              className="eye-icon"
+              className="absolute right-[15px] top-2"
               onClick={() => setVisible(!visible)}
             />
           )}
           {errors.password && touched.password && (
-            <span className="error">{errors.password}</span>
+            <p className="pt-2 text-red-500 text-sm font-semibold">
+              {errors.password}
+            </p>
           )}
         </div>
-        <button type="submit" disabled={isSubmitting}>
+        <button
+          type="submit"
+          disabled={isSubmitting}
+          className=" block w-full bg-orange-400 text-white rounded-md p-1 mb-6 "
+        >
           {isSubmitting ? (
-            <span>
+            <span className="text-2xl">
               Submiting
               <CircularProgress
                 size="2rem"
@@ -126,15 +139,17 @@ const Register = () => {
               />
             </span>
           ) : (
-            <span>Submit</span>
+            <span className="text-xl">Submit</span>
           )}
         </button>
 
-        <p>
+        <p className="text-slate-700">
           Already have and account?
           <br />
           <span className="line">
-            <Link to="/login">Sign In</Link>
+            <Link className="text-orange-500" to="/login">
+              Sign In
+            </Link>
           </span>
         </p>
       </form>

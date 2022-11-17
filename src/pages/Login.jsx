@@ -49,15 +49,24 @@ const Login = () => {
     });
 
   return (
-    <div className="form-container">
-      <div className="form-wrapper login">
-        <figure>
-          <img src={loginBackground} alt="" />
+    <div className="flex justify-center items-center min-h-[100vh] bg-black ">
+      <div className="flex h-[600px] rounded-lg overflow-hidden ">
+        <figure className="h-[100%]">
+          <img
+            src={loginBackground}
+            className=" h-[100%] object-contain"
+            alt=""
+          />
         </figure>
-        <form method="post" onSubmit={handleSubmit}>
-          <h2>Sign In</h2>
-          <div className="input-group">
+        <form
+          className="w-[400px] bg-white py-10 px-5 "
+          method="post"
+          onSubmit={handleSubmit}
+        >
+          <h2 className="text-slate-900 text-5xl mb-8">Sign In</h2>
+          <div className="relative mb-4 min-h-[60px]">
             <input
+              className="w-full py-1 text-md outline-none border-orange-200 border-b-2  "
               onChange={handleChange}
               onBlur={handleBlur}
               value={values.email}
@@ -66,11 +75,14 @@ const Login = () => {
               placeholder="Email Adress"
             />
             {errors.email && touched.email && (
-              <p className="error">{errors.email}</p>
+              <p className="pt-2 text-red-500 text-sm font-semibold">
+                {errors.email}
+              </p>
             )}
           </div>
-          <div className="input-group">
+          <div className="relative mb-4 min-h-[60px]">
             <input
+              className="w-full py-1 text-md outline-none border-orange-200 border-b-2  "
               onChange={handleChange}
               onBlur={handleBlur}
               value={values.password}
@@ -80,20 +92,26 @@ const Login = () => {
             />
             {visible ? (
               <AiOutlineEye
-                className="eye-icon"
+                className="absolute right-[15px] top-2"
                 onClick={() => setVisible(!visible)}
               />
             ) : (
               <AiOutlineEyeInvisible
-                className="eye-icon"
+                className="absolute right-[15px] top-2"
                 onClick={() => setVisible(!visible)}
               />
             )}
             {errors.password && touched.password && (
-              <p className="error">{errors.password}</p>
+              <p className="pt-2 text-red-500 text-sm font-semibold">
+                {errors.password}
+              </p>
             )}
           </div>
-          <button type="submit" disabled={loading} style={{ fontSize: "2rem" }}>
+          <button
+            type="submit"
+            disabled={loading}
+            className=" block w-full bg-orange-400 text-white rounded-md p-1 "
+          >
             {loading ? (
               <>
                 <span style={{ marginRight: "10px" }}>Loading</span>
@@ -103,17 +121,21 @@ const Login = () => {
                 />
               </>
             ) : (
-              <span>Login</span>
+              <span className="text-2xl">Login</span>
             )}
           </button>
 
-          <p className="google">Or signIn with google account</p>
+          <p className="py-8 text-center text-slate-600 text-sm">
+            Or signIn with google account
+          </p>
 
-          <p>
+          <p className="text-slate-700">
             Need an Account?
             <br />
-            <span className="line">
-              <Link to="/register">Sign Up</Link>
+            <span>
+              <Link className="text-orange-300" to="/register">
+                Sign Up
+              </Link>
             </span>
           </p>
         </form>

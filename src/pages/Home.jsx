@@ -1,7 +1,7 @@
 const Home = () => {
   return (
     <>
-      <section className=" bg-hero min-height md:min-h-[70vh]  flex flex-col justify-center   text-center md:text-left  bg-cover  relative ">
+      <section className=" bg-hero min-height md:min-h-[80vh]  flex flex-col justify-center   text-center md:text-left  bg-cover  relative ">
         <div className="md:absolute top-[25%] left-[10%] m-w-sm md:max-w-[800px]  ">
           <span className="text-orange-500 text-xl md:text-2xl font-bold">
             Let´s do it
