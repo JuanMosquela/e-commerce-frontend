@@ -1,7 +1,11 @@
+import { BsShieldShaded, BsTruck } from "react-icons/bs";
+import { AiOutlineFileText, AiOutlineGift } from "react-icons/ai";
+import Services from "../components/Services";
+
 const Home = () => {
   return (
     <>
-      <section className=" bg-hero min-height md:min-h-[75vh]   flex flex-col justify-center   text-center md:text-left  bg-cover  relative ">
+      <section className="bg-hero min-height md:min-h-[75vh]   flex flex-col justify-center   text-center md:text-left  bg-cover  relative ">
         <div className="md:absolute top-[25%] left-[10%] m-w-sm md:max-w-[700px]  ">
           <span className="text-orange-400 text-sm md:text-xl font-bold">
             Let´s do it
@@ -24,7 +28,7 @@ const Home = () => {
         </div>
       </section>
 
-      {/* <Services /> */}
+      <Services />
       {/* <ProductsList inputValue={inputValue} /> */}
     </>
   );

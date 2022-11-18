@@ -4,6 +4,7 @@ import CardProduct from "../components/CardProduct";
 import { Link } from "react-router-dom";
 import { ProductsContext } from "../context/SearchProductsProvider";
 import { useFetchAllProductsQuery } from "../redux/productsApi";
+import { CgMenuGridO, CgMenu } from "react-icons/cg";
 import Aside from "../components/Aside";
 
 const Products = () => {
@@ -20,15 +21,22 @@ const Products = () => {
           <Aside />
 
           <div className="col-span-3 grid grid-cols-3 gap-4">
+            <p className="col-span-3 flex items-center">
+              View as:
+              <div className="flex items-center gap-2 ml-4 ">
+                <CgMenuGridO className="bg-orange-400 text-white text-3xl px-1" />
+                <CgMenu className="bg-orange-400 text-white text-3xl px-1" />
+              </div>
+            </p>
             {!searchedProducts
               ? data?.products?.map((product) => (
                   <Link key={product._id} to={`/products/${product._id}`}>
-                    <CardProduct product={product} />
+                    <CardProduct className=" " product={product} />
                   </Link>
                 ))
               : searchedProducts?.results?.map((product) => (
                   <Link key={product._id} to={`/products/${product._id}`}>
-                    <CardProduct product={product} />
+                    <CardProduct className="" product={product} />
                   </Link>
                 ))}
           </div>

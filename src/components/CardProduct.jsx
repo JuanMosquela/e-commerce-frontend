@@ -8,13 +8,13 @@ const CardProduct = ({ product }) => {
   return (
     <div
       // className={isHovered ? "product-card hovered" : "product-card"}
-      className="bg-white shadow rounded overflow-hidden"
+      className="bg-white  shadow rounded overflow-hidden  "
       onMouseEnter={() => setIsHovered((prev) => !prev)}
       onMouseLeave={() => setIsHovered((prev) => !prev)}
     >
       <div className="relative">
         <img
-          className="object-contain h-[280px] w-48 m-auto"
+          className="object-contain h-[400px]  m-auto"
           src={product.pictureURL[0]}
           alt={product.title}
         />

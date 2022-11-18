@@ -1,0 +1,21 @@
+import servicesInfo from "../utils/servicesData";
+
+const Services = () => {
+  return (
+    <div className=" container flex justify-between items-center min-h-[20vh] ">
+      {servicesInfo.map((service, index) => (
+        <div className="flex items-center justify-center gap-6 border-gray-200 border-2 p-2 flex-1">
+          <i className="text-2xl">{service.icon}</i>
+
+          <div>
+            <h4 className="text-slate-700 text-md font-bold uppercase">
+              {service.title}
+            </h4>
+            <p className="text-sm text-gray-500 ">{service.subt}</p>
+          </div>
+        </div>
+      ))}
+    </div>
+  );
+};
+export default Services;
