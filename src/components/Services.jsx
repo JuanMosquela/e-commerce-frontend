@@ -6,7 +6,7 @@ const Services = () => {
       {servicesInfo.map((service, index) => (
         <div
           key={index}
-          className="flex items-center justify-center gap-6 border-orange-200 border-2 p-2 flex-1"
+          className="flex items-center justify-center gap-6 border-orange border-2 p-2 flex-1"
         >
           <i className="text-2xl">{service.icon}</i>
 

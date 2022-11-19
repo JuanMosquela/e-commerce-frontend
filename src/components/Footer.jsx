@@ -9,7 +9,7 @@ const Footer = () => {
             className=" py-1  font-bold uppercase text-sm md:text-md lg:text-xl text-black  "
             to="/"
           >
-            <span className="text-orange-400 text-xl font-bold">physical </span>
+            <span className="text-orange text-xl font-bold">physical </span>
             point
           </Link>
         </div>

@@ -15,13 +15,13 @@ const Navbar = () => {
   const { handleClick, inputValue, handleInput } = useContext(ProductsContext);
 
   return (
-    <header className=" w-full z-50 top-0  ">
+    <header className="w-full z-50 top-0 bg-white  ">
       <div className="container flex justify-between items-center py-2   ">
         <Link
           className=" py-1  font-bold uppercase text-sm md:text-md lg:text-xl text-black  "
           to="/"
         >
-          <span className="text-orange-400 text-xl font-bold">physical </span>
+          <span className="text-orange text-xl font-bold">physical </span>
           point
         </Link>
 
@@ -33,7 +33,7 @@ const Navbar = () => {
           <DropDownMenu />
         </div>
       </div>
-      <nav className="bg-black m-right bg-black ">
+      <nav className="m-right bg-dark ">
         <ul className="container flex justify gap-8 py-2">
           <Link
             className="text-white/80 hover:text-white hidden md:block text-lg  capitalize font-thin "

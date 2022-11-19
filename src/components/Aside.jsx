@@ -1,7 +1,7 @@
 const Aside = () => {
   return (
-    <div className="col-span-1 bg-white rounded-sm shadow-lg overflow-hidden ">
-      <div className=" divide-y divide-gray-300 px-6 py-4 ">
+    <div className="col-span-1 bg-white rounded-sm shadow-lg overflow-hidden h-fit ">
+      <div className=" divide-y divide-gray/30 px-6 py-4 ">
         <div>
           <h3 className="text-slate-900 font-bold uppercase mb-4 pt-6">
             Categories
@@ -12,7 +12,7 @@ const Aside = () => {
               className="text-gray-600 ml-3 cursor-pointer"
               htmlFor="cat-1"
             >
-              Proteinas
+              Suplementos
             </label>
             <div className="ml-auto text-gray-600 text-sm">(25)</div>
           </div>
@@ -37,6 +37,16 @@ const Aside = () => {
             <div className="ml-auto text-gray-600 text-sm">(25)</div>
           </div>
           <div className="flex justify-between items-center mb-3">
+            <input type="checkbox" name="cat-3" id="cat-3" />
+            <label
+              className="text-gray-600 ml-3 cursor-pointer"
+              htmlFor="cat-3"
+            >
+              Bolsos
+            </label>
+            <div className="ml-auto text-gray-600 text-sm">(25)</div>
+          </div>
+          <div className="flex justify-between items-center mb-3">
             <input type="checkbox" name="cat-4" id="cat-4" />
             <label
               className="text-gray-600 ml-3 cursor-pointer"
@@ -53,7 +63,7 @@ const Aside = () => {
           </h3>
           <div className="flex items-center mb-3 gap-4">
             <input
-              className="w-full text-md border-gray-600 bg-gray-100 px-3 outline-none  "
+              className="w-full text-md bg-gray/10 px-3 outline-none  "
               type="number"
               name="min"
               id="min"
@@ -61,7 +71,7 @@ const Aside = () => {
             />
             <span className="text-md text-gray-600 font-thin">-</span>
             <input
-              className="w-full text-md border-gray-600 bg-gray-100 px-3 outline-none   "
+              className="w-full text-md  bg-gray/10 px-3 outline-none   "
               type="number"
               name="max"
               id="max"

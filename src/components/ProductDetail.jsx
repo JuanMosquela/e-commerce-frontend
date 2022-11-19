@@ -55,7 +55,7 @@ const ProductDetail = ({ productDetail }) => {
       <div className="product-info">
         <h4>{productDetail.category}</h4>
         <h3 className="text-4xl font-semibold mb-4 ">{productDetail.title}</h3>
-        <div className="flex gap-2 items-center mb-4 text-3xl text-orange-400">
+        <div className="flex gap-2 items-center mb-4 text-3xl text-orange">
           <AiFillStar />
           <AiFillStar />
           <AiFillStar />
@@ -104,7 +104,7 @@ const ProductDetail = ({ productDetail }) => {
 
         <div className="flex gap-4">
           <button
-            className="flex items-center gap-2 px-8 py-2 text-white text-md  uppercase bg-orange-400 hover:bg-orange-300 ease-in duration-100 rounded-md"
+            className="flex items-center gap-2 px-8 py-2 text-white text-md  uppercase bg-orange hover:shadow-lg ease-in duration-100 rounded-md"
             onClick={() => handleClick(obj)}
           >
             <BsFillCartPlusFill />

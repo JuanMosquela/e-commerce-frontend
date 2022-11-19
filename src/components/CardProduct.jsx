@@ -18,19 +18,17 @@ const CardProduct = ({ product }) => {
           src={product.pictureURL[0]}
           alt={product.title}
         />
-        <div className=" flex items-center justify-center gap-2 absolute hover:bg-black inset-0 hover:bg-opacity-40 opacity-0 hover:opacity-100  ease-in duration-200">
-          <AiOutlineHeart className="bg-orange-500 hover:bg-orange-700 ease-in duration-100 rounded-full h-8 w-9 text-white flex items-center justify-center p-2  " />
-          <BiSearch className="bg-orange-500 hover:bg-orange-700 ease-in duration-100 rounded-full h-8 w-9 text-white flex items-center justify-center p-2  " />
+        <div className="group  flex items-center justify-center gap-2 absolute hover:bg-dark inset-0 hover:bg-opacity-40 opacity-0 hover:opacity-100  ease-in duration-200">
+          <AiOutlineHeart className="bg-orange hover:bg-orange ease-in duration-100 rounded-full h-8 w-9 text-white flex items-center justify-center p-2  " />
+          <BiSearch className="bg-orange hover:bg-orange ease-in duration-100 rounded-full h-8 w-9 text-white flex items-center justify-center p-2  " />
         </div>
       </div>
 
       <div className="px-4 py-2">
-        <h4 className=" md:min-h-[40px] text-sm md:text-md lg:text-[16px] mb-2 font-semibold text-slate-900 ">
+        <h4 className=" md:min-h-[40px] text-sm md:text-md lg:text-[16px] font-thin text-slate capitalize ">
           {product.title.toLowerCase()}
         </h4>
-        <h5 className=" text-sm text-gray-600 font-semibold ">
-          $ {product.price}
-        </h5>
+        <h5 className=" text-xl text-gray-600 font-bold ">$ {product.price}</h5>
       </div>
     </div>
   );
