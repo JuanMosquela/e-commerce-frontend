@@ -31,13 +31,13 @@ const DropDownMenu = () => {
     >
       <div className="flex items-center text-white gap-2">
         {/* {user ? <p>{`${user.name}`}</p> : null} */}
-        <AiOutlineUser className="text-slate-900 text-3xl" />
+        <AiOutlineUser className="text-slate text-3xl" />
       </div>
       {isOpen && (
         <ul className="absolute top-[42px] right-[-15px] w-[200px] px-6 py-2 bg-white rounded-sm z-40 shadow-lg ">
           <li>
             <Link
-              className="flex gap-6 items-center  hover:cursor-pointer hover:text-orange-500  "
+              className="flex gap-6 items-center  hover:cursor-pointer hover:text-orange  "
               to="/profile"
             >
               <CgProfile /> <p>My Profile</p>

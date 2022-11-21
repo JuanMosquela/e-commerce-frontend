@@ -20,7 +20,7 @@ module.exports = {
       },
       container: {
         center: true,
-        padding: "0rem",
+        padding: "2rem",
       },
 
       backgroundImage: {

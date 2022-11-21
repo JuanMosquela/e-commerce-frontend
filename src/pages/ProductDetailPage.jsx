@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import { CircularProgress } from "@mui/material";
 import ProductDetail from "../components/ProductDetail";
 import axios from "axios";
+import { useFetchSingleProductQuery } from "../redux/productsApi";
 
 const ProductDetailPage = () => {
   const location = useLocation();
@@ -14,30 +15,34 @@ const ProductDetailPage = () => {
 
   const [productDetail, setProductDetail] = useState({});
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const { data } = await axios.get(
-          `https://fit-commerce-api.onrender.com/api/products/${id}`
-        );
+  const { data, isLoading } = useFetchSingleProductQuery(id);
 
-        setProductDetail(data.product);
-        setLoading(false);
-      } catch (error) {
-        console.log(error);
-      }
-    };
+  console.log(data);
 
-    fetchData();
-  }, [id]);
+  // useEffect(() => {
+  //   const fetchData = async () => {
+  //     try {
+  //       const { data } = await axios.get(
+  //         `https://fit-commerce-api.onrender.com/api/products/${id}`
+  //       );
+
+  //       setProductDetail(data.product);
+  //       setLoading(false);
+  //     } catch (error) {
+  //       console.log(error);
+  //     }
+  //   };
+
+  //   fetchData();
+  // }, [id]);
 
   return (
     <section>
       <div className="min-height flex justify-center items-center my-7">
-        {loading ? (
+        {isLoading ? (
           <CircularProgress sx={{ color: "var(--color-orange)" }} size="5rem" />
         ) : (
-          <ProductDetail productDetail={productDetail} />
+          <ProductDetail data={data.product} />
         )}
       </div>
     </section>

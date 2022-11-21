@@ -33,8 +33,8 @@ const Navbar = () => {
           <DropDownMenu />
         </div>
       </div>
-      <nav className="m-right bg-dark ">
-        <ul className="container flex justify gap-8 py-2">
+      <nav className="flex bg-dark ">
+        <ul className="container flex py-2 gap-8   ">
           <Link
             className="text-white/80 hover:text-white hidden md:block text-lg  capitalize font-thin "
             to="/"

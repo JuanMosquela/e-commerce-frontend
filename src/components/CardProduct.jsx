@@ -25,7 +25,7 @@ const CardProduct = ({ product }) => {
       </div>
 
       <div className="px-4 py-2">
-        <h4 className=" md:min-h-[40px] text-sm md:text-md lg:text-[16px] font-thin text-slate capitalize ">
+        <h4 className="text-sm md:text-md lg:text-[16px] font-thin text-slate capitalize overflow-hidden whitespace-nowrap mb-4 ">
           {product.title.toLowerCase()}
         </h4>
         <h5 className=" text-xl text-gray-600 font-bold ">$ {product.price}</h5>

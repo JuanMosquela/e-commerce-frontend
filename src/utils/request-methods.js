@@ -21,8 +21,10 @@ const login = async (values) => {
   return data;
 };
 
-const getProducts = async () => {
-  const response = await axios.get(`${BASE_URL}/products`);
+const getProducts = async (value) => {
+  const response = await axios.get(
+    value ? `${BASE_URL}/?search=${value}` : `${BASE_URL}/products`
+  );
   return response;
 };
 
