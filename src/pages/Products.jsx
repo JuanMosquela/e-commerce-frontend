@@ -17,6 +17,10 @@ const Products = () => {
 
   const [currentPage, setCurrentPage] = useState(1);
 
+  const [grid, setGrid] = useState(true);
+
+  const [row, setRow] = useState(false);
+
   const [productsPerPage, setProductsPerPage] = useState(6);
 
   const { data, isError, error, isLoading } = useFetchAllProductsQuery();
@@ -25,6 +29,16 @@ const Products = () => {
 
   const lastProduct = currentPage * productsPerPage;
   const firstProduct = lastProduct - productsPerPage;
+
+  const handleRow = () => {
+    setGrid(false);
+    setRow(true);
+  };
+
+  const handleGrid = () => {
+    setRow(false);
+    setGrid(true);
+  };
 
   return (
     <section className="min-height bg-white flex justify-center py-7 ">
@@ -38,8 +52,14 @@ const Products = () => {
             <div className="col-span-1  flex ">
               View as:
               <div className="flex  gap-2 ml-4 ">
-                <CgMenuGridO className="bg-orange text-white text-3xl px-1" />
-                <CgMenu className="bg-orange text-white text-3xl px-1" />
+                <CgMenuGridO
+                  onClick={handleGrid}
+                  className="bg-orange text-white text-3xl px-1"
+                />
+                <CgMenu
+                  onClick={handleRow}
+                  className="bg-orange text-white text-3xl px-1"
+                />
               </div>
             </div>
             <Pagination
@@ -56,9 +76,11 @@ const Products = () => {
                   </Link>
                 )) */}
             {data?.products.slice(firstProduct, lastProduct).map((product) => (
-              <Link key={product._id} to={`/products/${product._id}`}>
-                <CardProduct className=" " product={product} />
-              </Link>
+              <div className={row ? `col-span-3` : ""}>
+                <Link key={product._id} to={`/products/${product._id}`}>
+                  <CardProduct product={product} grid={grid} row={row} />
+                </Link>
+              </div>
             ))}
           </div>
         </div>

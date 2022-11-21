@@ -2,19 +2,21 @@ import { useState } from "react";
 import { AiOutlineHeart } from "react-icons/ai";
 import { BiSearch } from "react-icons/bi";
 
-const CardProduct = ({ product }) => {
+const CardProduct = ({ product, grid, row }) => {
   const [isHovered, setIsHovered] = useState(false);
 
   return (
     <div
       // className={isHovered ? "product-card hovered" : "product-card"}
-      className="bg-white  shadow rounded overflow-hidden  "
-      onMouseEnter={() => setIsHovered((prev) => !prev)}
-      onMouseLeave={() => setIsHovered((prev) => !prev)}
+      className={
+        row
+          ? `flex items-center shadow-md rounded overflow-hidden`
+          : "shadow-md rounded overflow-hidden"
+      }
     >
-      <div className="relative">
+      <div className="relative flex-1">
         <img
-          className="object-contain h-[400px]  m-auto"
+          className="object-contain h-[400px] m-auto"
           src={product.pictureURL[0]}
           alt={product.title}
         />
@@ -24,11 +26,12 @@ const CardProduct = ({ product }) => {
         </div>
       </div>
 
-      <div className="px-4 py-2">
+      <div className="px-4 py-2 flex-1">
         <h4 className="text-sm md:text-md lg:text-[16px] font-thin text-slate capitalize overflow-hidden whitespace-nowrap mb-4 ">
           {product.title.toLowerCase()}
         </h4>
         <h5 className=" text-xl text-gray-600 font-bold ">$ {product.price}</h5>
+        {row && <p>{product.description}</p>}
       </div>
     </div>
   );
