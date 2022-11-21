@@ -24,8 +24,10 @@ const Products = () => {
   const [productsPerPage, setProductsPerPage] = useState(6);
 
   const { data, isError, error, isLoading } = useFetchAllProductsQuery();
-  // const { data: searchedProducts } =
-  //   useFetchAllProductsByNameOrCategoryQuery(inputValue);
+  const { data: searchedProducts } =
+    useFetchAllProductsByNameOrCategoryQuery(inputValue);
+
+  console.log(searchedProducts);
 
   const lastProduct = currentPage * productsPerPage;
   const firstProduct = lastProduct - productsPerPage;
@@ -63,7 +65,11 @@ const Products = () => {
               </div>
             </div>
             <Pagination
-              total={data.products.length}
+              total={
+                searchedProducts
+                  ? searchedProducts.findProducts.length
+                  : data.products.length
+              }
               productsPerPage={productsPerPage}
               setCurrentPage={setCurrentPage}
               currentPage={currentPage}
@@ -72,13 +78,13 @@ const Products = () => {
             {/* {searchedProducts
               ? searchedProducts?.findProducts.map((product) => (
                   <Link key={product._id} to={`/products/${product._id}`}>
-                    <CardProduct className=" " product={product} />
+                    <CardProduct row={row} product={product} />
                   </Link>
                 )) */}
             {data?.products.slice(firstProduct, lastProduct).map((product) => (
-              <div className={row ? `col-span-3` : ""}>
-                <Link key={product._id} to={`/products/${product._id}`}>
-                  <CardProduct product={product} grid={grid} row={row} />
+              <div key={product._id} className={row ? `col-span-3` : ""}>
+                <Link to={`/products/${product._id}`}>
+                  <CardProduct grid={grid} product={product} row={row} />
                 </Link>
               </div>
             ))}

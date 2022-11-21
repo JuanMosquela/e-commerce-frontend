@@ -13,7 +13,7 @@ export const productsApi = createApi({
       query: (id) => `/products/${id}`,
     }),
     fetchAllProductsByNameOrCategory: builder.query({
-      query: (inputValue) => `/?search=${inputValue}`,
+      query: (inputValue) => `/search/?search=${inputValue}`,
     }),
   }),
 });

@@ -1,11 +1,8 @@
-import axios from "axios";
 import { useContext } from "react";
-import { useState } from "react";
+
 import { AiOutlineSearch } from "react-icons/ai";
 import { useNavigate } from "react-router-dom";
 import { ProductsContext } from "../context/SearchProductsProvider";
-import { useFetchAllProductsByNameOrCategoryQuery } from "../redux/productsApi";
-import { BASE_URL } from "../utils/request-methods";
 
 const Search = () => {
   const { handleInput } = useContext(ProductsContext);

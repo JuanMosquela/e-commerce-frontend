@@ -1,3 +1,4 @@
+import { Rating } from "@mui/material";
 import { useState } from "react";
 import { AiFillStar, AiOutlineHeart, AiOutlineStar } from "react-icons/ai";
 import { BsFillCartPlusFill } from "react-icons/bs";
@@ -5,6 +6,7 @@ import { useDispatch } from "react-redux";
 import { useFetchAllProductsQuery } from "../redux/productsApi";
 import { addToCart } from "../redux/shoppingCartRedux";
 import CardProduct from "./CardProduct";
+import SelectField from "./SelectField";
 
 const ProductDetail = ({ data }) => {
   const [pictureIndex, setPictureIndex] = useState(0);
@@ -55,13 +57,9 @@ const ProductDetail = ({ data }) => {
         </div>
       </div>
       <div className="product-info  col-span-2 leading-10">
-        <h3 className="text-4xl font-semibold ">{data.title}</h3>
-        <div className="flex gap-2 items-center  text-3xl text-orange">
-          <AiFillStar />
-          <AiFillStar />
-          <AiFillStar />
-          <AiFillStar />
-          <AiOutlineStar />
+        <h3 className="text-4xl font-semibold mb-4 ">{data.title}</h3>
+        <div className="">
+          <Rating name="size-large" value={data.rating} size="large" readOnly />
         </div>
         <span className="text-sm rounded-xl bg-orange text-white font-bold px-6 py-2">
           {data.branch}
@@ -94,16 +92,18 @@ const ProductDetail = ({ data }) => {
               <option value="0">0</option>
             </select>
           ) : (
-            <select
-              onChange={(e) => handleChange(e)}
-              className=" px-2 py-1 w-full rounded-sm hover:cursor-pointer"
-            >
-              {productStock.map((qty, index) => (
-                <option key={index} value={qty}>
-                  {qty}
-                </option>
-              ))}
-            </select>
+            // <select
+            //   onChange={(e) => handleChange(e)}
+            //   className=" px-2 py-1 w-full rounded-sm hover:cursor-pointer"
+            // >
+            //   {productStock.map((qty, index) => (
+            //     <option key={index} value={qty}>
+            //       {qty}
+            //     </option>
+            //   ))}
+
+            // </select>
+            <SelectField quantity={productStock} />
           )}
         </div>
 
@@ -129,7 +129,9 @@ const ProductDetail = ({ data }) => {
         Description :
       </h3>
       <div className=" text-sm text-gray-900 col-span-3">
-        <p className="mb-6 text-slate font-thin ">{data.description}</p>
+        <p className="mb-6 text-slate font-thin max-w-[700px] ">
+          {data.description}
+        </p>
         <div className="grid grid-cols-2 gap-4">
           {Object.entries(data.subCategory).map((cat) => (
             <ul className="">

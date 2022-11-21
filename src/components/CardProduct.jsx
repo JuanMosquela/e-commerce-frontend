@@ -1,13 +1,13 @@
 import { useState } from "react";
 import { AiOutlineHeart } from "react-icons/ai";
 import { BiSearch } from "react-icons/bi";
+import { Rating } from "@mui/material";
 
-const CardProduct = ({ product, grid, row }) => {
+const CardProduct = ({ product, row, grid }) => {
   const [isHovered, setIsHovered] = useState(false);
 
   return (
     <div
-      // className={isHovered ? "product-card hovered" : "product-card"}
       className={
         row
           ? `flex items-center shadow-md rounded overflow-hidden`
@@ -30,9 +30,17 @@ const CardProduct = ({ product, grid, row }) => {
         <h4 className="text-sm md:text-md lg:text-[16px] font-semibold text-slate capitalize overflow-hidden whitespace-nowrap mb-4 ">
           {product.title.toLowerCase()}
         </h4>
+        <Rating
+          name="read-only"
+          value={product.rating}
+          precision={0.5}
+          readOnly
+        />
         <h5 className=" text-xl text-gray-600 font-bold ">$ {product.price}</h5>
         {row && (
-          <p className="text-slate font-thin pt-2">{product.description}</p>
+          <p className="text-slate font-thin pt-2">
+            {product.description.slice(1, 225)}...
+          </p>
         )}
       </div>
     </div>
