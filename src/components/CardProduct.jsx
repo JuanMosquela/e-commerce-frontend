@@ -27,11 +27,13 @@ const CardProduct = ({ product, grid, row }) => {
       </div>
 
       <div className="px-4 py-2 flex-1">
-        <h4 className="text-sm md:text-md lg:text-[16px] font-thin text-slate capitalize overflow-hidden whitespace-nowrap mb-4 ">
+        <h4 className="text-sm md:text-md lg:text-[16px] font-semibold text-slate capitalize overflow-hidden whitespace-nowrap mb-4 ">
           {product.title.toLowerCase()}
         </h4>
         <h5 className=" text-xl text-gray-600 font-bold ">$ {product.price}</h5>
-        {row && <p>{product.description}</p>}
+        {row && (
+          <p className="text-slate font-thin pt-2">{product.description}</p>
+        )}
       </div>
     </div>
   );
