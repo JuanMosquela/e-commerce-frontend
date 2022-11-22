@@ -15,6 +15,9 @@ export const productsApi = createApi({
     fetchAllProductsByNameOrCategory: builder.query({
       query: (inputValue) => `/search/?search=${inputValue}`,
     }),
+    fetchAllReviews: builder.query({
+      query: (id) => `/products/reviews/${id}`,
+    }),
   }),
 });
 
@@ -22,4 +25,5 @@ export const {
   useFetchAllProductsQuery,
   useFetchSingleProductQuery,
   useFetchAllProductsByNameOrCategoryQuery,
+  useFetchAllReviewsQuery,
 } = productsApi;

@@ -2,22 +2,30 @@ import { useState } from "react";
 import { AiFillStar, AiOutlineHeart, AiOutlineStar } from "react-icons/ai";
 import { BsFillCartPlusFill } from "react-icons/bs";
 import { useDispatch, useSelector } from "react-redux";
-import { useFetchAllProductsQuery } from "../redux/productsApi";
+import {
+  useFetchAllProductsQuery,
+  useFetchAllReviewsQuery,
+} from "../redux/productsApi";
 import { addToCart } from "../redux/shoppingCartRedux";
 import CardProduct from "./CardProduct";
 import RatingComponent from "./RatingComponent";
+import { Rating } from "@mui/material";
 
 const ProductDetail = ({ data }) => {
   const [pictureIndex, setPictureIndex] = useState(0);
   const [value, setValue] = useState(2);
   const [hover, setHover] = useState(-1);
-  const [text, setText] = useState("");
+  const [comment, setComment] = useState("");
 
   const [counter, setCounter] = useState(1);
 
   const dispatch = useDispatch();
 
   const user = useSelector((state) => state.auth.userLogin);
+
+  const { data: dataReviews } = useFetchAllReviewsQuery(data._id);
+
+  console.log(dataReviews);
 
   const obj = {
     product: data,
@@ -28,9 +36,10 @@ const ProductDetail = ({ data }) => {
     e.preventDefault();
     const userReview = {
       user,
-      text,
+      comment,
       value,
     };
+
     console.log(userReview);
   };
 
@@ -72,13 +81,12 @@ const ProductDetail = ({ data }) => {
       </div>
       <div className="product-info  col-span-2 leading-10">
         <h3 className="text-4xl font-semibold ">{data.title}</h3>
-        <div className="flex gap-2 items-center  text-3xl text-orange">
-          <AiFillStar />
-          <AiFillStar />
-          <AiFillStar />
-          <AiFillStar />
-          <AiOutlineStar />
-        </div>
+        <Rating
+          className="read-only"
+          value={data.rating}
+          precision={0.5}
+          readOnly
+        />
         <span className="text-sm rounded-xl bg-orange text-white font-bold px-6 py-2">
           {data.branch}
         </span>
@@ -144,7 +152,7 @@ const ProductDetail = ({ data }) => {
       <h3 className="text-slate-900 text:2xl font-semibold mb-2 col-span-1 ">
         Description :
       </h3>
-      <div className=" text-sm text-gray-900 col-span-3">
+      <div className=" text-sm text-gray-900 col-span-3 mb-10">
         <p className="mb-6 text-slate font-thin ">{data.description}</p>
         <ul className="grid grid-cols-2 gap-4">
           {Object.entries(data.subCategory).map((cat) => (
@@ -158,14 +166,21 @@ const ProductDetail = ({ data }) => {
         <div className="grid grid-cols-4 gap-4">
           <div className="col-span-2">
             <h3 className="text-md text-slate font-semibold mb-4">Reviews</h3>
-            <div className="bg-slate/10 p-2 rounded-md ">
-              <h4>Usuario</h4>
-
-              <p className=" text-md">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Nisi,
-                aliquam ullam molestias repellendus culpa totam? Error
-                voluptatum repellat maiores aperiam!
-              </p>
+            <div className="flex flex-col gap-2 max-h-[280px] overflow-scroll">
+              {dataReviews?.productReviews?.map((review) => (
+                <div className="bg-slate/10 rounded-md p-2">
+                  <div className="flex items-center gap-2">
+                    <h4>{review.user}</h4>
+                    <Rating
+                      className="read-only"
+                      value={review.ratings}
+                      precision={0.5}
+                      readOnly
+                    />
+                  </div>
+                  <p className="text-md">{review.comment}</p>
+                </div>
+              ))}
             </div>
           </div>
           <div className="col-span-2">
@@ -173,12 +188,11 @@ const ProductDetail = ({ data }) => {
               <h3 className="text-md text-slate font-semibold">
                 Deja un comentario
               </h3>
-
               <textarea
                 className="bg-slate/10 p-2 text-md w-full outline-none mt-4 resize-none rounded-md"
                 name="textarea"
                 rows="7"
-                onChange={(e) => setText(e.target.value)}
+                onChange={(e) => setComment(e.target.value)}
                 placeholder="Deja un comentario"
               ></textarea>
               <RatingComponent
