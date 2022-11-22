@@ -26,16 +26,7 @@ const Aside = () => {
             </label>
             <div className="ml-auto text-gray-600 text-sm">(25)</div>
           </div>
-          <div className="flex justify-between items-center mb-3">
-            <input type="checkbox" name="cat-3" id="cat-3" />
-            <label
-              className="text-gray-600 ml-3 cursor-pointer"
-              htmlFor="cat-3"
-            >
-              Maquinas
-            </label>
-            <div className="ml-auto text-gray-600 text-sm">(25)</div>
-          </div>
+
           <div className="flex justify-between items-center mb-3">
             <input type="checkbox" name="cat-3" id="cat-3" />
             <label

@@ -7,8 +7,6 @@ import { useState } from "react";
 export default function SelectField({ quantity }) {
   const [age, setAge] = useState("");
 
-  console.log(quantity);
-
   const handleChange = (event) => {
     setAge(event.target.value);
   };
@@ -27,7 +25,9 @@ export default function SelectField({ quantity }) {
           <em>None</em>
         </MenuItem>
         {quantity.map((qty, index) => (
-          <MenuItem value={qty}>{qty}</MenuItem>
+          <MenuItem key={index} value={qty}>
+            {qty}
+          </MenuItem>
         ))}
       </Select>
     </FormControl>

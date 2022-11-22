@@ -1,9 +1,9 @@
-import { useLocation, useParams } from "react-router-dom";
-import { useState, useEffect } from "react";
+import { useLocation } from "react-router-dom";
+import { useState } from "react";
 
 import { CircularProgress } from "@mui/material";
 import ProductDetail from "../components/ProductDetail";
-import axios from "axios";
+
 import { useFetchSingleProductQuery } from "../redux/productsApi";
 
 const ProductDetailPage = () => {
@@ -16,25 +16,6 @@ const ProductDetailPage = () => {
   const [productDetail, setProductDetail] = useState({});
 
   const { data, isLoading } = useFetchSingleProductQuery(id);
-
-  console.log(data);
-
-  // useEffect(() => {
-  //   const fetchData = async () => {
-  //     try {
-  //       const { data } = await axios.get(
-  //         `https://fit-commerce-api.onrender.com/api/products/${id}`
-  //       );
-
-  //       setProductDetail(data.product);
-  //       setLoading(false);
-  //     } catch (error) {
-  //       console.log(error);
-  //     }
-  //   };
-
-  //   fetchData();
-  // }, [id]);
 
   return (
     <section>
