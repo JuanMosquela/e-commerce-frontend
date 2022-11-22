@@ -1,5 +1,3 @@
-import { BsShieldShaded, BsTruck } from "react-icons/bs";
-import { AiOutlineFileText, AiOutlineGift } from "react-icons/ai";
 import Services from "../components/Services";
 import Categories from "../components/Categories";
 import Banner from "../components/Banner";

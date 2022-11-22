@@ -47,7 +47,7 @@ const Products = () => {
       {isLoading ? (
         <CircularProgress />
       ) : (
-        <div className="container grid grid-cols-4 gap-4   sm:grid-cols-2  md:grid-cols-3 lg:grid-cols-4 ">
+        <div className="container grid grid-cols-4 gap-4  sm:grid-cols-2  md:grid-cols-3 lg:grid-cols-4 ">
           <Aside />
 
           <div className="col-span-3 grid grid-cols-3 gap-4">
