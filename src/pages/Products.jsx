@@ -27,8 +27,6 @@ const Products = () => {
   const { data: searchedProducts } =
     useFetchAllProductsByNameOrCategoryQuery(inputValue);
 
-  console.log(searchedProducts);
-
   const lastProduct = currentPage * productsPerPage;
   const firstProduct = lastProduct - productsPerPage;
 

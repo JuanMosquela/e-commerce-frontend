@@ -3,6 +3,7 @@ import { AiFillStar, AiOutlineHeart, AiOutlineStar } from "react-icons/ai";
 import { BsFillCartPlusFill } from "react-icons/bs";
 import { useDispatch, useSelector } from "react-redux";
 import {
+  useCreateReviewMutation,
   useFetchAllProductsQuery,
   useFetchAllReviewsQuery,
 } from "../redux/productsApi";
@@ -25,6 +26,8 @@ const ProductDetail = ({ data }) => {
 
   const { data: dataReviews } = useFetchAllReviewsQuery(data._id);
 
+  const [createReview] = useCreateReviewMutation();
+
   const obj = {
     product: data,
     counter: counter,
@@ -32,13 +35,14 @@ const ProductDetail = ({ data }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const userReview = {
-      user,
+
+    createReview({
+      uid: data._id,
+      id: user.id,
+      user: user.name,
       comment,
       value,
-    };
-
-    console.log(userReview);
+    });
   };
 
   const handleChange = (e) => {
@@ -153,8 +157,8 @@ const ProductDetail = ({ data }) => {
       <div className=" text-sm text-gray-900 col-span-3 mb-10">
         <p className="mb-6 text-slate font-thin ">{data.description}</p>
         <ul className="grid grid-cols-2 gap-4">
-          {Object.entries(data.subCategory).map((cat) => (
-            <li className="text-slate font-thin capitalize">
+          {Object.entries(data.subCategory).map((cat, index) => (
+            <li key={index} className="text-slate font-thin capitalize">
               <span className="font-semibold text-sm">{cat[0]}: </span> {cat[1]}
             </li>
           ))}
@@ -164,22 +168,26 @@ const ProductDetail = ({ data }) => {
         <div className="grid grid-cols-4 gap-4">
           <div className="col-span-2">
             <h3 className="text-md text-slate font-semibold mb-4">Reviews</h3>
-            <div className="flex flex-col gap-2 max-h-[280px] overflow-scroll">
-              {dataReviews?.productReviews?.map((review) => (
-                <div className="bg-slate/10 rounded-md p-2">
-                  <div className="flex items-center gap-2">
-                    <h4>{review.user}</h4>
-                    <Rating
-                      className="read-only"
-                      value={review.ratings}
-                      precision={0.5}
-                      readOnly
-                    />
+            {dataReviews?.productReviews?.length === 0 ? (
+              <p>Todavia no hay comentarios</p>
+            ) : (
+              <div className="flex flex-col gap-2 max-h-[280px] overflow-scroll">
+                {dataReviews?.productReviews?.map((review, index) => (
+                  <div key={index} className="bg-slate/10 rounded-md p-2">
+                    <div className="flex items-center gap-2">
+                      <h4>{review.user}</h4>
+                      <Rating
+                        className="read-only"
+                        value={review.ratings}
+                        precision={0.5}
+                        readOnly
+                      />
+                    </div>
+                    <p className="text-md">{review.comment}</p>
                   </div>
-                  <p className="text-md">{review.comment}</p>
-                </div>
-              ))}
-            </div>
+                ))}
+              </div>
+            )}
           </div>
           <div className="col-span-2">
             <form action="" onSubmit={handleSubmit}>

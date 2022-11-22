@@ -18,6 +18,13 @@ export const productsApi = createApi({
     fetchAllReviews: builder.query({
       query: (id) => `/products/reviews/${id}`,
     }),
+    createReview: builder.mutation({
+      query: ({ uid, ...review }) => ({
+        url: `/products/reviews/${uid}`,
+        method: "PUT",
+        body: review,
+      }),
+    }),
   }),
 });
 
@@ -26,4 +33,5 @@ export const {
   useFetchSingleProductQuery,
   useFetchAllProductsByNameOrCategoryQuery,
   useFetchAllReviewsQuery,
+  useCreateReviewMutation,
 } = productsApi;

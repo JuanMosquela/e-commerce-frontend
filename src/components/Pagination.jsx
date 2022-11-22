@@ -12,9 +12,6 @@ const Pagination = ({
     pages.push(i);
   }
 
-  console.log(pages);
-  console.log(currentPage);
-
   return (
     <div className="col-span-2 ">
       <button
