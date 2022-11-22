@@ -25,8 +25,6 @@ const ProductDetail = ({ data }) => {
 
   const { data: dataReviews } = useFetchAllReviewsQuery(data._id);
 
-  console.log(dataReviews);
-
   const obj = {
     product: data,
     counter: counter,

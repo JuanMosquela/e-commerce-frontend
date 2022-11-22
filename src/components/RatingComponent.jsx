@@ -1,7 +1,7 @@
 import { useState } from "react";
 import Rating from "@mui/material/Rating";
 import Box from "@mui/material/Box";
-import StarIcon from "@mui/icons-material/Star";
+import { BsStar } from "react-icons/bs";
 
 const labels = {
   0.5: "Useless",
@@ -40,7 +40,7 @@ export default function RatingComponent({ value, setValue, hover, setHover }) {
         onChangeActive={(event, newHover) => {
           setHover(newHover);
         }}
-        emptyIcon={<StarIcon style={{ opacity: 0.55 }} fontSize="inherit" />}
+        emptyIcon={<BsStar style={{ opacity: 0.55 }} fontSize="inherit" />}
       />
       {value !== null && (
         <Box sx={{ ml: 2 }}>{labels[hover !== -1 ? hover : value]} </Box>
