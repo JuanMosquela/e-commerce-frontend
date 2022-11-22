@@ -16,7 +16,7 @@ const CardProduct = ({ product, row, grid }) => {
     >
       <div className="relative flex-1">
         <img
-          className="object-contain h-[400px] m-auto"
+          className="object-contain h-[320px] m-auto"
           src={product.pictureURL[0]}
           alt={product.title}
         />
@@ -38,9 +38,14 @@ const CardProduct = ({ product, row, grid }) => {
         />
         <h5 className=" text-xl text-gray-600 font-bold ">$ {product.price}</h5>
         {row && (
-          <p className="text-slate font-thin pt-2">
-            {product.description.slice(1, 225)}...
-          </p>
+          <>
+            <p className="text-slate font-thin pt-2 mb-4">
+              {product.description.slice(0, 225)}...
+            </p>
+            <p className="text-white bg-orange rounded-md px-4 py-1 inline-block font-bold text-sm">
+              Leer mas
+            </p>
+          </>
         )}
       </div>
     </div>
