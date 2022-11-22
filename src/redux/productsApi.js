@@ -17,6 +17,7 @@ export const productsApi = createApi({
     }),
     fetchAllReviews: builder.query({
       query: (id) => `/products/reviews/${id}`,
+      providesTags: ["Review"],
     }),
     createReview: builder.mutation({
       query: ({ uid, ...review }) => ({
@@ -24,6 +25,7 @@ export const productsApi = createApi({
         method: "PUT",
         body: review,
       }),
+      invalidatesTags: ["Review"],
     }),
   }),
 });
