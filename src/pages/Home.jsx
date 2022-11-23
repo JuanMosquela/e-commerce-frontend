@@ -13,11 +13,11 @@ const Home = () => {
 
           <h1 className="text-white text-5xl md:text-6xl xl:text-7xl font-bold mb-4 py-4 ">
             Start{" "}
-            <span className="text-orange-400 text-5xl md:text-6xl xl:text-7xl font-bold">
+            <span className="text-orange text-5xl md:text-6xl xl:text-7xl font-bold">
               working
             </span>{" "}
             out right{" "}
-            <span className="text-orange-400 text-5xl md:text-6xl xl:text-7xl font-bold">
+            <span className="text-orange text-5xl md:text-6xl xl:text-7xl font-bold">
               now
             </span>
           </h1>

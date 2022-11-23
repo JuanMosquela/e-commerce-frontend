@@ -49,7 +49,7 @@ const Login = () => {
     });
 
   return (
-    <div className="flex justify-center items-center min-h-[100vh] bg-black ">
+    <div className="flex justify-center items-center min-h-[100vh] bg-dark ">
       <div className="flex h-[600px] rounded-lg overflow-hidden ">
         <figure className="h-[100%]">
           <img
@@ -63,10 +63,10 @@ const Login = () => {
           method="post"
           onSubmit={handleSubmit}
         >
-          <h2 className="text-slate-900 text-5xl mb-8">Sign In</h2>
+          <h2 className="text-slate text-5xl mb-8">Sign In</h2>
           <div className="relative mb-4 min-h-[60px]">
             <input
-              className="w-full py-1 text-md outline-none border-orange-200 border-b-2  "
+              className="w-full py-1 text-md outline-none border-orange border-b-2  "
               onChange={handleChange}
               onBlur={handleBlur}
               value={values.email}
@@ -75,14 +75,14 @@ const Login = () => {
               placeholder="Email Adress"
             />
             {errors.email && touched.email && (
-              <p className="pt-2 text-red-500 text-sm font-semibold">
+              <p className="pt-2 text-red text-sm font-semibold">
                 {errors.email}
               </p>
             )}
           </div>
           <div className="relative mb-4 min-h-[60px]">
             <input
-              className="w-full py-1 text-md outline-none border-orange-200 border-b-2  "
+              className="w-full py-1 text-md outline-none border-orange border-b-2  "
               onChange={handleChange}
               onBlur={handleBlur}
               value={values.password}
@@ -102,7 +102,7 @@ const Login = () => {
               />
             )}
             {errors.password && touched.password && (
-              <p className="pt-2 text-red-500 text-sm font-semibold">
+              <p className="pt-2 text-red text-sm font-semibold">
                 {errors.password}
               </p>
             )}
@@ -110,7 +110,7 @@ const Login = () => {
           <button
             type="submit"
             disabled={loading}
-            className=" block w-full bg-orange-400 text-white rounded-md p-1 "
+            className=" block w-full bg-orange text-white rounded-md p-1 "
           >
             {loading ? (
               <>
@@ -125,7 +125,7 @@ const Login = () => {
             )}
           </button>
 
-          <p className="py-8 text-center text-slate-600 text-sm">
+          <p className="py-8 text-center text-slate text-sm">
             Or signIn with google account
           </p>
 
@@ -133,7 +133,7 @@ const Login = () => {
             Need an Account?
             <br />
             <span>
-              <Link className="text-orange-300" to="/register">
+              <Link className="text-orange" to="/register">
                 Sign Up
               </Link>
             </span>

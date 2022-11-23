@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { toast } from "react-toastify";
-import { publicRequest } from "../utils/request-methods";
+
 
 const initialState = {
   cart: localStorage.getItem("cart")

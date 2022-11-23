@@ -1,16 +1,15 @@
 import { useState } from "react";
-import { AiFillStar, AiOutlineHeart, AiOutlineStar } from "react-icons/ai";
+import { AiOutlineHeart } from "react-icons/ai";
 import { BsFillCartPlusFill } from "react-icons/bs";
 import { useDispatch, useSelector } from "react-redux";
 import {
   useCreateReviewMutation,
-  useFetchAllProductsQuery,
   useFetchAllReviewsQuery,
 } from "../redux/productsApi";
 import { addToCart } from "../redux/shoppingCartRedux";
-import CardProduct from "./CardProduct";
+
 import RatingComponent from "./RatingComponent";
-import { Rating } from "@mui/material";
+import { CircularProgress, Rating } from "@mui/material";
 
 const ProductDetail = ({ data }) => {
   const [pictureIndex, setPictureIndex] = useState(0);
@@ -26,7 +25,11 @@ const ProductDetail = ({ data }) => {
 
   const { data: dataReviews } = useFetchAllReviewsQuery(data._id);
 
-  const [createReview] = useCreateReviewMutation();
+  const [createReview, { isLoading, isError, error }] =
+    useCreateReviewMutation();
+
+  console.log(isError);
+  console.log(error);
 
   const obj = {
     product: data,
@@ -37,12 +40,13 @@ const ProductDetail = ({ data }) => {
     e.preventDefault();
 
     createReview({
-      uid: data._id,
-      id: user.id,
+      id: data._id,
       user: user.name,
       comment,
       value,
     });
+
+    if (!isLoading) e.target.reset();
   };
 
   const handleChange = (e) => {
@@ -171,7 +175,7 @@ const ProductDetail = ({ data }) => {
             {dataReviews?.productReviews?.length === 0 ? (
               <p>Todavia no hay comentarios</p>
             ) : (
-              <div className="flex flex-col gap-2 max-h-[280px] overflow-scroll">
+              <div className="flex flex-col-reverse  gap-2 max-h-[280px] overflow-scroll">
                 {dataReviews?.productReviews?.map((review, index) => (
                   <div key={index} className="bg-slate/10 rounded-md p-2">
                     <div className="flex items-center gap-2">
@@ -201,18 +205,36 @@ const ProductDetail = ({ data }) => {
                 onChange={(e) => setComment(e.target.value)}
                 placeholder="Deja un comentario"
               ></textarea>
-              <RatingComponent
-                value={value}
-                setValue={setValue}
-                hover={hover}
-                setHover={setHover}
-              />
-              <button
-                type="submit"
-                className="bg-orange text-white font-semibold text-md px-4 py-2 mt-6 rounded-md"
-              >
-                Enviar
-              </button>
+              <div className="flex items-center justify-between">
+                <RatingComponent
+                  value={value}
+                  setValue={setValue}
+                  hover={hover}
+                  setHover={setHover}
+                />
+                <button
+                  type="submit"
+                  disabled={isLoading}
+                  className="bg-orange flex  px-6 gap-3 text-white font-semibold text-md  py-2 mt-6 rounded-md"
+                >
+                  {isLoading ? (
+                    <>
+                      <p>Enviando</p>
+                      <CircularProgress
+                        size="1rem"
+                        sx={{ color: "rgba(255,255,255,.8)" }}
+                      />
+                    </>
+                  ) : (
+                    "Enviar"
+                  )}
+                </button>
+              </div>
+              {error && error.data?.msg && (
+                <p className="bg-red inline text-white px-3 py-1 text-md rounded-md shadow-md">
+                  {error.data.msg}
+                </p>
+              )}
             </form>
           </div>
         </div>

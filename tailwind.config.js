@@ -8,6 +8,7 @@ module.exports = {
       slate: "#343434",
       white: "#FFF",
       gray: "#878B8F",
+      red: "#ff0033",
     },
     extend: {
       screens: {

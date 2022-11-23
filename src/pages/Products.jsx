@@ -24,8 +24,8 @@ const Products = () => {
   const [productsPerPage, setProductsPerPage] = useState(6);
 
   const { data, isError, error, isLoading } = useFetchAllProductsQuery();
-  const { data: searchedProducts } =
-    useFetchAllProductsByNameOrCategoryQuery(inputValue);
+
+  console.log(isLoading, error, isError);
 
   const lastProduct = currentPage * productsPerPage;
   const firstProduct = lastProduct - productsPerPage;
@@ -63,11 +63,7 @@ const Products = () => {
               </div>
             </div>
             <Pagination
-              total={
-                searchedProducts
-                  ? searchedProducts.findProducts.length
-                  : data.products.length
-              }
+              total={data.products.length}
               productsPerPage={productsPerPage}
               setCurrentPage={setCurrentPage}
               currentPage={currentPage}

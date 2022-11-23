@@ -20,8 +20,8 @@ export const productsApi = createApi({
       providesTags: ["Review"],
     }),
     createReview: builder.mutation({
-      query: ({ uid, ...review }) => ({
-        url: `/products/reviews/${uid}`,
+      query: ({ id, ...review }) => ({
+        url: `/products/reviews/${id}`,
         method: "PUT",
         body: review,
       }),
