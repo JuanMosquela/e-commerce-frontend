@@ -175,7 +175,7 @@ const ProductDetail = ({ data }) => {
             {dataReviews?.productReviews?.length === 0 ? (
               <p>Todavia no hay comentarios</p>
             ) : (
-              <div className="flex flex-col-reverse  gap-2 max-h-[280px] overflow-scroll">
+              <div className="flex flex-col-reverse  gap-2  ">
                 {dataReviews?.productReviews?.map((review, index) => (
                   <div key={index} className="bg-slate/10 rounded-md p-2">
                     <div className="flex items-center gap-2">

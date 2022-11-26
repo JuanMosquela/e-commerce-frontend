@@ -19,30 +19,33 @@ import "react-toastify/dist/ReactToastify.css";
 import WishList from "./components/WishList";
 import About from "./pages/About";
 import Contact from "./pages/Contact";
+import { GoogleOAuthProvider } from "@react-oauth/google";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <BrowserRouter>
     <Provider store={store}>
-      <SearchProductsProvider>
-        <ToastContainer />
-        <Routes>
-          <Route path="/" exact element={<App />}>
-            <Route index element={<Home />} />
-            <Route path="/users" element={<User />} />
-            <Route path="/products" element={<Products />} />
-            <Route path="/products/:id" element={<ProductDetailPage />} />
-            <Route path="/contact" element={<Contact />} />
-            <Route path="/about" element={<About />} />
+      <GoogleOAuthProvider clientId={process.env.REACT_APP_GOOGLE_CLIENT_ID}>
+        <SearchProductsProvider>
+          <ToastContainer />
+          <Routes>
+            <Route path="/" exact element={<App />}>
+              <Route index element={<Home />} />
+              <Route path="/users" element={<User />} />
+              <Route path="/products" element={<Products />} />
+              <Route path="/products/:id" element={<ProductDetailPage />} />
+              <Route path="/contact" element={<Contact />} />
+              <Route path="/about" element={<About />} />
 
-            <Route element={<ProtectedRoute />}>
-              <Route path="/cartList" element={<CartList />} />
+              <Route element={<ProtectedRoute />}>
+                <Route path="/cartList" element={<CartList />} />
+              </Route>
             </Route>
-          </Route>
-          <Route path="/login" element={<Login />} />
-          <Route path="/register" element={<Register />} />
-        </Routes>
-      </SearchProductsProvider>
+            <Route path="/login" element={<Login />} />
+            <Route path="/register" element={<Register />} />
+          </Routes>
+        </SearchProductsProvider>
+      </GoogleOAuthProvider>
     </Provider>
   </BrowserRouter>
 );

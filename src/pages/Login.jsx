@@ -3,11 +3,12 @@ import { useFormik } from "formik";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useLocation, useNavigate } from "react-router-dom";
-
 import { signIn } from "../redux/authSliceRedux";
 import { loginSchemas } from "../schemas/loginSchemas";
 import loginBackground from "../img/login.jpg";
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
+import { GoogleLogin } from "@react-oauth/google";
+import jwtDecode from "jwt-decode";
 
 const Login = () => {
   const [visible, setVisible] = useState(false);
@@ -25,6 +26,13 @@ const Login = () => {
   useEffect(() => {
     if (auth.userLogin) navigate(from);
   }, []);
+
+  // const googleAuth = () => {
+  //   window.open(
+  //     `${process.env.REACT_APP_API_URL}api/auth/google/callback`,
+  //     "_self"
+  //   );
+  // };
 
   const onSubmit = async () => {
     try {
@@ -124,10 +132,19 @@ const Login = () => {
               <span className="text-2xl">Login</span>
             )}
           </button>
-
-          <p className="py-8 text-center text-slate text-sm">
-            Or signIn with google account
-          </p>
+          <p className="py-8 text-center text-slate text-sm">or</p>
+          <div className="flex justify-center">
+            <GoogleLogin
+              className=""
+              onSuccess={(credentialResponse) => {
+                const decode = jwtDecode(credentialResponse.credential);
+                console.log(decode);
+              }}
+              onError={() => {
+                console.log("Login Failed");
+              }}
+            />
+          </div>
 
           <p className="text-slate-700">
             Need an Account?

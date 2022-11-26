@@ -30,6 +30,7 @@ const Home = () => {
 
       <Services />
       <Categories />
+
       <Banner />
       {/* <ProductsList inputValue={inputValue} /> */}
     </>

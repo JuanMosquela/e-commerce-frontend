@@ -26,8 +26,6 @@ const Register = () => {
     if (auth.userLogin) navigate(from);
   }, [auth]);
 
-  useEffect(() => {}, []);
-
   const onSubmit = async (values) => {
     try {
       await dispatch(signUpUser(values));
@@ -59,7 +57,7 @@ const Register = () => {
   });
 
   return (
-    <div className="flex justify-center items-center min-h-[100vh] bg-dark">
+    <div className="flex flex-col justify-center items-center min-h-[100vh]  bg-white">
       <form
         className="w-[400px] bg-white py-10 px-5"
         method="post"
@@ -140,17 +138,18 @@ const Register = () => {
             <span className="text-xl">Submit</span>
           )}
         </button>
-
-        <p className="text-slate-700">
-          Already have and account?
-          <br />
-          <span className="line">
-            <Link className="text-orange" to="/login">
-              Sign In
-            </Link>
-          </span>
-        </p>
       </form>
+      <p>or</p>
+
+      <p className="text-slate-700">
+        Already have and account?
+        <br />
+        <span className="line">
+          <Link className="text-orange" to="/login">
+            Sign In
+          </Link>
+        </span>
+      </p>
     </div>
   );
 };
