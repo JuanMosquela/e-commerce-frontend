@@ -45,6 +45,8 @@ export const signIn = createAsyncThunk(
     try {
       console.log("signin function");
       const data = await publicRequest.login({
+        name: values.name,
+        picture: values.picture,
         email: values.email,
         password: values.password,
       });

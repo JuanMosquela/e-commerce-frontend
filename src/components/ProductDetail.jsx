@@ -10,6 +10,8 @@ import { addToCart } from "../redux/shoppingCartRedux";
 
 import RatingComponent from "./RatingComponent";
 import { CircularProgress, Rating } from "@mui/material";
+import { useContext } from "react";
+import { GoogleContext } from "../context/GoogleProvider";
 
 const ProductDetail = ({ data }) => {
   const [pictureIndex, setPictureIndex] = useState(0);
@@ -23,13 +25,11 @@ const ProductDetail = ({ data }) => {
 
   const user = useSelector((state) => state.auth.userLogin);
 
+  const { googleUser } = useContext(GoogleContext);
+
   const { data: dataReviews } = useFetchAllReviewsQuery(data._id);
 
-  const [createReview, { isLoading, isError, error }] =
-    useCreateReviewMutation();
-
-  console.log(isError);
-  console.log(error);
+  const [createReview, { isLoading, error }] = useCreateReviewMutation();
 
   const obj = {
     product: data,
@@ -41,7 +41,7 @@ const ProductDetail = ({ data }) => {
 
     createReview({
       id: data._id,
-      user: user.name,
+      user: user?.name || googleUser?.user?.name,
       comment,
       value,
     });

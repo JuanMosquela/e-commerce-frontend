@@ -13,10 +13,7 @@ const register = async (values) => {
 };
 
 const login = async (values) => {
-  const { data } = await axios.post(`${BASE_URL}/auth/login`, {
-    email: values.email,
-    password: values.password,
-  });
+  const { data } = await axios.post(`${BASE_URL}/auth/login`, values);
 
   return data;
 };

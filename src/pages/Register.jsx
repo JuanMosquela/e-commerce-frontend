@@ -6,7 +6,12 @@ import { registerSchemas } from "../schemas/registerSchemas";
 import { useDispatch, useSelector } from "react-redux";
 import { signUpUser } from "../redux/authSliceRedux";
 import { CircularProgress } from "@mui/material";
-import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
+import {
+  AiFillEye,
+  AiFillEyeInvisible,
+  AiOutlineEye,
+  AiOutlineEyeInvisible,
+} from "react-icons/ai";
 import { useEffect, useState } from "react";
 
 import { toast } from "react-toastify";
@@ -57,13 +62,13 @@ const Register = () => {
   });
 
   return (
-    <div className="flex flex-col justify-center items-center min-h-[100vh]  bg-white">
+    <div className="flex flex-col justify-center items-center min-h-[100vh]   bg-white">
       <form
-        className="w-[400px] bg-white py-10 px-5"
+        className="w-[400px] bg-white py-6 px-5  relative"
         method="post"
         onSubmit={handleSubmit}
       >
-        <h2 className="text-slate text-5xl mb-8">Register</h2>
+        <h2 className="text-slate text-4xl mb-8 font-semibold">Register</h2>
         <div className="relative mb-4 min-h-[60px]">
           <input
             className="w-full py-1 text-md outline-none border-orange border-b-2 "
@@ -80,7 +85,7 @@ const Register = () => {
         </div>
         <div className="relative mb-4 min-h-[60px]">
           <input
-            className="w-full py-1 text-md outline-none border-orange-200 border-b-2 "
+            className="w-full py-1 text-md outline-none border-orange border-b-2 "
             onChange={handleChange}
             onBlur={handleBlur}
             value={values.email}
@@ -105,13 +110,13 @@ const Register = () => {
             placeholder="Password"
           />
           {visible ? (
-            <AiOutlineEye
-              className="absolute right-[15px] top-2"
+            <AiFillEyeInvisible
+              className="absolute right-[15px] top-0 text-2xl"
               onClick={() => setVisible(!visible)}
             />
           ) : (
-            <AiOutlineEyeInvisible
-              className="absolute right-[15px] top-2"
+            <AiFillEye
+              className="absolute right-[15px] top-0 text-2xl"
               onClick={() => setVisible(!visible)}
             />
           )}
@@ -124,7 +129,7 @@ const Register = () => {
         <button
           type="submit"
           disabled={isSubmitting}
-          className=" block w-full bg-orange text-white rounded-md p-1 mb-6 "
+          className=" block w-full bg-orange text-white rounded-md p-1 mb-[5rem] "
         >
           {isSubmitting ? (
             <span className="text-2xl">
@@ -138,18 +143,16 @@ const Register = () => {
             <span className="text-xl">Submit</span>
           )}
         </button>
+        <p className="absolute bottom-0 text-slate-700 text-sm font-thin">
+          Already have and account?
+          <br />
+          <span className="line">
+            <Link className="text-orange text-xl font-bold" to="/login">
+              Sign In
+            </Link>
+          </span>
+        </p>
       </form>
-      <p>or</p>
-
-      <p className="text-slate-700">
-        Already have and account?
-        <br />
-        <span className="line">
-          <Link className="text-orange" to="/login">
-            Sign In
-          </Link>
-        </span>
-      </p>
     </div>
   );
 };
