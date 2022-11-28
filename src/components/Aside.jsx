@@ -37,8 +37,6 @@ const Aside = ({
     }
   };
 
-  console.log(filters);
-
   return (
     <div className="col-span-1 bg-white rounded-sm shadow-lg overflow-hidden h-fit ">
       <div className=" divide-y divide-gray/30 px-6 py-4 ">
