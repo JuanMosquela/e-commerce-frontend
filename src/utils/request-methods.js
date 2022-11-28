@@ -26,10 +26,11 @@ const getProducts = async (value) => {
 };
 
 const getFilterProducts = async (values) => {
-  console.log(values);
-  // const response = await axios.get(
-  //   value ? `${BASE_URL}/?search=${value}` : `${BASE_URL}/products`
-  // );
+  const { data } = await axios.get(
+    `${BASE_URL}/search/products/?category=${values.category}&branch=${values.branch}&rating=${values.rating}&min=${values.price[0]}&max=${values.price[1]}`
+  );
+
+  return data;
 };
 
 const publicRequest = {

@@ -2,12 +2,17 @@ import { Rating, Slider } from "@mui/material";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { addPrice, addRating } from "../redux/searchFilterRedux";
+import { addPrice, addRating, reset } from "../redux/searchFilterRedux";
 import publicRequest from "../utils/request-methods";
 import { CheckboxBranch, CheckboxCategory } from "./CheckboxComponent";
 import { IoIosOptions } from "react-icons/io";
 
-const Aside = ({ data: { products } }) => {
+const Aside = ({
+  data: { products },
+  setFilterProducts,
+  loading,
+  setLoading,
+}) => {
   const [price, setPrice] = useState([20, 100]);
 
   const dispatch = useDispatch();
@@ -19,7 +24,20 @@ const Aside = ({ data: { products } }) => {
     dispatch(addPrice(newValue));
   };
 
-  const handleFilters = () => publicRequest.getFilterProducts(filters);
+  const handleFilters = async () => {
+    setLoading(true);
+    try {
+      const { findProducts } = await publicRequest.getFilterProducts(filters);
+
+      setFilterProducts(findProducts);
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  console.log(filters);
 
   return (
     <div className="col-span-1 bg-white rounded-sm shadow-lg overflow-hidden h-fit ">
@@ -64,12 +82,14 @@ const Aside = ({ data: { products } }) => {
         </div>
       </div>
 
-      <button
-        onClick={handleFilters}
-        className="bg-orange px-4 py-2 rounded-md text-white font-bold block mx-auto mb-4"
-      >
-        Aplicar
-      </button>
+      <div className="flex">
+        <button
+          onClick={handleFilters}
+          className="bg-orange px-4 py-2 rounded-md text-white font-bold block mx-auto mb-4"
+        >
+          Aplicar
+        </button>
+      </div>
     </div>
   );
 };

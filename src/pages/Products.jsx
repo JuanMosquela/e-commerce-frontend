@@ -21,6 +21,10 @@ const Products = () => {
 
   const [row, setRow] = useState(false);
 
+  const [filterProducts, setFilterProducts] = useState([]);
+
+  const [loading, setLoading] = useState(false);
+
   const [productsPerPage, setProductsPerPage] = useState(6);
 
   const { data, isError, error, isLoading } = useFetchAllProductsQuery();
@@ -38,13 +42,20 @@ const Products = () => {
     setGrid(true);
   };
 
+  console.log(filterProducts);
+
   return (
     <section className="min-height bg-white flex justify-center py-7 ">
       {isLoading ? (
         <CircularProgress />
       ) : (
         <div className="container grid grid-cols-4 gap-4  sm:grid-cols-2  md:grid-cols-3 lg:grid-cols-4 ">
-          <Aside data={data} />
+          <Aside
+            data={data}
+            setFilterProducts={setFilterProducts}
+            setLoading={setLoading}
+            loading={loading}
+          />
 
           <div className="col-span-3 grid grid-cols-3 gap-4">
             <div className="col-span-1  flex ">
@@ -67,19 +78,21 @@ const Products = () => {
               currentPage={currentPage}
             />
 
-            {/* {searchedProducts
-              ? searchedProducts?.findProducts.map((product) => (
+            {filterProducts.length !== 0
+              ? filterProducts?.map((product) => (
                   <Link key={product._id} to={`/products/${product._id}`}>
                     <CardProduct row={row} product={product} />
                   </Link>
-                )) */}
-            {data?.products.slice(firstProduct, lastProduct).map((product) => (
-              <div key={product._id} className={row ? `col-span-3` : ""}>
-                <Link to={`/products/${product._id}`}>
-                  <CardProduct grid={grid} product={product} row={row} />
-                </Link>
-              </div>
-            ))}
+                ))
+              : data?.products
+                  .slice(firstProduct, lastProduct)
+                  .map((product) => (
+                    <div key={product._id} className={row ? `col-span-3` : ""}>
+                      <Link to={`/products/${product._id}`}>
+                        <CardProduct grid={grid} product={product} row={row} />
+                      </Link>
+                    </div>
+                  ))}
           </div>
         </div>
       )}

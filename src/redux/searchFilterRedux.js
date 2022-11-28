@@ -24,10 +24,16 @@ export const searchFilterSlice = createSlice({
     addRating: (state, action) => {
       state.rating = action.payload;
     },
+    reset: (state) => {
+      state.category = "";
+      state.price = [0, 200];
+      state.branch = "";
+      state.rating = 0;
+    },
   },
 });
 
-export const { addCategory, addBranch, addPrice, addRating } =
+export const { addCategory, addBranch, addPrice, addRating, reset } =
   searchFilterSlice.actions;
 
 export default searchFilterSlice.reducer;
