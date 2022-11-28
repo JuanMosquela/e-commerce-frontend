@@ -12,6 +12,7 @@ import RatingComponent from "./RatingComponent";
 import { CircularProgress, Rating } from "@mui/material";
 import { useContext } from "react";
 import { GoogleContext } from "../context/GoogleProvider";
+import { useNavigate } from "react-router-dom";
 
 const ProductDetail = ({ data }) => {
   const [pictureIndex, setPictureIndex] = useState(0);
@@ -29,6 +30,8 @@ const ProductDetail = ({ data }) => {
 
   const { data: dataReviews } = useFetchAllReviewsQuery(data._id);
 
+  const navigate = useNavigate();
+
   const [createReview, { isLoading, error }] = useCreateReviewMutation();
 
   const obj = {
@@ -38,6 +41,10 @@ const ProductDetail = ({ data }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    if (!googleUser || user) {
+      navigate("/login");
+      return;
+    }
 
     createReview({
       id: data._id,
@@ -54,6 +61,10 @@ const ProductDetail = ({ data }) => {
   };
 
   const handleClick = (obj) => {
+    if (!googleUser || user) {
+      navigate("/login");
+      return;
+    }
     console.log(obj.counter);
     dispatch(addToCart(obj));
   };
