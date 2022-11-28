@@ -1,79 +1,75 @@
-const Aside = () => {
+import { Rating, Slider } from "@mui/material";
+import axios from "axios";
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { addPrice, addRating } from "../redux/searchFilterRedux";
+import publicRequest from "../utils/request-methods";
+import { CheckboxBranch, CheckboxCategory } from "./CheckboxComponent";
+import { IoIosOptions } from "react-icons/io";
+
+const Aside = ({ data: { products } }) => {
+  const [price, setPrice] = useState([20, 100]);
+
+  const dispatch = useDispatch();
+
+  const filters = useSelector((state) => state.filter);
+
+  const handleChange = (event, newValue) => {
+    setPrice(newValue);
+    dispatch(addPrice(newValue));
+  };
+
+  const handleFilters = () => publicRequest.getFilterProducts(filters);
+
   return (
     <div className="col-span-1 bg-white rounded-sm shadow-lg overflow-hidden h-fit ">
       <div className=" divide-y divide-gray/30 px-6 py-4 ">
+        <h3 className="flex  items-center justify-between text-slate font-bold uppercase mb-4 pt-6">
+          search filters
+          <IoIosOptions />
+        </h3>
         <div>
-          <h3 className="text-slate-900 font-bold uppercase mb-4 pt-6">
-            Categories
+          <h3 className="text-slate font-bold uppercase mb-4 pt-6">
+            By Categories
           </h3>
-          <div className="flex justify-between items-center mb-3">
-            <input type="checkbox" name="cat-1" id="cat-1" />
-            <label
-              className="text-gray-600 ml-3 cursor-pointer"
-              htmlFor="cat-1"
-            >
-              Suplementos
-            </label>
-            <div className="ml-auto text-gray-600 text-sm">(25)</div>
-          </div>
-          <div className="flex justify-between items-center mb-3">
-            <input type="checkbox" name="cat-2" id="cat-2" />
-            <label
-              className="text-gray-600 ml-3 cursor-pointer"
-              htmlFor="cat-2"
-            >
-              Zapatillas
-            </label>
-            <div className="ml-auto text-gray-600 text-sm">(25)</div>
-          </div>
-
-          <div className="flex justify-between items-center mb-3">
-            <input type="checkbox" name="cat-3" id="cat-3" />
-            <label
-              className="text-gray-600 ml-3 cursor-pointer"
-              htmlFor="cat-3"
-            >
-              Bolsos
-            </label>
-            <div className="ml-auto text-gray-600 text-sm">(25)</div>
-          </div>
-          <div className="flex justify-between items-center mb-3">
-            <input type="checkbox" name="cat-4" id="cat-4" />
-            <label
-              className="text-gray-600 ml-3 cursor-pointer"
-              htmlFor="cat-4"
-            >
-              Accesorios
-            </label>
-            <div className="ml-auto text-gray-600 text-sm">(25)</div>
-          </div>
+          <CheckboxCategory products={products} />
         </div>
         <div>
-          <h3 className="text-slate-900 font-bold uppercase mb-4 pt-6">
-            Price
+          <h3 className="text-slate font-bold uppercase mb-4 pt-6">
+            By Branch
           </h3>
+          <CheckboxBranch products={products} />
+        </div>
+        <div>
+          <h3 className="text-slate font-bold uppercase mb-4 pt-6">By price</h3>
           <div className="flex items-center mb-3 gap-4">
-            <input
-              className="w-full text-md bg-gray/10 px-3 outline-none  "
-              type="number"
-              name="min"
-              id="min"
-              placeholder="min"
-            />
-            <span className="text-md text-gray-600 font-thin">-</span>
-            <input
-              className="w-full text-md  bg-gray/10 px-3 outline-none   "
-              type="number"
-              name="max"
-              id="max"
-              placeholder="max"
+            <Slider
+              defaultValue={200}
+              getAriaLabel={() => "Price range"}
+              value={filters.price}
+              onChange={handleChange}
+              valueLabelDisplay="auto"
             />
           </div>
         </div>
         <div>
-          
+          <h3 className="text-slate font-bold uppercase mb-4 pt-6">
+            By rating
+          </h3>
+          <Rating
+            name="simple-controlled"
+            value={filters.rating}
+            onChange={(event, newValue) => dispatch(addRating(newValue))}
+          />
         </div>
       </div>
+
+      <button
+        onClick={handleFilters}
+        className="bg-orange px-4 py-2 rounded-md text-white font-bold block mx-auto mb-4"
+      >
+        Aplicar
+      </button>
     </div>
   );
 };

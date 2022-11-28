@@ -25,10 +25,18 @@ const getProducts = async (value) => {
   return response;
 };
 
+const getFilterProducts = async (values) => {
+  console.log(values);
+  // const response = await axios.get(
+  //   value ? `${BASE_URL}/?search=${value}` : `${BASE_URL}/products`
+  // );
+};
+
 const publicRequest = {
   register,
   login,
   getProducts,
+  getFilterProducts,
 };
 
 export default publicRequest;
