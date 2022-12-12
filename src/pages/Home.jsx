@@ -1,8 +1,14 @@
 import Services from "../components/Services";
 import Categories from "../components/Categories";
 import Banner from "../components/Banner";
+import { useFetchTopRatedProductsQuery } from "../redux/productsApi";
+import CardProduct from "../components/CardProduct";
+import { Link } from "react-router-dom";
+import Carrusel from "../components/Carrusel";
 
 const Home = () => {
+  const { data } = useFetchTopRatedProductsQuery();
+
   return (
     <>
       <section className="bg-hero min-height md:min-h-[75vh]   flex flex-col justify-center   text-center md:text-left  bg-cover  relative ">
@@ -32,6 +38,16 @@ const Home = () => {
       <Categories />
 
       <Banner />
+
+      <Carrusel data={data} title="Top Rated Products" />
+
+      {/* <div className="flex">
+        {data?.results.map((product) => (
+          <Link to={`/products/${product._id}`}>
+            <CardProduct product={product} />
+          </Link>
+        ))}
+      </div> */}
       {/* <ProductsList inputValue={inputValue} /> */}
     </>
   );

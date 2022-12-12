@@ -3,6 +3,7 @@ import { AiOutlineHeart } from "react-icons/ai";
 import { BsFillCartPlusFill } from "react-icons/bs";
 import { useDispatch, useSelector } from "react-redux";
 import {
+  useAddToFavMutation,
   useCreateReviewMutation,
   useFetchAllReviewsQuery,
 } from "../redux/productsApi";
@@ -13,6 +14,7 @@ import { CircularProgress, Rating } from "@mui/material";
 import { useContext } from "react";
 import { GoogleContext } from "../context/GoogleProvider";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 const ProductDetail = ({ data }) => {
   const [pictureIndex, setPictureIndex] = useState(0);
@@ -24,7 +26,7 @@ const ProductDetail = ({ data }) => {
 
   const dispatch = useDispatch();
 
-  const user = useSelector((state) => state.auth.userLogin);
+  const auth = useSelector((state) => state.auth);
 
   const { googleUser } = useContext(GoogleContext);
 
@@ -32,7 +34,11 @@ const ProductDetail = ({ data }) => {
 
   const navigate = useNavigate();
 
+  const [buttonClicked, setButtonClicked] = useState(false);
+
   const [createReview, { isLoading, error }] = useCreateReviewMutation();
+
+  const [addToFav] = useAddToFavMutation();
 
   const obj = {
     product: data,
@@ -41,14 +47,14 @@ const ProductDetail = ({ data }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (!googleUser || user) {
+    if (!googleUser || auth.user) {
       navigate("/login");
       return;
     }
 
     createReview({
       id: data._id,
-      user: user?.name || googleUser?.user?.name,
+      user: auth?.user || googleUser?.user?.name,
       comment,
       value,
     });
@@ -56,15 +62,38 @@ const ProductDetail = ({ data }) => {
     if (!isLoading) e.target.reset();
   };
 
+  const handleFav = async (e) => {
+    e.preventDefault();
+    setButtonClicked(true);
+
+    if (!auth.token) {
+      console.log("debes estar autenticado");
+      return;
+    }
+
+    const newFavProduct = {
+      id: data._id,
+      name: auth.user,
+    };
+
+    addToFav(newFavProduct);
+
+    if (!isLoading) {
+      console.log(data);
+    }
+
+    toast.info("Product added to fav");
+  };
+
   const handleChange = (e) => {
     setCounter(Number(e.target.value));
   };
 
   const handleClick = (obj) => {
-    if (!googleUser || user) {
-      navigate("/login");
-      return;
-    }
+    // if (!googleUser || !auth.token) {
+    //   navigate("/login");
+    //   return;
+    // }
     console.log(obj.counter);
     dispatch(addToCart(obj));
   };
@@ -158,7 +187,7 @@ const ProductDetail = ({ data }) => {
           </button>
           <button
             className="flex items-center gap-2 px-8 py-2 text-slate-900 border border-slate-400 text-md  uppercase  rounded-md"
-            onClick={() => handleClick(obj)}
+            onClick={handleFav}
           >
             <AiOutlineHeart />
             Wishlist

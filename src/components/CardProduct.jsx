@@ -68,11 +68,11 @@ const CardProduct = ({ product, row, grid, addedToFavs }) => {
     <div
       className={
         row
-          ? `flex items-center shadow-md rounded overflow-hidden bg-white`
-          : "shadow-md rounded overflow-hidden bg-white"
+          ? `flex items-center shadow-md rounded overflow-hidden bg-white h-[450px]`
+          : "shadow-md rounded overflow-hidden bg-white  h-[450px]"
       }
     >
-      <div className="relative">
+      <div className="relative flex-1">
         <img
           className="object-contain h-[320px] m-auto"
           src={product.pictureURL[0]}
@@ -94,8 +94,8 @@ const CardProduct = ({ product, row, grid, addedToFavs }) => {
         </div>
       </div>
 
-      <div className="px-4 py-2">
-        <h4 className="text-sm md:text-md lg:text-[16px] font-semibold text-slate capitalize overflow-hidden whitespace-nowrap mb-4 ">
+      <div className="px-4 py-2 flex-1">
+        <h4 className="text-sm md:text-md lg:text-[16px] font-semibold text-slate capitalize overflow-hidden whitespace-nowrap mb-2 ">
           {product.title.toLowerCase()}
         </h4>
         <Rating

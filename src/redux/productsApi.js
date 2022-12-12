@@ -23,6 +23,9 @@ export const productsApi = createApi({
     fetchAllProducts: builder.query({
       query: () => "/products",
     }),
+    fetchTopRatedProducts: builder.query({
+      query: () => "/products/rated",
+    }),
     fetchSingleProduct: builder.query({
       query: (id) => `/products/${id}`,
     }),
@@ -68,6 +71,7 @@ export const {
   useSignInMutation,
   useSignUpMutation,
   useFetchAllProductsQuery,
+  useFetchTopRatedProductsQuery,
   useFetchSingleProductQuery,
   useFetchAllProductsByNameOrCategoryQuery,
   useFetchAllReviewsQuery,
