@@ -16,11 +16,12 @@ import SearchProductsProvider from "./context/SearchProductsProvider";
 import ProtectedRoute from "./components/ProtectedRoute";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import WishList from "./components/WishList";
+
 import About from "./pages/About";
 import Contact from "./pages/Contact";
 import { GoogleOAuthProvider } from "@react-oauth/google";
 import GoogleProvider from "./context/GoogleProvider";
+import WishListPage from "./pages/WishListPage";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
@@ -41,6 +42,7 @@ root.render(
 
                 <Route element={<ProtectedRoute />}>
                   <Route path="/cartList" element={<CartList />} />
+                  <Route path="/wishList" element={<WishListPage />} />
                 </Route>
               </Route>
               <Route path="/login" element={<Login />} />

@@ -45,7 +45,7 @@ const Products = () => {
   console.log(filterProducts);
 
   return (
-    <section className="min-height bg-white flex justify-center py-7 ">
+    <section className="min-height bg-gray flex justify-center py-7 ">
       {isLoading ? (
         <CircularProgress />
       ) : (

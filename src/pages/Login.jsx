@@ -3,9 +3,9 @@ import { useFormik } from "formik";
 import { useContext, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import { signIn } from "../redux/authSliceRedux";
+import { setCredentials, signIn } from "../redux/slices/authSliceRedux";
 import { loginSchemas } from "../schemas/loginSchemas";
-import loginBackground from "../img/login.jpg";
+
 import { FcGoogle } from "react-icons/fc";
 import {
   AiFillEye,
@@ -18,6 +18,8 @@ import jwtDecode from "jwt-decode";
 import publicRequest from "../utils/request-methods";
 import axios from "axios";
 import { GoogleContext } from "../context/GoogleProvider";
+import { useSignInMutation } from "../redux/productsApi";
+import { toast } from "react-toastify";
 
 const Login = () => {
   const [visible, setVisible] = useState(false);
@@ -29,21 +31,36 @@ const Login = () => {
   const auth = useSelector((state) => state.auth);
   const dispatch = useDispatch();
 
-  console.log(googleUser);
+  const [signIn, { data, isLoading, error }] = useSignInMutation();
+
+  console.log(auth);
 
   const loading = auth.isLoading;
 
   useEffect(() => {
-    if (auth.userLogin || googleUser?.token) navigate(from);
+    if (auth.user || googleUser?.token) navigate(from);
   }, [googleUser]);
+
+  useEffect(() => {
+    if (data?.token) {
+      dispatch(setCredentials(data));
+      toast.success("logeado correctamente");
+    }
+    if (error?.status === 401) {
+      toast.error(error.data.msg);
+    }
+
+    if (auth?.token) navigate(from);
+  }, [data, error]);
+
+  useEffect(() => {
+    if (auth?.token) navigate(from);
+  }, [auth]);
 
   const onSubmit = async () => {
     try {
-      const data = await dispatch(signIn(values));
+      await signIn(values);
       console.log(data);
-      if (data.payload?.token) {
-        navigate(from, { replace: true });
-      }
     } catch (error) {
       console.log(error);
     }
@@ -129,11 +146,6 @@ const Login = () => {
                 className="absolute right-[15px] top-0 text-2xl"
                 onClick={() => setVisible(!visible)}
               />
-            )}
-            {errors.password && touched.password && (
-              <p className="pt-2 text-red text-sm font-semibold">
-                {errors.password}
-              </p>
             )}
             {errors.password && touched.password && (
               <p className="pt-2 text-red text-sm font-semibold">

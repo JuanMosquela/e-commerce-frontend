@@ -1,6 +1,6 @@
 import { configureStore } from "@reduxjs/toolkit";
 
-import authReducer from "../redux/authSliceRedux";
+import authReducer from "./slices/authSliceRedux";
 import { productsApi } from "./productsApi";
 import shoppingCartRedux, { reloadCart } from "./shoppingCartRedux";
 import searchFilterSlice from "./searchFilterRedux";

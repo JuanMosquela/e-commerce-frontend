@@ -74,7 +74,7 @@ const CartList = () => {
               <span className="text-sm text-slate ">$ {product.price}</span>
               <div className="cursor-pointer border-2 border-orange px-4 py-2 flex justify-between w-[200px] mx-auto rounded-md bg-slate/10 slate">
                 <span
-                  className="text-[1.2rem]  "
+                  className="text-[1.2rem] "
                   onClick={() => handleDecrese(product)}
                 >
                   -

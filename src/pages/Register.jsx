@@ -4,7 +4,7 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import { registerSchemas } from "../schemas/registerSchemas";
 
 import { useDispatch, useSelector } from "react-redux";
-import { signUpUser } from "../redux/authSliceRedux";
+import { signUpUser } from "../redux/slices/authSliceRedux";
 import { CircularProgress } from "@mui/material";
 import {
   AiFillEye,
@@ -15,6 +15,7 @@ import {
 import { useEffect, useState } from "react";
 
 import { toast } from "react-toastify";
+import { useSignUpMutation } from "../redux/productsApi";
 
 const Register = () => {
   const [visible, setVisible] = useState(false);
@@ -26,14 +27,23 @@ const Register = () => {
 
   console.log(auth.isSuccess);
 
+  const [signUp, { data, error, isLoading }] = useSignUpMutation();
+
   useEffect(() => {
-    if (auth.isSuccess) navigate("/login");
-    if (auth.userLogin) navigate(from);
-  }, [auth]);
+    console.log(error);
+    if (data?.user) {
+      navigate("/login");
+    }
+
+    if (error?.status === 401) {
+      toast.error(error?.data?.msg);
+    }
+  }, [data, error]);
 
   const onSubmit = async (values) => {
+    console.log(values);
     try {
-      await dispatch(signUpUser(values));
+      await signUp(values);
     } catch (error) {
       console.log(error);
       toast.error(`${error}`, { position: "top-right" });
@@ -131,12 +141,11 @@ const Register = () => {
           disabled={isSubmitting}
           className=" block w-full bg-orange text-white rounded-md p-1 mb-[5rem] "
         >
-          {isSubmitting ? (
+          {isLoading ? (
             <span className="text-2xl">
-              Submiting
               <CircularProgress
-                size="2rem"
-                sx={{ color: "rgba(255,255,255,.7)" }}
+                size="1rem"
+                sx={{ color: "rgba(255,255,255,.6)" }}
               />
             </span>
           ) : (

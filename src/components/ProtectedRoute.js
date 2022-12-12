@@ -5,7 +5,7 @@ import { GoogleContext } from "../context/GoogleProvider";
 
 const ProtectedRoute = () => {
   const location = useLocation();
-  const user = useSelector((state) => state.auth.userLogin);
+  const user = useSelector((state) => state.auth);
   const { googleUser } = useContext(GoogleContext);
 
   return user?.token || googleUser?.token ? (

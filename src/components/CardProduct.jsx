@@ -1,32 +1,100 @@
 import { useState } from "react";
-import { AiOutlineHeart } from "react-icons/ai";
+import { AiOutlineDelete, AiOutlineHeart } from "react-icons/ai";
 import { BiSearch } from "react-icons/bi";
 import { Rating } from "@mui/material";
+import { useSelector } from "react-redux";
+import {
+  useAddToFavMutation,
+  useRemoveFavMutation,
+} from "../redux/productsApi";
+import { toast } from "react-toastify";
 
-const CardProduct = ({ product, row, grid }) => {
+const CardProduct = ({ product, row, grid, addedToFavs }) => {
   const [isHovered, setIsHovered] = useState(false);
+
+  console.log(addedToFavs);
+
+  const [buttonClicked, setButtonClicked] = useState(false);
+
+  const auth = useSelector((state) => state.auth);
+
+  const [addToFav, { data, isLoading, error }] = useAddToFavMutation();
+
+  const [removeFav] = useRemoveFavMutation();
+
+  const handleFav = async (e) => {
+    e.preventDefault();
+    setButtonClicked(true);
+
+    if (!auth.token) {
+      console.log("debes estar autenticado");
+      return;
+    }
+
+    const newFavProduct = {
+      id: product._id,
+      name: auth.user,
+    };
+
+    addToFav(newFavProduct);
+
+    if (!isLoading) {
+      console.log(data);
+    }
+
+    toast.info("Product added to fav");
+  };
+
+  const handleFavDelete = (e) => {
+    e.preventDefault();
+    setButtonClicked(true);
+
+    if (!auth.token) {
+      console.log("debes estar autenticado");
+      return;
+    }
+
+    const newFavProduct = {
+      id: product._id,
+      name: auth.user,
+    };
+
+    removeFav(newFavProduct);
+
+    toast.info("Product removed from fav");
+  };
 
   return (
     <div
       className={
         row
-          ? `flex items-center shadow-md rounded overflow-hidden`
-          : "shadow-md rounded overflow-hidden"
+          ? `flex items-center shadow-md rounded overflow-hidden bg-white`
+          : "shadow-md rounded overflow-hidden bg-white"
       }
     >
-      <div className="relative flex-1">
+      <div className="relative">
         <img
           className="object-contain h-[320px] m-auto"
           src={product.pictureURL[0]}
           alt={product.title}
         />
         <div className="group  flex items-center justify-center gap-2 absolute hover:bg-dark inset-0 hover:bg-opacity-40 opacity-0 hover:opacity-100  ease-in duration-200">
-          <AiOutlineHeart className="bg-orange hover:bg-orange ease-in duration-100 rounded-full h-8 w-9 text-white flex items-center justify-center p-2  " />
+          {addedToFavs ? (
+            <AiOutlineDelete
+              onClick={handleFavDelete}
+              className="bg-orange hover:bg-orange ease-in duration-100 rounded-full h-8 w-9 text-white flex items-center justify-center p-2 "
+            />
+          ) : (
+            <AiOutlineHeart
+              onClick={handleFav}
+              className=" bg-orange hover:bg-orange ease-in duration-100 rounded-full h-8 w-9 text-white flex items-center justify-center p-2 "
+            />
+          )}
           <BiSearch className="bg-orange hover:bg-orange ease-in duration-100 rounded-full h-8 w-9 text-white flex items-center justify-center p-2  " />
         </div>
       </div>
 
-      <div className="px-4 py-2 flex-1">
+      <div className="px-4 py-2">
         <h4 className="text-sm md:text-md lg:text-[16px] font-semibold text-slate capitalize overflow-hidden whitespace-nowrap mb-4 ">
           {product.title.toLowerCase()}
         </h4>
