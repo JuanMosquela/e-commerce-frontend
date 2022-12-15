@@ -15,7 +15,7 @@ import {
 import { useEffect, useState } from "react";
 
 import { toast } from "react-toastify";
-import { useSignUpMutation } from "../redux/productsApi";
+import { useSignUpMutation } from "../redux/api/productsApi";
 
 const Register = () => {
   const [visible, setVisible] = useState(false);

@@ -6,13 +6,14 @@ import { useSelector } from "react-redux";
 import {
   useAddToFavMutation,
   useRemoveFavMutation,
-} from "../redux/productsApi";
+} from "../redux/api/productsApi";
 import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
 
 const CardProduct = ({ product, row, grid, addedToFavs }) => {
   const [isHovered, setIsHovered] = useState(false);
 
-  console.log(addedToFavs);
+  const navigate = useNavigate();
 
   const [buttonClicked, setButtonClicked] = useState(false);
 
@@ -27,6 +28,8 @@ const CardProduct = ({ product, row, grid, addedToFavs }) => {
     setButtonClicked(true);
 
     if (!auth.token) {
+      navigate("/login");
+
       console.log("debes estar autenticado");
       return;
     }

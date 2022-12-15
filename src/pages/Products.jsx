@@ -6,7 +6,7 @@ import { ProductsContext } from "../context/SearchProductsProvider";
 import {
   useFetchAllProductsByNameOrCategoryQuery,
   useFetchAllProductsQuery,
-} from "../redux/productsApi";
+} from "../redux/api/productsApi";
 import { CgMenuGridO, CgMenu } from "react-icons/cg";
 import Aside from "../components/Aside";
 import { useState } from "react";

@@ -14,7 +14,6 @@ import { GoogleContext } from "../context/GoogleProvider";
 
 const Navbar = () => {
   const { handleClick, inputValue, handleInput } = useContext(ProductsContext);
- 
 
   return (
     <header className="w-full z-50 top-0 bg-white  ">

@@ -6,7 +6,7 @@ import {
   useAddToFavMutation,
   useCreateReviewMutation,
   useFetchAllReviewsQuery,
-} from "../redux/productsApi";
+} from "../redux/api/productsApi";
 import { addToCart } from "../redux/shoppingCartRedux";
 
 import RatingComponent from "./RatingComponent";
@@ -97,6 +97,7 @@ const ProductDetail = ({ data }) => {
     console.log(obj.counter);
     dispatch(addToCart(obj));
   };
+
   const productStock = [];
 
   for (let i = 1; i <= data.stock; i++) {

@@ -22,6 +22,7 @@ import Contact from "./pages/Contact";
 import { GoogleOAuthProvider } from "@react-oauth/google";
 import GoogleProvider from "./context/GoogleProvider";
 import WishListPage from "./pages/WishListPage";
+import Profile from "./pages/Profile";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
@@ -43,6 +44,7 @@ root.render(
                 <Route element={<ProtectedRoute />}>
                   <Route path="/cartList" element={<CartList />} />
                   <Route path="/wishList" element={<WishListPage />} />
+                  <Route path="/profile" element={<Profile />} />
                 </Route>
               </Route>
               <Route path="/login" element={<Login />} />

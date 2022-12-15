@@ -4,6 +4,14 @@ export const productsApi = createApi({
   reducerPath: "productsApi",
   baseQuery: fetchBaseQuery({
     baseUrl: "https://e-commerce-backend-production-03e0.up.railway.app/api",
+    prepareHeaders: (headers, { getState }) => {
+      const token = getState().auth.token;
+      if (token) {
+        headers.set("authorization", `Bearer ${token}`);
+      }
+      console.log(headers);
+      return headers;
+    },
   }),
   endpoints: (builder) => ({
     signIn: builder.mutation({
@@ -64,6 +72,9 @@ export const productsApi = createApi({
       }),
       invalidatesTags: ["Favorites"],
     }),
+    getUser: builder.query({
+      query: (id) => `/users/${id}`,
+    }),
   }),
 });
 
@@ -79,4 +90,5 @@ export const {
   useGetFavProductsQuery,
   useAddToFavMutation,
   useRemoveFavMutation,
+  useGetUserQuery,
 } = productsApi;

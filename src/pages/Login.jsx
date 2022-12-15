@@ -18,7 +18,7 @@ import jwtDecode from "jwt-decode";
 import publicRequest from "../utils/request-methods";
 import axios from "axios";
 import { GoogleContext } from "../context/GoogleProvider";
-import { useSignInMutation } from "../redux/productsApi";
+import { useSignInMutation } from "../redux/api/productsApi";
 import { toast } from "react-toastify";
 
 const Login = () => {

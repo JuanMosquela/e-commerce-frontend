@@ -4,7 +4,7 @@ import { useState } from "react";
 import { CircularProgress } from "@mui/material";
 import ProductDetail from "../components/ProductDetail";
 
-import { useFetchSingleProductQuery } from "../redux/productsApi";
+import { useFetchSingleProductQuery } from "../redux/api/productsApi";
 
 const ProductDetailPage = () => {
   const location = useLocation();

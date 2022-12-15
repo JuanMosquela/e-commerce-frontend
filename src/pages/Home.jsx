@@ -1,7 +1,7 @@
 import Services from "../components/Services";
 import Categories from "../components/Categories";
 import Banner from "../components/Banner";
-import { useFetchTopRatedProductsQuery } from "../redux/productsApi";
+import { useFetchTopRatedProductsQuery } from "../redux/api/productsApi";
 import CardProduct from "../components/CardProduct";
 import { Link } from "react-router-dom";
 import Carrusel from "../components/Carrusel";
