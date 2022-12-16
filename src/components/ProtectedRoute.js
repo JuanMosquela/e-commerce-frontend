@@ -5,10 +5,9 @@ import { GoogleContext } from "../context/GoogleProvider";
 
 const ProtectedRoute = () => {
   const location = useLocation();
-  const user = useSelector((state) => state.auth);
-  const { googleUser } = useContext(GoogleContext);
+  const token = useSelector((state) => state.auth.token);
 
-  return user?.token || googleUser?.token ? (
+  return token ? (
     <Outlet />
   ) : (
     <Navigate to="/login" state={{ from: location }} replace />

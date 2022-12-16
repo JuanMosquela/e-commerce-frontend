@@ -37,9 +37,9 @@ const Login = () => {
 
   const loading = auth.isLoading;
 
-  useEffect(() => {
-    if (auth.user || googleUser?.token) navigate(from);
-  }, [googleUser]);
+  // useEffect(() => {
+  //   if (auth.user || googleUser?.token) navigate(from);
+  // }, [googleUser]);
 
   useEffect(() => {
     if (data?.token) {
