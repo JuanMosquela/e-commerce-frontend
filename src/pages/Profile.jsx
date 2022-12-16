@@ -5,6 +5,8 @@ import {
 } from "../redux/api/productsApi";
 import notFound from "../img/not-found.jpg";
 import FormModal from "../components/FormModal";
+import { TextField } from "@mui/material";
+import { BsFillCloudPlusFill } from "react-icons/bs";
 
 const Profile = () => {
   const user = useSelector((state) => state.auth.user);
@@ -13,6 +15,8 @@ const Profile = () => {
 
   const [updatePicture, { data: userPicture, error: pictureError }] =
     useUpdatePictureMutation();
+
+  console.log(userPicture);
 
   const onFileChange = (e) => {
     let formData = new FormData();
@@ -25,8 +29,8 @@ const Profile = () => {
 
   return (
     <section className=" ">
-      <div className="md:container min-h-screen  gap-4 bg-white py-10">
-        <figure className="relative cursor-pointer  ">
+      <div className="md:container min-h-screen  gap-4 bg-white py-10 flex">
+        {/* <figure className="relative cursor-pointer  ">
           <img
             className="h-[500px] w-full object-cover"
             src={userInfo?.user?.picture ? userInfo?.user?.picture : notFound}
@@ -37,9 +41,29 @@ const Profile = () => {
             type="file"
             onChange={onFileChange}
           />
-        </figure>
+        </figure> */}
+        <div className=" relative flex-1 h-[500px] bg-gray border border-dashed border-orange flex flex-col justify-center items-center  mb-6">
+          <img
+            className="w-full h-[100%] object-cover absolute"
+            src={userPicture?.model?.picture}
+            alt=""
+          />
+          <div className="relative mb-4 h-[80px] w-[240px]   ">
+            <input
+              className="relative h-[100%] w-[100%] z-20 opacity-0 cursor-pointer   "
+              type="file"
+              onChange={onFileChange}
+            />
+            <button className="flex justify-center items-center gap-4 absolute top-0 left-0 bg-orange w-[100%] h-[100%] rounded-lg shadow-lg  font-bold  text-white">
+              <BsFillCloudPlusFill className="text-4xl" />
+              Upload a file
+            </button>
+          </div>
+          <p className="text-slate text-md">Support files</p>
+          <span className="text-slate text-sm">PDF, JPG, PNG</span>
+        </div>
 
-        <div className=" flex flex-col justify-between  ">
+        {/* <div className=" flex flex-col justify-between  ">
           <div>
             <div>
               <span htmlFor="name" className="text-sm font-thin mb-2">
@@ -58,8 +82,37 @@ const Profile = () => {
               </h3>
             </div>
           </div>
-
           <FormModal data={userInfo} />
+        </div> */}
+        <div className="flex flex-col flex-1 gap-4    ">
+          <TextField
+            className="w-full"
+            id="filled-basic"
+            label="Name"
+            variant="filled"
+            defaultValue={userInfo?.user.name}
+          />
+          <TextField
+            className="w-full"
+            id="filled-basic"
+            label="Email"
+            variant="filled"
+            defaultValue={userInfo?.user.email}
+          />
+          <TextField
+            className="w-full"
+            id="filled-basic"
+            label="Category"
+            variant="filled"
+          />
+          <TextField
+            className="w-full"
+            id="filled-multiline-static"
+            label="Add a description"
+            multiline
+            rows={6}
+            variant="filled"
+          />
         </div>
       </div>
     </section>

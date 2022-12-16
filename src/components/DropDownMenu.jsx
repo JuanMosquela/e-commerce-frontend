@@ -11,7 +11,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../redux/slices/authSliceRedux";
 import { AiOutlineHeart, AiOutlineUser } from "react-icons/ai";
 import { GoogleContext } from "../context/GoogleProvider";
-import { BsPersonFill } from "react-icons/bs";
+import { BsPersonFill, BsBagCheck } from "react-icons/bs";
 
 const DropDownMenu = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -48,6 +48,16 @@ const DropDownMenu = () => {
             >
               <BsPersonFill className="text-2xl bg-gray/50 text-slate rounded-full p-1 " />{" "}
               <p className="text-sm text-slate font-thin">Edit Profile</p>
+            </Link>
+            <MdOutlineKeyboardArrowRight className="text-xl font-thin text-slate/90" />
+          </li>
+          <li className="flex justify-between items-center w-full my-3">
+            <Link
+              className="flex gap-4 items-center  hover:cursor-pointer hover:text-orange  "
+              to="/product-create"
+            >
+              <BsBagCheck className="text-2xl bg-gray/50 text-slate rounded-full p-1 " />{" "}
+              <p className="text-sm text-slate font-thin">Publish Product</p>
             </Link>
             <MdOutlineKeyboardArrowRight className="text-xl font-thin text-slate/90" />
           </li>
