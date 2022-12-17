@@ -201,13 +201,16 @@ const ProductDetail = ({ data }) => {
       </h3>
       <div className=" text-sm text-gray-900 col-span-3 mb-10">
         <p className="mb-6 text-slate font-thin ">{data.description}</p>
-        <ul className="grid grid-cols-2 gap-4">
-          {Object.entries(data.subCategory).map((cat, index) => (
-            <li key={index} className="text-slate font-thin capitalize">
-              <span className="font-semibold text-sm">{cat[0]}: </span> {cat[1]}
-            </li>
-          ))}
-        </ul>
+        {data.subCategory && (
+          <ul className="grid grid-cols-2 gap-4">
+            {Object.entries(data.subCategory).map((cat, index) => (
+              <li key={index} className="text-slate font-thin capitalize">
+                <span className="font-semibold text-sm">{cat[0]}: </span>{" "}
+                {cat[1]}
+              </li>
+            ))}
+          </ul>
+        )}
       </div>
       <div className="col-span-4">
         <div className="grid grid-cols-4 gap-4">

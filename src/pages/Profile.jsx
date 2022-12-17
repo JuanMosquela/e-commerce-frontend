@@ -42,6 +42,7 @@ const Profile = () => {
             onChange={onFileChange}
           />
         </figure> */}
+
         <div className=" relative flex-1 h-[500px] bg-gray border border-dashed border-orange flex flex-col justify-center items-center  mb-6">
           <img
             className="w-full h-[100%] object-cover absolute"
@@ -99,12 +100,7 @@ const Profile = () => {
             variant="filled"
             defaultValue={userInfo?.user.email}
           />
-          <TextField
-            className="w-full"
-            id="filled-basic"
-            label="Category"
-            variant="filled"
-          />
+
           <TextField
             className="w-full"
             id="filled-multiline-static"

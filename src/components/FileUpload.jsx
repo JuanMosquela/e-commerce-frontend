@@ -1,10 +1,9 @@
 import { BsFillCloudPlusFill } from "react-icons/bs";
 
-const FileUpload = () => {
+const FileUpload = ({ handlePicture }) => {
   const handleUpload = (e) => {
-    let formData = new FormData();
-    formData.append("picture", e.target.files[0]);
-    console.log(e.target.files[0]);
+    // let formData = new FormData();
+    // formData.append("picture", e.target.files[0]);
   };
 
   return (
@@ -13,7 +12,7 @@ const FileUpload = () => {
         <input
           className="relative h-[100%] w-[100%] z-20 opacity-0 cursor-pointer   "
           type="file"
-          onChange={handleUpload}
+          onChange={handlePicture}
         />
         <button className="flex justify-center items-center gap-4 absolute top-0 left-0 bg-orange w-[100%] h-[100%] rounded-lg shadow-lg  font-bold  text-white">
           <BsFillCloudPlusFill className="text-4xl" />

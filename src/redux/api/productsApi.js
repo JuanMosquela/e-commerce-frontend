@@ -93,6 +93,13 @@ export const productsApi = createApi({
       }),
       invalidatesTags: ["User"],
     }),
+    createProduct: builder.mutation({
+      query: (body) => ({
+        url: "/products",
+        method: "POST",
+        body: body,
+      }),
+    }),
   }),
 });
 
@@ -111,4 +118,5 @@ export const {
   useGetUserQuery,
   useUpdateUserMutation,
   useUpdatePictureMutation,
+  useCreateProductMutation,
 } = productsApi;
