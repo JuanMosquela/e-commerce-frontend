@@ -24,6 +24,8 @@ import GoogleProvider from "./context/GoogleProvider";
 import WishListPage from "./pages/WishListPage";
 import Profile from "./pages/Profile";
 import CreateProduct from "./pages/CreateProduct";
+import ProfileEdit from "./pages/ProfileEdit";
+import MyProducts from "./pages/MyProducts";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
@@ -46,7 +48,9 @@ root.render(
                   <Route path="/cartList" element={<CartList />} />
                   <Route path="/wishList" element={<WishListPage />} />
                   <Route path="/profile" element={<Profile />} />
-                  <Route path="product-create" element={<CreateProduct />} />
+                  <Route path="/profile-edit" element={<ProfileEdit />} />
+                  <Route path="/user-products" element={<MyProducts />} />
+                  <Route path="/create-product" element={<CreateProduct />} />
                 </Route>
               </Route>
               <Route path="/login" element={<Login />} />

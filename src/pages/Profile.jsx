@@ -16,6 +16,8 @@ const Profile = () => {
   const [updatePicture, { data: userPicture, error: pictureError }] =
     useUpdatePictureMutation();
 
+  console.log(userInfo);
+
   console.log(userPicture);
 
   const onFileChange = (e) => {
@@ -64,7 +66,7 @@ const Profile = () => {
           <span className="text-slate text-sm">PDF, JPG, PNG</span>
         </div>
 
-        {/* <div className=" flex flex-col justify-between  ">
+        <div className=" flex-1 flex-col justify-between  ">
           <div>
             <div>
               <span htmlFor="name" className="text-sm font-thin mb-2">
@@ -84,8 +86,8 @@ const Profile = () => {
             </div>
           </div>
           <FormModal data={userInfo} />
-        </div> */}
-        <div className="flex flex-col flex-1 gap-4    ">
+        </div>
+        {/* <div className="flex flex-col flex-1 gap-4    ">
           <TextField
             className="w-full"
             id="filled-basic"
@@ -109,7 +111,7 @@ const Profile = () => {
             rows={6}
             variant="filled"
           />
-        </div>
+        </div> */}
       </div>
     </section>
   );
