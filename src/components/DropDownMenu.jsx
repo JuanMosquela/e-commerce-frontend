@@ -14,12 +14,12 @@ import { BsPersonFill, BsBagCheck } from "react-icons/bs";
 import "../input.css";
 import notFound from "../img/not-found.jpg";
 import { useRef } from "react";
+import useOnClickOutside from "../hooks/useClickOutside";
 
 const DropDownMenu = () => {
   const [isOpen, setIsOpen] = useState(false);
   const dispatch = useDispatch();
   const user = useSelector((state) => state.auth);
-
   const menu = useRef();
 
   const handleLogout = (e) => {
@@ -33,18 +33,7 @@ const DropDownMenu = () => {
     e.stopPropagation();
   };
 
-  useEffect(() => {
-    const handleOutsideClicks = (e) => {
-      if (isOpen && menu?.current && !menu?.current?.contains(e.target)) {
-        setIsOpen(false);
-      }
-    };
-
-    document.addEventListener("mousedown", handleOutsideClicks);
-    return () => {
-      document.removeEventListener("mousedown", handleOutsideClicks);
-    };
-  }, [isOpen]);
+  const res = useOnClickOutside(menu, isOpen, setIsOpen);
 
   return (
     <div className="relative hover:cursor-pointer " ref={menu}>
@@ -58,7 +47,7 @@ const DropDownMenu = () => {
       <ul
         className={`dropdown-menu group/item ${isOpen ? "active" : "inactive"}`}
       >
-        {user && (
+        {user?.user && (
           <div className="flex items-center w-full  mb-6 gap-4 pb-3 border-b border-b-slate/40">
             <img
               className="w-[30px] h-[30px] rounded-full "

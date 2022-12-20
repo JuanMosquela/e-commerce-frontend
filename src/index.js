@@ -26,6 +26,8 @@ import Profile from "./pages/Profile";
 import CreateProduct from "./pages/CreateProduct";
 import ProfileEdit from "./pages/ProfileEdit";
 import MyProducts from "./pages/MyProducts";
+import UserProductView from "./pages/UserProductView";
+import ScrollToTop from "./components/ScrollToTop";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
@@ -33,6 +35,7 @@ root.render(
     <Provider store={store}>
       <GoogleOAuthProvider clientId={process.env.REACT_APP_GOOGLE_CLIENT_ID}>
         <SearchProductsProvider>
+          <ScrollToTop />
           <GoogleProvider>
             <ToastContainer />
             <Routes>
@@ -51,6 +54,10 @@ root.render(
                   <Route path="/profile-edit" element={<ProfileEdit />} />
                   <Route path="/user-products" element={<MyProducts />} />
                   <Route path="/create-product" element={<CreateProduct />} />
+                  <Route
+                    path="user-products/view/:id"
+                    element={<UserProductView />}
+                  />
                 </Route>
               </Route>
               <Route path="/login" element={<Login />} />

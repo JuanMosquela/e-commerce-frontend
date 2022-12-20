@@ -1,13 +1,20 @@
 import { AiOutlineEdit } from "react-icons/ai";
 import { Link } from "react-router-dom";
-import { useFetchTopRatedProductsQuery } from "../redux/api/productsApi";
+import {
+  useFetchTopRatedProductsQuery,
+  useGetUserQuery,
+} from "../redux/api/productsApi";
 
 import { MdOutlineAddCircle } from "react-icons/md";
 
 import DropDownOptions from "../components/DropDownOptions";
+import EmptyComponent from "../components/EmptyComponent";
+import { useSelector } from "react-redux";
 
 const MyProducts = () => {
-  const { data } = useFetchTopRatedProductsQuery();
+  const id = useSelector((state) => state.auth.user._id);
+
+  const { data } = useGetUserQuery(id);
 
   return (
     <section className=" md:container min-h-screen pt-10 ">
@@ -22,43 +29,46 @@ const MyProducts = () => {
         </Link>
       </div>
 
-      <table className=" table-auto w-full rounded-lg bg-white shadow-md">
-        <thead className=" border-b-2 bg-dark text-white">
-          <tr className="">
-            <th className="py-2">Product</th>
-            <th className="py-2">Title</th>
-            <th className="py-2">Price</th>
-            <th className="py-2">Amount</th>
-            <th className="py-2">Actions</th>
-          </tr>
-        </thead>
-        <tbody className=" ">
-          {data?.results.map((product) => (
-            <tr
-              key={product._id}
-              className="text-center border-slate/20 border "
-            >
-              <td>
-                <img
-                  className=" block mx-auto w-[100px] h-[100px] object-contain py-2"
-                  src={product.pictureURL[0]}
-                  alt=""
-                  srcset=""
-                />
-              </td>
-              <td>{product.title}</td>
-              <td>{product.price}</td>
-              <td>{product.stock}</td>
-              <td>
-                <div className="relative flex gap-2 justify-center items-center ">
-                  <AiOutlineEdit />
-                  <DropDownOptions />
-                </div>
-              </td>
+      {data?.user.products.length === 0 ? (
+        <EmptyComponent title="You didn't published any products yet" />
+      ) : (
+        <table className=" table-auto w-full rounded-lg bg-white shadow-md">
+          <thead className=" border-b-2 bg-dark text-white">
+            <tr className="">
+              <th className="py-2">Product</th>
+              <th className="py-2">Title</th>
+              <th className="py-2">Price</th>
+              <th className="py-2">Amount</th>
+              <th className="py-2">Actions</th>
             </tr>
-          ))}
-        </tbody>
-      </table>
+          </thead>
+          <tbody className=" ">
+            {data?.user?.products.map((product) => (
+              <tr
+                key={product._id}
+                className="text-center border-slate/20 border "
+              >
+                <td>
+                  <img
+                    className=" block mx-auto w-[100px] h-[100px] object-contain py-2"
+                    src={product.pictureURL[0]}
+                    alt={`${product.title} product`}
+                  />
+                </td>
+                <td>{product.title}</td>
+                <td>{product.price}</td>
+                <td>{product.stock}</td>
+                <td>
+                  <div className="relative flex gap-2 justify-center items-center ">
+                    <AiOutlineEdit />
+                    <DropDownOptions product={product} />
+                  </div>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      )}
     </section>
   );
 };

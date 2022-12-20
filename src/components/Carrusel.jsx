@@ -59,7 +59,7 @@ const Carrusel = ({ title, data }) => {
       <Slider {...settings}>
         {data?.results.map((product, index) => (
           <div key={product._id} className="md:max-w-[280px] lg:max-w-[320px]">
-            <Link to={`/${product._id}`}>
+            <Link to={`products/${product._id}`}>
               <CardProduct product={product} />
             </Link>
           </div>

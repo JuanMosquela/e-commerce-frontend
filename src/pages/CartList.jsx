@@ -11,6 +11,7 @@ import {
 } from "../redux/shoppingCartRedux";
 import { Link } from "react-router-dom";
 import EmpyCart from "../components/EmptyCart";
+import EmptyComponent from "../components/EmptyComponent";
 
 const CartList = () => {
   const { cart, totalPrice } = useSelector(useCartSelector);
@@ -35,7 +36,7 @@ const CartList = () => {
   return (
     <section className="flex-col justify-center min-h-screen pt-[5rem] bg-white container">
       {cart.length === 0 ? (
-        <EmpyCart />
+        <EmptyComponent title="Your cart it's empty" />
       ) : (
         <>
           <div className="grid grid-cols-4 text-center border-b-2 border-gray/50 text-lg text-slate font-bold uppercase pb-2">
