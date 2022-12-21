@@ -1,18 +1,21 @@
-import { AiOutlineEdit } from "react-icons/ai";
+import { AiOutlineDelete } from "react-icons/ai";
 import { Link } from "react-router-dom";
 import {
-  useFetchTopRatedProductsQuery,
+  useDeleteProductMutation,
   useGetUserQuery,
 } from "../redux/api/productsApi";
 
 import { MdOutlineAddCircle } from "react-icons/md";
 
-import DropDownOptions from "../components/DropDownOptions";
 import EmptyComponent from "../components/EmptyComponent";
 import { useSelector } from "react-redux";
+import ProductModal from "../components/ProductModal";
 
 const MyProducts = () => {
   const id = useSelector((state) => state.auth.user._id);
+
+  const [deleteProduct, { data: dataProduct, error }] =
+    useDeleteProductMutation();
 
   const { data } = useGetUserQuery(id);
 
@@ -60,8 +63,13 @@ const MyProducts = () => {
                 <td>{product.stock}</td>
                 <td>
                   <div className="relative flex gap-2 justify-center items-center ">
-                    <AiOutlineEdit />
-                    <DropDownOptions product={product} />
+                    <div>
+                      <ProductModal data={product} />
+                    </div>
+
+                    <AiOutlineDelete
+                      onClick={() => deleteProduct(product._id)}
+                    />
                   </div>
                 </td>
               </tr>

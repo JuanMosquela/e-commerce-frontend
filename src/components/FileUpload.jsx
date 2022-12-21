@@ -7,8 +7,8 @@ const FileUpload = ({ handlePicture }) => {
   };
 
   return (
-    <div className="flex-1 h-[500px] bg-gray border border-dashed border-orange p-4 flex flex-col justify-center items-center  mb-6">
-      <div className="relative mb-4 h-[80px] w-[240px]   ">
+    <div className="flex-1 h-[240px] bg-gray border border-dashed border-orange p-4 flex flex-col justify-center items-center  mb-6">
+      <div className=" relative mb-4 h-[80px] w-[240px]   ">
         <input
           className="relative h-[100%] w-[100%] z-20 opacity-0 cursor-pointer   "
           type="file"

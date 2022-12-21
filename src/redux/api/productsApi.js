@@ -99,6 +99,23 @@ export const productsApi = createApi({
         method: "POST",
         body: body,
       }),
+      invalidatesTags: ["User"],
+    }),
+    updateProduct: builder.mutation({
+      query: ({ id, body }) => ({
+        url: `/products/${id}`,
+        method: "PUT",
+        body: body,
+      }),
+      invalidatesTags: ["User"],
+    }),
+
+    deleteProduct: builder.mutation({
+      query: (id) => ({
+        url: `/products/${id}`,
+        method: "DELETE",
+      }),
+      invalidatesTags: ["User"],
     }),
   }),
 });
@@ -119,4 +136,6 @@ export const {
   useUpdateUserMutation,
   useUpdatePictureMutation,
   useCreateProductMutation,
+  useUpdateProductMutation,
+  useDeleteProductMutation,
 } = productsApi;

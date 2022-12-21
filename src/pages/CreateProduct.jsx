@@ -13,10 +13,8 @@ import FileUpload from "../components/FileUpload";
 import { useCreateProductMutation } from "../redux/api/productsApi";
 
 const CreateProduct = () => {
-  const [createProduct, { data, error, isSuccess, isLoading }] =
+  const [createProduct, { data, isSuccess, isLoading }] =
     useCreateProductMutation();
-
-  console.log(data, error);
 
   const [productPicture, setProductPicture] = useState(null);
 
@@ -37,8 +35,6 @@ const CreateProduct = () => {
     const file = e.target.files[0];
     setProductPicture(file);
   };
-
-  console.log(productPicture);
 
   const categories = ["zapatillas", "suplementos", "bolsos", "accesorios "];
 
@@ -143,7 +139,7 @@ const CreateProduct = () => {
           className="bg-orange text-white font-bold text-xl rounded-md w-[200px] px-2 py-4 mx-auto mt-6 "
         >
           {isLoading ? (
-            <CircularProgress size="1.5rem" sx={{ color: "#FFF" }} />
+            <CircularProgress size="1.5 rem" sx={{ color: "#FFF" }} />
           ) : (
             "Publish Product"
           )}
