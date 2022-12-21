@@ -60,7 +60,7 @@ const CreateProduct = () => {
   }, [data]);
 
   return (
-    <section className="md:container py-10 ">
+    <section className="md:w-[800px] mx-auto py-10 ">
       <h2 className="text-slate text-xl font-semibold mb-6">
         Add a new Product
       </h2>

@@ -7,7 +7,8 @@ import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 import { useState } from "react";
-import { AiOutlineEdit } from "react-icons/ai";
+import { FiEdit } from "react-icons/fi";
+
 import FileUpload from "./FileUpload";
 import { useUpdateProductMutation } from "../redux/api/productsApi";
 import { Modal } from "@mui/material";
@@ -91,7 +92,7 @@ export default function ProductModal({ data }) {
         }}
         onClick={handleOpen}
       >
-        <AiOutlineEdit className="text-xl" />
+        <FiEdit className="text-xl bg-blue text-white w-[30px] h-[30px] p-1 cursor-pointer  " />
       </Button>
       <Modal
         open={open}

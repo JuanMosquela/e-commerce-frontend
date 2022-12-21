@@ -53,7 +53,7 @@ const MyProducts = () => {
               >
                 <td>
                   <img
-                    className=" block mx-auto w-[100px] h-[100px] object-contain py-2"
+                    className=" block mx-auto w-[45px] h-[65px] object-cover py-2"
                     src={product.pictureURL[0]}
                     alt={`${product.title} product`}
                   />
@@ -68,6 +68,7 @@ const MyProducts = () => {
                     </div>
 
                     <AiOutlineDelete
+                      className="text-xl bg-red text-white w-[30px] h-[30px] p-1 cursor-pointer  "
                       onClick={() => deleteProduct(product._id)}
                     />
                   </div>
