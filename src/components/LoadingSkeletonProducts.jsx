@@ -4,7 +4,7 @@ const LoadingSkeletonProducts = () => {
   return (
     <div className="col-span-3 grid grid-cols-3 gap-4">
       {newArray?.map((item, index) => (
-        <div key={index} className="animate-pulse flex-1 bg-white">
+        <div key={index} className="animate-pulse flex-1 bg-white rounded-md">
           <div className="  p-4 h-[320px] mb-4  ">
             <div className="w-full h-[100%] bg-gray"></div>
           </div>

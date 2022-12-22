@@ -43,11 +43,9 @@ const Products = () => {
     setGrid(true);
   };
 
-  console.log(filterProducts);
-
   return (
     <section className="min-height bg-gray flex justify-center py-7 ">
-      <div className="container grid grid-cols-4 gap-4  sm:grid-cols-2  md:grid-cols-3 lg:grid-cols-4 ">
+      <div className="container grid grid-cols-4 gap-4  sm:grid-cols-2  md:grid-cols-3 lg:grid-cols-4 items-start ">
         <Aside
           data={data}
           setFilterProducts={setFilterProducts}
@@ -55,7 +53,7 @@ const Products = () => {
           loading={loading}
         />
 
-        {isLoading && !data ? (
+        {isLoading || loading ? (
           <LoadingSkeletonProducts />
         ) : (
           <div className="col-span-3 grid grid-cols-3 gap-4">
