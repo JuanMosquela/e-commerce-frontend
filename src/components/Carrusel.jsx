@@ -1,13 +1,10 @@
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-
 import { Link } from "react-router-dom";
-
 import CardProduct from "./CardProduct";
 
 const Carrusel = ({ title, data }) => {
-  console.log(data);
   const settings = {
     infinite: true,
     lazyLoad: true,
@@ -52,12 +49,14 @@ const Carrusel = ({ title, data }) => {
     ],
   };
 
+  console.log(data);
+
   return (
     <div className=" md:container mb-10">
       <h2 className="text-slate text-2xl font-semibold mb-">{title}</h2>
 
       <Slider {...settings}>
-        {data?.results.map((product, index) => (
+        {data?.results?.map((product) => (
           <div key={product._id} className="md:max-w-[280px] lg:max-w-[320px]">
             <Link to={`products/${product._id}`}>
               <CardProduct product={product} />

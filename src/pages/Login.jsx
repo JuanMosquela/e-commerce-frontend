@@ -7,14 +7,9 @@ import { setCredentials, signIn } from "../redux/slices/authSliceRedux";
 import { loginSchemas } from "../schemas/loginSchemas";
 
 import { FcGoogle } from "react-icons/fc";
-import {
-  AiFillEye,
-  AiFillEyeInvisible,
-  AiOutlineEye,
-  AiOutlineEyeInvisible,
-} from "react-icons/ai";
-import { GoogleLogin, useGoogleLogin } from "@react-oauth/google";
-import jwtDecode from "jwt-decode";
+import { AiFillEye, AiFillEyeInvisible } from "react-icons/ai";
+import { useGoogleLogin } from "@react-oauth/google";
+
 import publicRequest from "../utils/request-methods";
 import axios from "axios";
 import { GoogleContext } from "../context/GoogleProvider";
@@ -25,7 +20,7 @@ const Login = () => {
   const [visible, setVisible] = useState(false);
   const location = useLocation();
   const navigate = useNavigate();
-  const { handleLoginWithGoogle, googleUser } = useContext(GoogleContext);
+  const { handleLoginWithGoogle } = useContext(GoogleContext);
   const from = location.state?.from?.pathname || "/";
 
   const auth = useSelector((state) => state.auth);
@@ -33,21 +28,18 @@ const Login = () => {
 
   const [signIn, { data, isLoading, error }] = useSignInMutation();
 
-  console.log(auth);
-
-  const loading = auth.isLoading;
-
-  // useEffect(() => {
-  //   if (auth.user || googleUser?.token) navigate(from);
-  // }, [googleUser]);
+  console.log(error);
 
   useEffect(() => {
     if (data?.token) {
       dispatch(setCredentials(data));
-      toast.success("logeado correctamente");
+      toast.success("Logeado correctamente");
     }
     if (error?.status === 401) {
       toast.error(error.data.msg);
+    }
+    if (error?.status === 400) {
+      toast.error("Este usuario no existe");
     }
 
     if (auth?.token) navigate(from);
@@ -75,41 +67,25 @@ const Login = () => {
       validationSchema: loginSchemas,
       onSubmit,
     });
-  const login = useGoogleLogin({
-    onSuccess: async (tokenResponse) => {
-      console.log(tokenResponse);
-      const { data } = await axios.get(
-        "https://www.googleapis.com/oauth2/v3/userinfo",
-        {
-          headers: {
-            Authorization: `Bearer ${tokenResponse.access_token}`,
-          },
-        }
-      );
-
-      const googleUser = {
-        aud: data.sub,
-        name: data.name,
-        email: data.email,
-        picture: data.picture,
-        password: data.sub,
-      };
-
-      handleLoginWithGoogle(googleUser);
-
-      await publicRequest.login(googleUser);
-    },
-  });
 
   return (
-    <div className="flex justify-center items-center min-h-[100vh] bg-white  ">
-      <div className="flex h-[540px] rounded-lg overflow-hidden relative  shadow-md ">
+    <div className="flex justify-center items-center min-h-[100vh] bg-gray  ">
+      <div className="flex  rounded-lg overflow-hidden relative   shadow-md ">
         <form
           className="w-[400px] bg-white py-6 px-5 "
           method="post"
           onSubmit={handleSubmit}
         >
-          <h2 className="text-slate text-4xl mb-8 font-semibold">Sign In</h2>
+          <Link
+            className="block  text-center py-1  font-bold uppercase text-sm md:text-md lg:text-3xl text-black mb-10 "
+            to="/"
+          >
+            <span className="text-orange text-3xl font-bold mb-4">
+              physical{" "}
+            </span>
+            point
+          </Link>
+          <h2 className="text-slate text-2xl mb-8 font-semibold">Sign In</h2>
           <div className="relative mb-4 min-h-[60px]">
             <input
               className="w-full py-1 text-md outline-none border-orange border-b-2  "
@@ -155,42 +131,30 @@ const Login = () => {
           </div>
           <button
             type="submit"
-            disabled={loading}
-            className=" block w-full bg-orange text-white rounded-md p-1 "
+            disabled={isLoading}
+            className="block w-full bg-orange text-white rounded-md py-2 "
           >
-            {loading ? (
+            {isLoading ? (
               <>
-                <span style={{ marginRight: "10px" }}>Loading</span>
                 <CircularProgress
                   sx={{ color: "rgba(255,255,255,.8)" }}
-                  size="2rem"
+                  size="1.5rem"
                 />
               </>
             ) : (
-              <span className="text-2xl">Login</span>
+              <span className="text-sm uppercase">Login</span>
             )}
           </button>
-          <p className="py-8 text-center text-slate text-xl">or</p>
-          <div className="flex justify-center">
-            <button
-              type="button"
-              onClick={login}
-              className="flex items-center text-lg gap-4 shadow-sm px-4 py-2"
-            >
-              <FcGoogle />
-              Login with Google
-            </button>
-          </div>
 
-          <p className="absolute bottom-0 text-slate-700 text-sm font-thin pb-2">
-            Need an Account?
-            <br />
-            <span>
+          <div className=" pt-10 text-end ">
+            <p className="   text-slate text-md font-thin pb-2">
+              Need an Account?
+              <br />
               <Link className="text-orange text-xl font-bold" to="/register">
                 Sign Up
               </Link>
-            </span>
-          </p>
+            </p>
+          </div>
         </form>
       </div>
     </div>

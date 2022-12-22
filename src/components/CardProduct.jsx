@@ -30,7 +30,7 @@ const CardProduct = ({ product, row, grid, addedToFavs }) => {
     if (!auth.token) {
       navigate("/login");
 
-      console.log("debes estar autenticado");
+      toast.error("Debes estar autenticado");
       return;
     }
 
@@ -53,7 +53,7 @@ const CardProduct = ({ product, row, grid, addedToFavs }) => {
     setButtonClicked(true);
 
     if (!auth.token) {
-      console.log("debes estar autenticado");
+      toast.error("Debes estar autenticado");
       return;
     }
 

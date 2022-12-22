@@ -50,7 +50,8 @@ const ProductDetail = ({ data }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    if (!auth?.token) {
+    if (!auth.token) {
+      toast.error("Debes estar autenticado");
       navigate("/login");
       return;
     }
@@ -68,10 +69,10 @@ const ProductDetail = ({ data }) => {
   const handleFav = async (e) => {
     e.preventDefault();
     setButtonClicked(true);
-    console.log(data?._id);
 
     if (!auth.token) {
-      console.log("debes estar autenticado");
+      toast.error("Debes estar autenticado");
+      navigate("/login");
       return;
     }
 
@@ -89,18 +90,9 @@ const ProductDetail = ({ data }) => {
     toast.info("Product added to fav");
   };
 
-  const handleChange = (e) => {
-    setCounter(Number(e.target.value));
-  };
+  const handleChange = (e) => setCounter(Number(e.target.value));
 
-  const handleClick = (obj) => {
-    // if (!googleUser || !auth.token) {
-    //   navigate("/login");
-    //   return;
-    // }
-    console.log(obj.counter);
-    dispatch(addToCart(obj));
-  };
+  const handleClick = (obj) => dispatch(addToCart(obj));
 
   const productStock = [];
 
@@ -116,7 +108,7 @@ const ProductDetail = ({ data }) => {
     if (error?.status === 501) {
       toast.error(`${error?.data?.msg}`);
     }
-  }, [error]);
+  }, [error, reviewData]);
 
   return (
     <div className="container grid grid-cols-4 min-h-full justify-center mt-[8rem] gap-4 mb-10 ">

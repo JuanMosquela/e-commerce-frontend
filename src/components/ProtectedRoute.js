@@ -1,7 +1,7 @@
-import { useContext } from "react";
+import { useEffect } from "react";
 import { useSelector } from "react-redux";
 import { useLocation, Navigate, Outlet } from "react-router-dom";
-import { GoogleContext } from "../context/GoogleProvider";
+import { toast } from "react-toastify";
 
 const ProtectedRoute = () => {
   const location = useLocation();

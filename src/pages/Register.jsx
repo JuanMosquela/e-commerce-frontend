@@ -72,13 +72,20 @@ const Register = () => {
   });
 
   return (
-    <div className="flex flex-col justify-center items-center min-h-[100vh]   bg-white">
+    <div className="flex flex-col justify-center items-center min-h-[100vh]   bg-gray">
       <form
         className="w-[400px] bg-white py-6 px-5  relative"
         method="post"
         onSubmit={handleSubmit}
       >
-        <h2 className="text-slate text-4xl mb-8 font-semibold">Register</h2>
+        <Link
+          className="block  text-center py-1  font-bold uppercase text-sm md:text-md lg:text-3xl text-black mb-10 "
+          to="/"
+        >
+          <span className="text-orange text-3xl font-bold mb-4">physical </span>
+          point
+        </Link>
+        <h2 className="text-slate text-2xl mb-8 font-semibold">Register</h2>
         <div className="relative mb-4 min-h-[60px]">
           <input
             className="w-full py-1 text-md outline-none border-orange border-b-2 "
@@ -139,28 +146,26 @@ const Register = () => {
         <button
           type="submit"
           disabled={isSubmitting}
-          className=" block w-full bg-orange text-white rounded-md p-1 mb-[5rem] "
+          className=" block w-full bg-orange text-white rounded-md py-2 "
         >
           {isLoading ? (
-            <span className="text-2xl">
-              <CircularProgress
-                size="1rem"
-                sx={{ color: "rgba(255,255,255,.6)" }}
-              />
-            </span>
+            <CircularProgress
+              size="1.5rem"
+              sx={{ color: "rgba(255,255,255)" }}
+            />
           ) : (
-            <span className="text-xl">Submit</span>
+            <span className="text-sm uppercase">Register</span>
           )}
         </button>
-        <p className="absolute bottom-0 text-slate-700 text-sm font-thin">
-          Already have and account?
-          <br />
-          <span className="line">
+        <div className=" pt-10 text-end ">
+          <p className="   text-slate text-md font-thin pb-2">
+            Already have an Account?
+            <br />
             <Link className="text-orange text-xl font-bold" to="/login">
               Sign In
             </Link>
-          </span>
-        </p>
+          </p>
+        </div>
       </form>
     </div>
   );
