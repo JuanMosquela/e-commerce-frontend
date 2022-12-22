@@ -67,8 +67,6 @@ const CardProduct = ({ product, row, grid, addedToFavs }) => {
     toast.info("Product removed from fav");
   };
 
-  console.log(product);
-
   return (
     <div
       className={
@@ -109,9 +107,7 @@ const CardProduct = ({ product, row, grid, addedToFavs }) => {
           precision={0.5}
           readOnly
         />
-        <h5 className=" text-xl text-gray-600 font-bold ">
-          $ {product?.price}
-        </h5>
+        <h5 className=" text-xl text-slate font-bold ">$ {product?.price}</h5>
         {row && (
           <>
             <p className="text-slate font-thin pt-2 mb-4">

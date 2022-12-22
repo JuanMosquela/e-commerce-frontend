@@ -68,7 +68,7 @@ function BpRadio(props) {
 export function CheckboxBranch({ products }) {
   const dispatch = useDispatch();
 
-  const branchesArr = products.map((product) => {
+  const branchesArr = products?.map((product) => {
     return product.branch;
   });
 
@@ -102,7 +102,7 @@ export function CheckboxBranch({ products }) {
 export function CheckboxCategory({ products }) {
   const dispatch = useDispatch();
 
-  const categoriesArr = products.map((product) => {
+  const categoriesArr = products?.map((product) => {
     return product.category;
   });
 
@@ -120,7 +120,7 @@ export function CheckboxCategory({ products }) {
         aria-labelledby="demo-customized-radios"
         name="customized-radios"
       >
-        {myCategories.map((category, index) => (
+        {myCategories?.map((category, index) => (
           <FormControlLabel
             key={index}
             onChange={handleChange}

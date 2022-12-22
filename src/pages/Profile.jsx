@@ -7,6 +7,7 @@ import notFound from "../img/not-found.jpg";
 import FormModal from "../components/FormModal";
 import { TextField } from "@mui/material";
 import { BsFillCloudPlusFill } from "react-icons/bs";
+import FileUpload from "../components/FileUpload";
 
 const Profile = () => {
   const user = useSelector((state) => state.auth.user);
@@ -51,6 +52,7 @@ const Profile = () => {
             src={userPicture?.model?.picture}
             alt=""
           />
+          <FileUpload   />
           <div className="relative mb-4 h-[80px] w-[240px]   ">
             <input
               className="relative h-[100%] w-[100%] z-20 opacity-0 cursor-pointer   "

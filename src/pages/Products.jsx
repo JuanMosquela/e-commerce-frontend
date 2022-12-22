@@ -11,6 +11,7 @@ import { CgMenuGridO, CgMenu } from "react-icons/cg";
 import Aside from "../components/Aside";
 import { useState } from "react";
 import Pagination from "../components/Pagination";
+import LoadingSkeletonProducts from "../components/LoadingSkeletonProducts";
 
 const Products = () => {
   const { inputValue } = useContext(ProductsContext);
@@ -45,18 +46,18 @@ const Products = () => {
   console.log(filterProducts);
 
   return (
-    <section className="min-height bg-white flex justify-center py-7 ">
-      {isLoading ? (
-        <CircularProgress />
-      ) : (
-        <div className="container grid grid-cols-4 gap-4  sm:grid-cols-2  md:grid-cols-3 lg:grid-cols-4 ">
-          <Aside
-            data={data}
-            setFilterProducts={setFilterProducts}
-            setLoading={setLoading}
-            loading={loading}
-          />
+    <section className="min-height bg-gray flex justify-center py-7 ">
+      <div className="container grid grid-cols-4 gap-4  sm:grid-cols-2  md:grid-cols-3 lg:grid-cols-4 ">
+        <Aside
+          data={data}
+          setFilterProducts={setFilterProducts}
+          setLoading={setLoading}
+          loading={loading}
+        />
 
+        {isLoading && !data ? (
+          <LoadingSkeletonProducts />
+        ) : (
           <div className="col-span-3 grid grid-cols-3 gap-4">
             <div className="col-span-1  flex ">
               View as:
@@ -72,13 +73,13 @@ const Products = () => {
               </div>
             </div>
             <Pagination
-              total={data.products.length}
+              total={data?.products?.length}
               productsPerPage={productsPerPage}
               setCurrentPage={setCurrentPage}
               currentPage={currentPage}
             />
 
-            {filterProducts.length !== 0
+            {filterProducts?.length !== 0
               ? filterProducts?.map((product) => (
                   <Link key={product._id} to={`/products/${product._id}`}>
                     <CardProduct row={row} product={product} />
@@ -94,8 +95,8 @@ const Products = () => {
                     </div>
                   ))}
           </div>
-        </div>
-      )}
+        )}
+      </div>
     </section>
   );
 };

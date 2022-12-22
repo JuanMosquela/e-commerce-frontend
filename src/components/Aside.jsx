@@ -7,12 +7,7 @@ import publicRequest from "../utils/request-methods";
 import { CheckboxBranch, CheckboxCategory } from "./CheckboxComponent";
 import { IoIosOptions } from "react-icons/io";
 
-const Aside = ({
-  data: { products },
-  setFilterProducts,
-  loading,
-  setLoading,
-}) => {
+const Aside = ({ data, setFilterProducts, loading, setLoading }) => {
   const [price, setPrice] = useState([20, 100]);
 
   const dispatch = useDispatch();
@@ -23,6 +18,8 @@ const Aside = ({
     setPrice(newValue);
     dispatch(addPrice(newValue));
   };
+
+  console.log(data?.products);
 
   const handleFilters = async () => {
     setLoading(true);
@@ -48,13 +45,13 @@ const Aside = ({
           <h3 className="text-slate font-bold uppercase mb-4 pt-6">
             By Categories
           </h3>
-          <CheckboxCategory products={products} />
+          <CheckboxCategory products={data?.products} />
         </div>
         <div>
           <h3 className="text-slate font-bold uppercase mb-4 pt-6">
             By Branch
           </h3>
-          <CheckboxBranch products={products} />
+          <CheckboxBranch products={data?.products} />
         </div>
         <div>
           <h3 className="text-slate font-bold uppercase mb-4 pt-6">By price</h3>
@@ -62,7 +59,7 @@ const Aside = ({
             <Slider
               defaultValue={200}
               getAriaLabel={() => "Price range"}
-              value={filters.price}
+              value={filters?.price}
               onChange={handleChange}
               valueLabelDisplay="auto"
             />
@@ -74,7 +71,7 @@ const Aside = ({
           </h3>
           <Rating
             name="simple-controlled"
-            value={filters.rating}
+            value={filters?.rating}
             onChange={(event, newValue) => dispatch(addRating(newValue))}
           />
         </div>
