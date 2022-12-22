@@ -1,10 +1,10 @@
 const LoadingSkeletonProducts = () => {
-  const newArray = [0, 0, 0, 0, 0, 0];
+  const newArray = new Array(6).fill(0);
 
   return (
     <div className="col-span-3 grid grid-cols-3 gap-4">
-      {newArray?.map((item) => (
-        <div className="animate-pulse flex-1 bg-white">
+      {newArray?.map((item, index) => (
+        <div key={index} className="animate-pulse flex-1 bg-white">
           <div className="  p-4 h-[320px] mb-4  ">
             <div className="w-full h-[100%] bg-gray"></div>
           </div>

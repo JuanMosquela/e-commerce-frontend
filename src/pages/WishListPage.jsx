@@ -17,7 +17,7 @@ const WishListPage = () => {
 
   return (
     <section className="md:container pt-10 ">
-      {data?.result.length === 0 ? (
+      {data?.result?.length === 0 ? (
         <EmptyComponent title="No favorites products added yet" />
       ) : (
         <>
@@ -27,7 +27,7 @@ const WishListPage = () => {
           <div className="min-h-[100vh] grid grid-cols-4 gap-4">
             {data?.result?.map((product) => (
               <CardProduct
-                key={product._id}
+                key={product?._id}
                 product={product}
                 addedToFavs={true}
               />

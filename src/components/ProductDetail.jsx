@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { AiOutlineHeart } from "react-icons/ai";
 import { BsFillCartPlusFill } from "react-icons/bs";
 import { useDispatch, useSelector } from "react-redux";
@@ -36,7 +36,9 @@ const ProductDetail = ({ data }) => {
 
   const [buttonClicked, setButtonClicked] = useState(false);
 
-  const [createReview, { isLoading, error }] = useCreateReviewMutation();
+  const [createReview, { data: reviewData, isLoading, error }] =
+    useCreateReviewMutation();
+  console.log(reviewData, error);
 
   const [addToFav] = useAddToFavMutation();
 
@@ -47,14 +49,15 @@ const ProductDetail = ({ data }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (!googleUser || auth.user) {
+
+    if (!auth?.token) {
       navigate("/login");
       return;
     }
 
     createReview({
       id: data._id,
-      user: auth?.user || googleUser?.user?.name,
+      user: auth?.user.name,
       comment,
       value,
     });
@@ -65,6 +68,7 @@ const ProductDetail = ({ data }) => {
   const handleFav = async (e) => {
     e.preventDefault();
     setButtonClicked(true);
+    console.log(data?._id);
 
     if (!auth.token) {
       console.log("debes estar autenticado");
@@ -73,7 +77,7 @@ const ProductDetail = ({ data }) => {
 
     const newFavProduct = {
       id: data._id,
-      name: auth.user,
+      name: auth.user.name,
     };
 
     addToFav(newFavProduct);
@@ -103,6 +107,16 @@ const ProductDetail = ({ data }) => {
   for (let i = 1; i <= data.stock; i++) {
     productStock.push(i);
   }
+
+  useEffect(() => {
+    if (reviewData && !isLoading) {
+      toast.success("Product reviewed");
+    }
+
+    if (error?.status === 501) {
+      toast.error(`${error?.data?.msg}`);
+    }
+  }, [error]);
 
   return (
     <div className="container grid grid-cols-4 min-h-full justify-center mt-[8rem] gap-4 mb-10 ">
@@ -259,14 +273,13 @@ const ProductDetail = ({ data }) => {
                 <button
                   type="submit"
                   disabled={isLoading}
-                  className="bg-orange flex  px-6 gap-3 text-white font-semibold text-md  py-2 mt-6 rounded-md"
+                  className="bg-orange flex justify-center items-center  px-6 gap-3 text-white font-semibold text-md w-[100px]  py-2 mt-6 rounded-md"
                 >
                   {isLoading ? (
                     <>
-                      <p>Enviando</p>
                       <CircularProgress
-                        size="1rem"
-                        sx={{ color: "rgba(255,255,255,.8)" }}
+                        size="1.5rem"
+                        sx={{ color: "rgba(255,255,255)" }}
                       />
                     </>
                   ) : (
@@ -274,11 +287,6 @@ const ProductDetail = ({ data }) => {
                   )}
                 </button>
               </div>
-              {error && error.data?.msg && (
-                <p className="bg-red inline text-white px-3 py-1 text-md rounded-md shadow-md">
-                  {error.data.msg}
-                </p>
-              )}
             </form>
           </div>
         </div>
