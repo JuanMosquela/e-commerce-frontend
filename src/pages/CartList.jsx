@@ -34,7 +34,7 @@ const CartList = () => {
   };
 
   return (
-    <section className="flex-col justify-center min-h-screen pt-[5rem] bg-white container">
+    <section className="flex-col justify-center min-h-screen  bg-white container">
       {cart.length === 0 ? (
         <EmptyComponent title="Your cart it's empty" />
       ) : (

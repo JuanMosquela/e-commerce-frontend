@@ -67,8 +67,6 @@ const CardProduct = ({ product, row, grid, addedToFavs }) => {
     toast.info("Product removed from fav");
   };
 
-  console.log(product);
-
   return (
     <div
       className={

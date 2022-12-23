@@ -13,14 +13,17 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { setCredentials } from "../redux/slices/authSliceRedux";
 import { toast } from "react-toastify";
+import FileUpload from "./FileUpload";
 
 export default function FormModal({ data }) {
   const [open, setOpen] = useState(false);
 
   const [formInputs, setFormInputs] = useState({
-    name: "",
-    email: "",
+    name: data?.user.name,
+    email: data?.user.email,
   });
+
+  const [picture, setPicture] = useState(null);
 
   const dispatch = useDispatch();
 
@@ -28,6 +31,11 @@ export default function FormModal({ data }) {
 
   const [updateUser, { data: user, error, isLoading }] =
     useUpdateUserMutation();
+
+  const handlePicture = (e) => {
+    const file = e.target.files[0];
+    setPicture(file);
+  };
 
   const handleChange = (e) => {
     setFormInputs({ ...formInputs, [e.target.name]: e.target.value });
@@ -41,16 +49,27 @@ export default function FormModal({ data }) {
     setOpen(false);
   };
 
-  const handleForm = async () => {
+  const handleForm = () => {
+    const formData = new FormData();
+
+    if (picture) {
+      formData.append("picture", picture);
+    }
+    for (const value of Object.entries(formInputs)) {
+      formData.append(value[0], value[1]);
+      console.log(value[0] + ", " + value[1]);
+    }
     const newUser = {
       id: data?.user._id,
-      name: formInputs.name,
-      email: formInputs.email,
+      body: formData,
     };
-    await updateUser(newUser);
+    console.log(newUser);
 
-    if (!isLoading && !error) {
-    }
+    if (!isLoading) setOpen(false);
+
+    // updateUser(newProduct);
+
+    // createProduct(formData);
   };
 
   useEffect(() => {
@@ -87,6 +106,7 @@ export default function FormModal({ data }) {
           <DialogContentText>
             Update your profile picture, username or email adress
           </DialogContentText>
+          <FileUpload handlePicture={handlePicture} />
           <TextField
             autoFocus
             margin="dense"

@@ -1,11 +1,6 @@
 import { BsFillCloudPlusFill } from "react-icons/bs";
 
 const FileUpload = ({ handlePicture }) => {
-  const handleUpload = (e) => {
-    // let formData = new FormData();
-    // formData.append("picture", e.target.files[0]);
-  };
-
   return (
     <div className="flex-1 h-[240px] bg-gray border border-dashed border-orange p-4 flex flex-col justify-center items-center  mb-6">
       <div className=" relative mb-4 h-[80px] w-[240px]   ">

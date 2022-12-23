@@ -4,12 +4,15 @@ import { Link } from "react-router-dom";
 
 const EmptyComponent = ({ title }) => {
   return (
-    <div className="empty-cart-container">
-      <div className="empty-cart-wrapper">
-        <h2>{title}</h2>
-        <BsBagDash className="bag" />
-        <Link to="/" className="button-wrapper">
-          <HiOutlineArrowNarrowLeft className="icon" />
+    <div className="flex justify-center items-center min-h-screen">
+      <div className="text-center leading-6 text-slate uppercase">
+        <h2 className="font-bold text-4xl">{title}</h2>
+        <BsBagDash className="mx-auto text-5xl my-6 " />
+        <Link
+          to="/"
+          className="flex gap-4 w-full justify-center items-center font-semibold hover:text-orange duration-200"
+        >
+          <HiOutlineArrowNarrowLeft className="text-2xl" />
           <p>Go back</p>
         </Link>
       </div>

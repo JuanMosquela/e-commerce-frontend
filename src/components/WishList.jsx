@@ -5,11 +5,9 @@ import { useCartSelector } from "../redux/shoppingCartRedux";
 import { useGetFavProductsQuery } from "../redux/api/productsApi";
 
 const WishList = () => {
-  const id = useSelector((state) => state.auth.id);
+  const id = useSelector((state) => state.auth.user._id);
 
   const { data } = useGetFavProductsQuery(id);
-
-  console.log(data);
 
   return (
     <Link to="/wishList" className="text-slate-900  text-3xl relative">

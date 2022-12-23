@@ -19,8 +19,6 @@ const Aside = ({ data, setFilterProducts, loading, setLoading }) => {
     dispatch(addPrice(newValue));
   };
 
-  console.log(data?.products);
-
   const handleFilters = async () => {
     setLoading(true);
     try {

@@ -112,10 +112,10 @@ const ProductDetail = ({ data }) => {
 
   return (
     <div className="container grid grid-cols-4 min-h-full justify-center mt-[8rem] gap-4 mb-10 ">
-      <div className="flex flex-col col-span-2 gap-4">
-        <figure className="w-full">
+      <div className="flex flex-col col-span-2 w-[600px] gap-4">
+        <figure className="w-full ">
           <img
-            className="m-auto h-[500px] object-contain rounded-sm shadow-md"
+            className="m-auto h-[500px] w-full object-cover rounded-sm"
             src={data.pictureURL[pictureIndex]}
             alt=""
           />
@@ -132,33 +132,39 @@ const ProductDetail = ({ data }) => {
           ))}
         </div>
       </div>
-      <div className="product-info  col-span-2 leading-10">
-        <h3 className="text-4xl font-semibold ">{data.title}</h3>
+      <div className="col-span-2 leading-10">
+        <h4 className="inline text-2xl  text-orange font-bold ">
+          {data.branch}
+        </h4>
+        <h3 className="text-5xl font-bold mb-4">{data.title}</h3>
         <Rating
-          className="read-only"
+          name="size-large"
+          size="large"
           value={data.rating}
           precision={0.5}
           readOnly
         />
-        <span className="text-sm rounded-xl bg-orange text-white font-bold px-6 py-2">
-          {data.branch}
-        </span>
+
         <h4 className="">
           {" "}
           <span className="text-slate font-semibold text-sm capitalize">
-            categorias:
+            categoria
           </span>{" "}
           {data.category}
         </h4>
 
         <div className="mb-4 flex gap-2">
-          <p className="text-md font-semibold text-slate">Disponibilidad:</p>
-          <p className="text-sm font-thin">
-            {data.stock === 0 ? "No stock" : `In Stock`}
-          </p>
+          <p className="text-md font-semibold text-slate">Disponibilidad</p>
+          <span className="flex  items-center  text-white font-semibold text-sm ">
+            {data.stock === 0 ? (
+              <p className="bg-red px-2 py-1 rounded-md ">No stock</p>
+            ) : (
+              <p className="bg-blue px-2 py-1 rounded-md  ">En Stock</p>
+            )}
+          </span>
         </div>
 
-        <span className="block mb-4 text-slate-900 text-2xl">
+        <span className="block mb-4 text-slate text-3xl font-bold">
           $ {data.price}
         </span>
 
@@ -173,7 +179,7 @@ const ProductDetail = ({ data }) => {
           ) : (
             <select
               onChange={(e) => handleChange(e)}
-              className=" px-2 py-1 w-full rounded-sm hover:cursor-pointer"
+              className=" p-2 w-full rounded-md hover:cursor-pointer bg-gray border-2 border-orange text-slate"
             >
               {productStock.map((qty, index) => (
                 <option key={index} value={qty}>
