@@ -53,7 +53,9 @@ const Carrusel = ({ title, data }) => {
 
   return (
     <div className=" md:container mb-10">
-      <h2 className="text-slate text-2xl font-semibold mb-">{title}</h2>
+      <h2 className="text-dark text-xl font-bold font-montserrat mb-4 uppercase">
+        {title}
+      </h2>
 
       <Slider {...settings}>
         {data?.results?.map((product) => (

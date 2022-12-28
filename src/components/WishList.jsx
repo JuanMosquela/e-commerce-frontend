@@ -5,15 +5,15 @@ import { useCartSelector } from "../redux/shoppingCartRedux";
 import { useGetFavProductsQuery } from "../redux/api/productsApi";
 
 const WishList = () => {
-  const id = useSelector((state) => state.auth.user._id);
+  const user = useSelector((state) => state.auth.user);
 
-  const { data } = useGetFavProductsQuery(id);
+  const { data } = useGetFavProductsQuery(user?._id);
 
   return (
     <Link to="/wishList" className="text-slate-900  text-3xl relative">
       <AiOutlineHeart />
       <span className="absolute flex justify-center items-center text-white bg-orange h-[25px] w-[25px] rounded-full text-sm p-2 top-[-5px] right-[-15px]   ">
-        {data?.result.length ? data.result.length : 0}
+        {data ? data?.result?.length : 0}
       </span>
     </Link>
   );

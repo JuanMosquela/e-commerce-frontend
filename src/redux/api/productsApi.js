@@ -3,7 +3,7 @@ import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 export const productsApi = createApi({
   reducerPath: "productsApi",
   baseQuery: fetchBaseQuery({
-    baseUrl: "https://e-commerce-backend-production-03e0.up.railway.app/api",
+    baseUrl: "https://fit-commerce-api.onrender.com/api",
 
     prepareHeaders: (headers, { getState }) => {
       const token = getState().auth.token;
@@ -21,6 +21,7 @@ export const productsApi = createApi({
         method: "POST",
         body: body,
       }),
+      invalidatesTags: ["Cart"],
     }),
     signUp: builder.mutation({
       query: (body) => ({
@@ -117,6 +118,40 @@ export const productsApi = createApi({
       }),
       invalidatesTags: ["User"],
     }),
+    getCart: builder.query({
+      query: () => "/cart",
+      providesTags: ["Cart"],
+    }),
+    addProductToCart: builder.mutation({
+      query: (body) => ({
+        url: "/cart",
+        method: "POST",
+        body,
+      }),
+      invalidatesTags: ["Cart"],
+    }),
+    updateProductCart: builder.mutation({
+      query: ({ id, value }) => ({
+        url: `/cart/${id}`,
+        method: "PUT",
+        body: value,
+      }),
+      invalidatesTags: ["Cart"],
+    }),
+    clearCart: builder.mutation({
+      query: () => ({
+        url: `/cart`,
+        method: "DELETE",
+      }),
+      invalidatesTags: ["Cart"],
+    }),
+    removeFromCart: builder.mutation({
+      query: (id) => ({
+        url: `/cart/${id}`,
+        method: "DELETE",
+      }),
+      invalidatesTags: ["Cart"],
+    }),
   }),
 });
 
@@ -138,4 +173,9 @@ export const {
   useCreateProductMutation,
   useUpdateProductMutation,
   useDeleteProductMutation,
+  useGetCartQuery,
+  useAddProductToCartMutation,
+  useUpdateProductCartMutation,
+  useClearCartMutation,
+  useRemoveFromCartMutation,
 } = productsApi;

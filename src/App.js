@@ -6,7 +6,7 @@ import Navbar from "./components/Navbar";
 
 function App() {
   return (
-    <div className="bg-white">
+    <div className="bg-white font-nunito">
       <Navbar />
       <>
         <Outlet />

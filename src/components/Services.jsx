@@ -11,10 +11,10 @@ const Services = () => {
           <i className="text-2xl">{service.icon}</i>
 
           <div>
-            <h4 className="text-slate-700 text-md font-bold uppercase">
+            <h4 className="text-dark text-lg font-black uppercase">
               {service.title}
             </h4>
-            <p className="text-sm text-gray-500 ">{service.subt}</p>
+            <p className="text-md text-slate ">{service.subt}</p>
           </div>
         </div>
       ))}

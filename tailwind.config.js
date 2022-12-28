@@ -3,13 +3,18 @@ module.exports = {
   content: ["./src/**/*.{js,jsx,ts,tsx}"],
   theme: {
     colors: {
-      orange: "#faba42",
-      dark: "#000",
-      slate: "#343434",
+      orange: "#FF7D1B",
+      dark: "#1E1F27",
+      slate: "#7C7B80",
       white: "#FFF",
       red: "#ff0033",
       gray: "#F5F5F5",
+      text: "#808080",
       blue: "#98CAFB",
+    },
+    fontFamily: {
+      nunito: ["Nunito", "sans-serif"],
+      montserrat: ["Montserrat", "sans-serif"],
     },
     extend: {
       screens: {

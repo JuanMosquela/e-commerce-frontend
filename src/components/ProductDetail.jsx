@@ -3,6 +3,7 @@ import { AiOutlineHeart } from "react-icons/ai";
 import { BsFillCartPlusFill } from "react-icons/bs";
 import { useDispatch, useSelector } from "react-redux";
 import {
+  useAddProductToCartMutation,
   useAddToFavMutation,
   useCreateReviewMutation,
   useFetchAllReviewsQuery,
@@ -26,6 +27,9 @@ const ProductDetail = ({ data }) => {
 
   const dispatch = useDispatch();
 
+  const [addProductToCart, { isLoading: addProductLoading }] =
+    useAddProductToCartMutation();
+
   const auth = useSelector((state) => state.auth);
 
   const { googleUser } = useContext(GoogleContext);
@@ -40,7 +44,7 @@ const ProductDetail = ({ data }) => {
     useCreateReviewMutation();
   console.log(reviewData, error);
 
-  const [addToFav] = useAddToFavMutation();
+  const [addToFav, { isLoading: favLoading }] = useAddToFavMutation();
 
   const obj = {
     product: data,
@@ -92,7 +96,13 @@ const ProductDetail = ({ data }) => {
 
   const handleChange = (e) => setCounter(Number(e.target.value));
 
-  const handleClick = (obj) => dispatch(addToCart(obj));
+  const handleClick = (obj) => {
+    dispatch(addToCart(obj));
+    addProductToCart({
+      product: data._id,
+      quantity: counter,
+    });
+  };
 
   const productStock = [];
 
@@ -112,7 +122,7 @@ const ProductDetail = ({ data }) => {
 
   return (
     <div className="container grid grid-cols-4 min-h-full justify-center mt-[8rem] gap-4 mb-10 ">
-      <div className="flex flex-col col-span-2 w-[600px] gap-4">
+      <div className="flex flex-col col-span-2 w-[600px] gap-4 ">
         <figure className="w-full ">
           <img
             className="m-auto h-[500px] w-full object-cover rounded-sm"
@@ -132,12 +142,15 @@ const ProductDetail = ({ data }) => {
           ))}
         </div>
       </div>
-      <div className="col-span-2 leading-10">
-        <h4 className="inline text-2xl  text-orange font-bold ">
+      <div className="col-span-2 font-nunito">
+        <h4 className="inline text-2xl  text-orange font-bold mb-4 ">
           {data.branch}
         </h4>
-        <h3 className="text-5xl font-bold mb-4">{data.title}</h3>
+        <h3 className=" max-w-[600px] text-5xl text-dark mb-4 leading-[4rem] font-black ">
+          {data.title}
+        </h3>
         <Rating
+          className="mb-4"
           name="size-large"
           size="large"
           value={data.rating}
@@ -145,26 +158,27 @@ const ProductDetail = ({ data }) => {
           readOnly
         />
 
-        <h4 className="">
+        {/* <h4 className="">
           {" "}
           <span className="text-slate font-semibold text-sm capitalize">
             categoria
           </span>{" "}
           {data.category}
-        </h4>
+        </h4> */}
 
-        <div className="mb-4 flex gap-2">
-          <p className="text-md font-semibold text-slate">Disponibilidad</p>
-          <span className="flex  items-center  text-white font-semibold text-sm ">
-            {data.stock === 0 ? (
-              <p className="bg-red px-2 py-1 rounded-md ">No stock</p>
-            ) : (
-              <p className="bg-blue px-2 py-1 rounded-md  ">En Stock</p>
-            )}
-          </span>
-        </div>
+        <span className="flex  items-center  text-white font-semibold text-sm mb-4 ">
+          {data.stock === 0 ? (
+            <p className="bg-red px-2 py-1 rounded-md ">No stock</p>
+          ) : (
+            <p className="bg-blue px-2 py-1 rounded-md  ">En Stock</p>
+          )}
+        </span>
 
-        <span className="block mb-4 text-slate text-3xl font-bold">
+        <p className="mb-6 text-slate  font-semibold font-nunito  ">
+          {data.description.slice(0, 320)}...
+        </p>
+
+        <span className="block mb-4 text-dark text-3xl font-bold">
           $ {data.price}
         </span>
 
@@ -192,18 +206,36 @@ const ProductDetail = ({ data }) => {
 
         <div className="flex gap-4">
           <button
-            className="flex items-center gap-2 px-8 py-2 text-white text-md  uppercase bg-orange hover:shadow-lg ease-in duration-100 rounded-md"
+            className="flex items-center justify-center gap-2 min-w-[180px]  py-2 text-white text-md  uppercase bg-orange hover:shadow-lg ease-in duration-100 rounded-md"
             onClick={() => handleClick(obj)}
           >
-            <BsFillCartPlusFill />
-            Add to Cart
+            {addProductLoading ? (
+              <CircularProgress
+                sx={{ color: "rgba(255,255,255,.8)" }}
+                size="1.5rem"
+              />
+            ) : (
+              <>
+                <BsFillCartPlusFill />
+                Add to Cart
+              </>
+            )}
           </button>
           <button
-            className="flex items-center gap-2 px-8 py-2 text-slate-900 border border-slate-400 text-md  uppercase  rounded-md"
+            className="flex items-center justify-center gap-2 min-w-[180px] px-8 py-2 text-dark border border-slate text-md  uppercase  rounded-md"
             onClick={handleFav}
           >
-            <AiOutlineHeart />
-            Wishlist
+            {favLoading ? (
+              <CircularProgress
+                sx={{ color: "rgba(000,000,000,.8)" }}
+                size="1.5rem"
+              />
+            ) : (
+              <>
+                <AiOutlineHeart />
+                WishList
+              </>
+            )}
           </button>
         </div>
       </div>
@@ -211,7 +243,7 @@ const ProductDetail = ({ data }) => {
       <h3 className="text-slate-900 text:2xl font-semibold mb-2 col-span-1 ">
         Description :
       </h3>
-      <div className=" text-sm text-gray-900 col-span-3 mb-10">
+      {/* <div className=" text-sm text-gray-900 col-span-3 mb-10">
         <p className="mb-6 text-slate font-thin ">{data.description}</p>
         {data.subCategory && (
           <ul className="grid grid-cols-2 gap-4">
@@ -223,7 +255,7 @@ const ProductDetail = ({ data }) => {
             ))}
           </ul>
         )}
-      </div>
+      </div> */}
       <div className="col-span-4">
         <div className="grid grid-cols-4 gap-4">
           <div className="col-span-2">

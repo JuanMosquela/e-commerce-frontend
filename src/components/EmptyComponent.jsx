@@ -5,8 +5,8 @@ import { Link } from "react-router-dom";
 const EmptyComponent = ({ title }) => {
   return (
     <div className="flex justify-center items-center min-h-screen">
-      <div className="text-center leading-6 text-slate uppercase">
-        <h2 className="font-bold text-4xl">{title}</h2>
+      <div className="text-center leading-6 text-dark uppercase font-nunito">
+        <h2 className="font-black text-4xl  ">{title}</h2>
         <BsBagDash className="mx-auto text-5xl my-6 " />
         <Link
           to="/"

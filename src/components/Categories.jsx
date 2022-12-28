@@ -22,7 +22,9 @@ const categories = [
 const Categories = () => {
   return (
     <section className="container">
-      <h2 className="text-slate text-2xl font-semibold mb-4">Categories</h2>
+      <h2 className="text-dark text-xl font-bold font-montserrat mb-4 uppercase">
+        Categories
+      </h2>
       <div className="grid grid-cols-4 gap-4">
         {categories.map((cat, index) => (
           <Link key={index} to="/products">

@@ -19,10 +19,10 @@ const Navbar = () => {
     <header className="w-full z-50 top-0 bg-white  ">
       <div className="container flex justify-between items-center py-2   ">
         <Link
-          className=" py-1  font-bold uppercase text-sm md:text-md lg:text-xl text-black  "
+          className=" py-1  font-black uppercase text-sm md:text-md lg:text-xl text-dark   "
           to="/"
         >
-          <span className="text-orange text-xl font-bold">physical </span>
+          <span className="text-orange text-xl">physical </span>
           point
         </Link>
 

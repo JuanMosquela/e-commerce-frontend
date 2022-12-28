@@ -35,24 +35,22 @@ const Aside = ({ data, setFilterProducts, loading, setLoading }) => {
   return (
     <div className="col-span-1 bg-white rounded-sm shadow-lg overflow-hidden h-fit ">
       <div className=" divide-y divide-gray/30 px-6 py-4 ">
-        <h3 className="flex  items-center justify-between text-slate font-bold uppercase mb-4 pt-6">
+        <h3 className="flex  items-center justify-between text-dark font-bold uppercase mb-4 pt-6">
           search filters
           <IoIosOptions />
         </h3>
         <div>
-          <h3 className="text-slate font-bold uppercase mb-4 pt-6">
+          <h3 className="text-dark font-bold uppercase mb-4 pt-6">
             By Categories
           </h3>
           <CheckboxCategory products={data?.products} />
         </div>
         <div>
-          <h3 className="text-slate font-bold uppercase mb-4 pt-6">
-            By Branch
-          </h3>
+          <h3 className="text-dark font-bold uppercase mb-4 pt-6">By Branch</h3>
           <CheckboxBranch products={data?.products} />
         </div>
         <div>
-          <h3 className="text-slate font-bold uppercase mb-4 pt-6">By price</h3>
+          <h3 className="text-dark font-bold uppercase mb-4 pt-6">By price</h3>
           <div className="flex items-center mb-3 gap-4">
             <Slider
               defaultValue={200}
@@ -64,9 +62,7 @@ const Aside = ({ data, setFilterProducts, loading, setLoading }) => {
           </div>
         </div>
         <div>
-          <h3 className="text-slate font-bold uppercase mb-4 pt-6">
-            By rating
-          </h3>
+          <h3 className="text-dark font-bold uppercase mb-4 pt-6">By rating</h3>
           <Rating
             name="simple-controlled"
             value={filters?.rating}
