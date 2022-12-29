@@ -131,7 +131,7 @@ export const productsApi = createApi({
       invalidatesTags: ["Cart"],
     }),
     updateProductCart: builder.mutation({
-      query: ({ id, value }) => ({
+      query: ({ id, ...value }) => ({
         url: `/cart/${id}`,
         method: "PUT",
         body: value,

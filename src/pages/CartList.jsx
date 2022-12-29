@@ -51,7 +51,7 @@ const CartList = () => {
                   <h4 className="text-dark pt-4 font-semibold text-md  ">
                     {product?.item.title}
                   </h4>
-                  <h5 className="text-slate mt-2 text-sm mb-2 ">
+                  <h5 className="text-dark mt-2 text-sm mb-2 capitalize ">
                     {product?.item.category}
                   </h5>
                   <button
@@ -70,7 +70,7 @@ const CartList = () => {
           ))}
           <div className="flex justify-between flex-wrap gap-2 items-center mt-4">
             <button
-              className="text-slate border-2 border-gray bg-white text-sm rounded-sm px-4 py-1 cursor-pointer"
+              className="text-slate border border-slate bg-white text-lg rounded-sm px-4 py-1 cursor-pointer font-thin"
               onClick={() => clearCart()}
             >
               Clear Cart
@@ -87,7 +87,7 @@ const CartList = () => {
               </p>
 
               <Link to="/success">
-                <button className="flex justify-center bg-orange text-white font-bold px-3 py-3 rounded-md uppercase cursor-pointer w-full shadow-md ">
+                <button className="flex justify-center bg-orange text-white font-bold px-3 py-3 rounded-md uppercase cursor-pointer w-full hover:shadow-lg hover:duration-150 ">
                   Check out
                 </button>
               </Link>
