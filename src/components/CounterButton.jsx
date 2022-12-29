@@ -17,7 +17,7 @@ const CounterButton = ({ product }) => {
       >
         -
       </span>
-      <span className="text-[1.2rem]  ">
+      <span className="text-lg  ">
         {isLoading ? (
           <>
             <CircularProgress
@@ -26,7 +26,7 @@ const CounterButton = ({ product }) => {
             />
           </>
         ) : (
-          <p>{product?.quantity}</p>
+          <>{product?.quantity}</>
         )}
       </span>
       <span

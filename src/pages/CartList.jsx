@@ -62,10 +62,12 @@ const CartList = () => {
                   </button>
                 </div>
               </div>
-              <span className="text-sm text-slate ">{product?.quantity}</span>
+              <span className="text-lg text-dark ">{product?.quantity}</span>
               <CounterButton product={product} />
 
-              <span>$ {(product?.total).toFixed(2)}</span>
+              <span className="text-lg text-dark  font-bold">
+                $ {(product?.total).toFixed(2)}
+              </span>
             </div>
           ))}
           <div className="flex justify-between flex-wrap gap-2 items-center mt-4">
@@ -78,7 +80,7 @@ const CartList = () => {
             <div className="cart-checkout">
               <div className="flex justify-between w-64 mb-4 items-center">
                 <h3 className="text-dark text-xl font-bold">Subtotal:</h3>
-                <span className="text-dark text-[1.5rem] font-bold">
+                <span className="text-dark text-xl font-bold">
                   $ {data?.result?.subTotal.toFixed(2)}
                 </span>
               </div>
