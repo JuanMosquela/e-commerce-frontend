@@ -5,6 +5,7 @@ import { useFetchTopRatedProductsQuery } from "../redux/api/productsApi";
 import CardProduct from "../components/CardProduct";
 import { Link } from "react-router-dom";
 import Carrusel from "../components/Carrusel";
+import Suscribe from "../components/Suscribe";
 
 const Home = () => {
   const { data } = useFetchTopRatedProductsQuery();
@@ -41,14 +42,7 @@ const Home = () => {
 
       <Carrusel data={data} title="Top Rated Products" />
 
-      {/* <div className="flex">
-        {data?.results.map((product) => (
-          <Link to={`/products/${product._id}`}>
-            <CardProduct product={product} />
-          </Link>
-        ))}
-      </div> */}
-      {/* <ProductsList inputValue={inputValue} /> */}
+      <Suscribe />
     </>
   );
 };

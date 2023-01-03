@@ -6,11 +6,13 @@ import { Link } from "react-router-dom";
 import EmptyComponent from "../components/EmptyComponent";
 import {
   useClearCartMutation,
+  useCreatePaymentMutation,
   useGetCartQuery,
   useRemoveFromCartMutation,
 } from "../redux/api/productsApi";
 
 import CounterButton from "../components/CounterButton";
+import { CircularProgress } from "@mui/material";
 
 const CartList = () => {
   const { data, isLoading, error } = useGetCartQuery();
@@ -22,6 +24,19 @@ const CartList = () => {
   const dispatch = useDispatch();
 
   const [removeFromCart] = useRemoveFromCartMutation();
+
+  const [
+    createPayment,
+    { data: dataPayment, error: paymentError, isLoading: loadingPayment },
+  ] = useCreatePaymentMutation();
+
+  const handlePayment = async () => {
+    const { data } = await createPayment();
+
+    if (data) {
+      window.location.href = data.result.init_point;
+    }
+  };
 
   return (
     <section className="flex-col justify-center min-h-screen  bg-white md:container pt-10">
@@ -88,11 +103,19 @@ const CartList = () => {
                 Taxes and shipping calculated at checkout
               </p>
 
-              <Link to="/success">
-                <button className="flex justify-center bg-orange text-white font-bold px-3 py-3 rounded-md uppercase cursor-pointer w-full hover:shadow-lg hover:duration-150 ">
-                  Check out
-                </button>
-              </Link>
+              <button
+                onClick={handlePayment}
+                className="flex justify-center bg-orange text-white font-bold px-3 py-3 rounded-md uppercase cursor-pointer w-full hover:shadow-lg hover:duration-150 "
+              >
+                {loadingPayment ? (
+                  <CircularProgress
+                    sx={{ color: "rgba(255,255,255,.8)" }}
+                    size="1.5rem"
+                  />
+                ) : (
+                  "Check Out"
+                )}
+              </button>
             </div>
           </div>
         </>

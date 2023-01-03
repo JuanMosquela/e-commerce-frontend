@@ -3,7 +3,8 @@ module.exports = {
   content: ["./src/**/*.{js,jsx,ts,tsx}"],
   theme: {
     colors: {
-      orange: "#FF7D1B",
+      orange: "#f8b435",
+      hover_orange: "#faba42",
       dark: "#1E1F27",
       slate: "#7C7B80",
       white: "#FFF",

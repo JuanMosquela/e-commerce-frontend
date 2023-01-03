@@ -225,7 +225,7 @@ const ProductDetail = ({ data }) => {
             className="flex items-center justify-center gap-2 min-w-[180px] px-8 py-2 text-dark border border-slate text-md  uppercase  rounded-md"
             onClick={handleFav}
           >
-            {favLoading ? (
+             {favLoading ? (
               <CircularProgress
                 sx={{ color: "rgba(000,000,000,.8)" }}
                 size="1.5rem"
@@ -234,6 +234,7 @@ const ProductDetail = ({ data }) => {
               <>
                 <AiOutlineHeart />
                 WishList
+                
               </>
             )}
           </button>
