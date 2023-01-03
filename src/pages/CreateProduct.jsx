@@ -54,7 +54,6 @@ const CreateProduct = () => {
 
   useEffect(() => {
     if (isSuccess) {
-      console.log("exito");
       toast.success("Product created successfully");
     }
   }, [data]);
@@ -139,7 +138,10 @@ const CreateProduct = () => {
           className="bg-orange text-white font-bold text-xl rounded-md w-[200px] px-2 py-4 mx-auto mt-6 "
         >
           {isLoading ? (
-            <CircularProgress size="1.5 rem" sx={{ color: "#FFF" }} />
+            <CircularProgress
+              sx={{ color: "rgba(255,255,255,.8)" }}
+              size="1.5rem"
+            />
           ) : (
             "Publish Product"
           )}

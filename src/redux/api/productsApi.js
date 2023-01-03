@@ -3,14 +3,14 @@ import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 export const productsApi = createApi({
   reducerPath: "productsApi",
   baseQuery: fetchBaseQuery({
-    baseUrl: "https://fit-commerce-api.onrender.com/api",
+    baseUrl: "https://e-commerce-backend-production-e980.up.railway.app/api",
 
     prepareHeaders: (headers, { getState }) => {
       const token = getState().auth.token;
       if (token) {
         headers.set("authorization", `Bearer ${token}`);
       }
-      console.log(headers);
+
       return headers;
     },
   }),
@@ -79,10 +79,10 @@ export const productsApi = createApi({
       providesTags: ["User"],
     }),
     updateUser: builder.mutation({
-      query: ({ id, ...rest }) => ({
+      query: ({ id, body }) => ({
         url: `/users/${id}`,
         method: "PUT",
-        body: rest,
+        body: body,
       }),
       invalidatesTags: ["User"],
     }),

@@ -14,25 +14,11 @@ const Profile = () => {
 
   const { data: userInfo, error, isError } = useGetUserQuery(user._id);
 
-  const [updatePicture, { data: userPicture, error: pictureError }] =
-    useUpdatePictureMutation();
-
   console.log(userInfo);
-
-  console.log(userPicture);
-
-  const onFileChange = (e) => {
-    let formData = new FormData();
-    formData.append("picture", e.target.files[0]);
-    updatePicture({
-      id: user._id,
-      formData,
-    });
-  };
 
   return (
     <section className=" ">
-      <div className="md:container min-h-screen  gap-4 bg-white py-10 flex">
+      <div className="md:container min-h-screen  gap-4 bg-white py-10 flex ">
         {/* <figure className="relative cursor-pointer  ">
           <img
             className="h-[500px] w-full object-cover"
@@ -46,18 +32,13 @@ const Profile = () => {
           />
         </figure> */}
 
-        {
-          /* <div className=" relative flex-1 h-[500px] bg-gray border border-dashed border-orange flex flex-col justify-center items-center  mb-6">
-          <img
-            className="w-full h-[100%] object-cover absolute"
-            src={userPicture?.model?.picture}
-            alt=""
-          />
-         
-        </div> */
-
-          <FileUpload />
-        }
+        <figure className="overflow-hidden flex-1">
+          {userInfo?.user.picture ? (
+            <img src={userInfo?.user.picture} alt="" className="object-fit " />
+          ) : (
+            <img src={notFound} alt="" className="object-fit " />
+          )}
+        </figure>
 
         <div className=" flex-1 flex-col justify-between  ">
           <div>

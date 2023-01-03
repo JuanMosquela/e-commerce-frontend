@@ -13,6 +13,7 @@ import {
 
 import CounterButton from "../components/CounterButton";
 import { CircularProgress } from "@mui/material";
+import axios from "axios";
 
 const CartList = () => {
   const { data, isLoading, error } = useGetCartQuery();
@@ -33,10 +34,14 @@ const CartList = () => {
   const handlePayment = async () => {
     const { data } = await createPayment();
 
+    console.log(data);
+
     if (data) {
-      window.location.href = data.result.init_point;
+      window.location.href = data.init_point;
     }
   };
+
+  console.log(paymentError);
 
   return (
     <section className="flex-col justify-center min-h-screen  bg-white md:container pt-10">

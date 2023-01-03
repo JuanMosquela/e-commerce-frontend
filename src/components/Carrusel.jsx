@@ -49,8 +49,6 @@ const Carrusel = ({ title, data }) => {
     ],
   };
 
-  console.log(data);
-
   return (
     <div className=" md:container mb-10">
       <h2 className="text-dark text-xl font-bold font-montserrat mb-4 uppercase">

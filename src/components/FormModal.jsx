@@ -52,32 +52,35 @@ export default function FormModal({ data }) {
   const handleForm = () => {
     const formData = new FormData();
 
-    if (picture) {
-      formData.append("picture", picture);
-    }
     for (const value of Object.entries(formInputs)) {
       formData.append(value[0], value[1]);
       console.log(value[0] + ", " + value[1]);
     }
+
+    if (picture) {
+      formData.append("picture", picture);
+    }
+    if (!isLoading) setOpen(false);
+
     const newUser = {
       id: data?.user._id,
       body: formData,
     };
-    console.log(newUser);
 
-    if (!isLoading) setOpen(false);
-
-    // updateUser(newProduct);
-
-    // createProduct(formData);
+    updateUser(newUser);
   };
+
+  console.log(user, error);
 
   useEffect(() => {
     if (user) {
+      console.log("entra aca");
       dispatch(
         setCredentials({
           user: user.user,
+          email: user.user.email,
           token,
+          picture: user.user.picture,
         })
       );
       toast.info("Usuario actualizado");
@@ -116,7 +119,7 @@ export default function FormModal({ data }) {
             type="text"
             fullWidth
             variant="standard"
-            defaultValue={data?.user.name}
+            value={formInputs.name}
             onChange={handleChange}
             required
           />
@@ -129,7 +132,7 @@ export default function FormModal({ data }) {
             type="email"
             fullWidth
             variant="standard"
-            defaultValue={data?.user.email}
+            value={formInputs.email}
             onChange={handleChange}
             required
           />

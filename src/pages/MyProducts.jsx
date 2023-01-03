@@ -19,10 +19,16 @@ const MyProducts = () => {
 
   const { data } = useGetUserQuery(id);
 
+  console.log(data);
+
   return (
     <section className=" md:container min-h-screen pt-10 ">
       <div className="flex justify-between mb-6 ">
-        <h2 className="text-slate text-md  font-semibold">My Products</h2>
+        {data?.user?.products.length !== 0 ? (
+          <h2 className="text-slate text-md  font-semibold">My Products</h2>
+        ) : (
+          <div></div>
+        )}
         <Link
           to="/create-product"
           className="flex gap-2 items-center bg-orange text-white py-2 px-4 rounded-md"
@@ -53,7 +59,7 @@ const MyProducts = () => {
               >
                 <td>
                   <img
-                    className=" block mx-auto w-[45px] h-[65px] object-cover py-2"
+                    className=" block mx-auto w-[45px] h-[45px] rounded-full object-cover p-1 "
                     src={product.pictureURL[0]}
                     alt={`${product.title} product`}
                   />
