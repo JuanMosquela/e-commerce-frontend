@@ -69,8 +69,6 @@ export default function FormModal({ data }) {
     updateUser(newUser);
   };
 
-  console.log(user, error);
-
   useEffect(() => {
     if (user) {
       dispatch(

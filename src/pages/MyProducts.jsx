@@ -10,16 +10,14 @@ import { MdOutlineAddCircle } from "react-icons/md";
 import EmptyComponent from "../components/EmptyComponent";
 import { useSelector } from "react-redux";
 import ProductModal from "../components/ProductModal";
+import { CircularProgress } from "@mui/material";
 
 const MyProducts = () => {
   const id = useSelector((state) => state.auth.user._id);
 
-  const [deleteProduct, { data: dataProduct, error }] =
-    useDeleteProductMutation();
+  const [deleteProduct, { isLoading }] = useDeleteProductMutation();
 
   const { data } = useGetUserQuery(id);
-
-  console.log(data);
 
   return (
     <section className=" md:container min-h-screen pt-10 ">
@@ -69,14 +67,21 @@ const MyProducts = () => {
                 <td>{product.stock}</td>
                 <td>
                   <div className="relative flex gap-2 justify-center items-center ">
-                    <div>
+                    <button className="rounded-md text-xl bg-blue  w-[30px] h-[30px] cursor-pointer flex justify-center items-center">
                       <ProductModal data={product} />
-                    </div>
-
-                    <AiOutlineDelete
-                      className="text-xl bg-red text-white w-[30px] h-[30px] p-1 cursor-pointer  "
-                      onClick={() => deleteProduct(product._id)}
-                    />
+                    </button>
+                    <button className="rounded-md w-[30px] h-[30px] bg-red flex justify-center items-center text-xl text-white">
+                      {isLoading ? (
+                        <CircularProgress
+                          sx={{ color: "rgba(255,255,255,.8)" }}
+                          size="1rem"
+                        />
+                      ) : (
+                        <AiOutlineDelete
+                          onClick={() => deleteProduct(product._id)}
+                        />
+                      )}
+                    </button>
                   </div>
                 </td>
               </tr>

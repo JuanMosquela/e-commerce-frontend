@@ -78,8 +78,6 @@ export default function ProductModal({ data }) {
     };
 
     updateProduct(newProduct);
-
-    // createProduct(formData);
   };
 
   useEffect(() => {
@@ -91,18 +89,8 @@ export default function ProductModal({ data }) {
 
   return (
     <div>
-      <Button
-        sx={{
-          display: "flex",
-          gap: ".5rem",
-          alingItems: "center",
-          marginLeft: "auto",
-          color: "#252538",
-        }}
-        onClick={handleOpen}
-      >
-        <FiEdit className="text-xl bg-blue text-white w-[30px] h-[30px] p-1 cursor-pointer  " />
-      </Button>
+      <FiEdit onClick={handleOpen} className=" text-white text-xl  " />
+
       <Modal
         open={open}
         onClose={handleClose}
