@@ -11,15 +11,17 @@ import { FiEdit } from "react-icons/fi";
 
 import FileUpload from "./FileUpload";
 import { useUpdateProductMutation } from "../redux/api/productsApi";
-import { Modal } from "@mui/material";
+import { CircularProgress, Modal } from "@mui/material";
 import { Box } from "@mui/system";
+import { useEffect } from "react";
+import { toast } from "react-toastify";
 
 export default function ProductModal({ data }) {
   const [open, setOpen] = useState(false);
 
   const [productPicture, setProductPicture] = useState(null);
 
-  const [updateProduct, { data: productData, error }] =
+  const [updateProduct, { data: productData, error, isLoading }] =
     useUpdateProductMutation();
 
   const [formInputs, setFormInputs] = useState({
@@ -79,6 +81,13 @@ export default function ProductModal({ data }) {
 
     // createProduct(formData);
   };
+
+  useEffect(() => {
+    if (productData) {
+      toast.info("Product updated");
+      setOpen(false);
+    }
+  }, [productData]);
 
   return (
     <div>
@@ -197,7 +206,24 @@ export default function ProductModal({ data }) {
           </DialogContent>
           <DialogActions>
             <Button onClick={handleClose}>Cancel</Button>
-            <Button onClick={handleForm}>Update</Button>
+            <Button
+              sx={{
+                backgroundColor: "#f8b435",
+                color: "#FFF",
+                "&:hover": { backgroundColor: "#f8b435", color: "#FFF" },
+              }}
+              disabled={isLoading}
+              onClick={handleForm}
+            >
+              {isLoading ? (
+                <CircularProgress
+                  sx={{ color: "rgba(255,255,255,.8)" }}
+                  size="1.5rem"
+                />
+              ) : (
+                "Update"
+              )}
+            </Button>
           </DialogActions>
         </Box>
       </Modal>

@@ -14,13 +14,14 @@ import { useDispatch, useSelector } from "react-redux";
 import { setCredentials } from "../redux/slices/authSliceRedux";
 import { toast } from "react-toastify";
 import FileUpload from "./FileUpload";
+import { CircularProgress } from "@mui/material";
 
 export default function FormModal({ data }) {
   const [open, setOpen] = useState(false);
 
   const [formInputs, setFormInputs] = useState({
-    name: data?.user.name,
-    email: data?.user.email,
+    name: data?.user?.name,
+    email: data?.user?.email,
   });
 
   const [picture, setPicture] = useState(null);
@@ -54,13 +55,11 @@ export default function FormModal({ data }) {
 
     for (const value of Object.entries(formInputs)) {
       formData.append(value[0], value[1]);
-      console.log(value[0] + ", " + value[1]);
     }
 
     if (picture) {
       formData.append("picture", picture);
     }
-    if (!isLoading) setOpen(false);
 
     const newUser = {
       id: data?.user._id,
@@ -74,13 +73,11 @@ export default function FormModal({ data }) {
 
   useEffect(() => {
     if (user) {
-      console.log("entra aca");
       dispatch(
         setCredentials({
           user: user.user,
           email: user.user.email,
           token,
-          picture: user.user.picture,
         })
       );
       toast.info("Usuario actualizado");
@@ -139,7 +136,24 @@ export default function FormModal({ data }) {
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose}>Cancel</Button>
-          <Button onClick={handleForm}>Update</Button>
+          <Button
+            sx={{
+              backgroundColor: "#f8b435",
+              color: "#FFF",
+              "&:hover": { backgroundColor: "#f8b435", color: "#FFF" },
+            }}
+            disabled={isLoading}
+            onClick={handleForm}
+          >
+            {isLoading ? (
+              <CircularProgress
+                sx={{ color: "rgba(255,255,255,.8)" }}
+                size="1.5rem"
+              />
+            ) : (
+              "Update"
+            )}
+          </Button>
         </DialogActions>
       </Dialog>
     </div>
