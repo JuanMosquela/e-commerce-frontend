@@ -4,10 +4,18 @@ import { useEffect } from "react";
 import { useState } from "react";
 import { useSelector } from "react-redux";
 import { toast } from "react-toastify";
+import {
+  useCreateOrderMutation,
+  useGetCartQuery,
+} from "../redux/api/productsApi";
 import { checkoutSchemas } from "../schemas/checkoutSchema";
 
 const Checkout = () => {
-  const cart = useSelector((state) => state.auth.user.cart);
+  const { id } = useSelector((state) => state.auth.user);
+
+  const { data: cartData } = useGetCartQuery(id);
+
+  console.log(cartData);
 
   const [checked, setChecked] = useState(false);
 
@@ -33,7 +41,16 @@ const Checkout = () => {
     if (!checked) {
       return console.log("marca");
     }
-    console.log(values);
+
+    // const newOrder = {
+    //   name: values.firstName,
+    //   email: values.email,
+    //   country: values.country,
+    //   postalCode: values.postalCode,
+    //   adress: "Calle falsa",
+    // };
+
+    // createOrder(newOrder);
   };
 
   const { values, handleChange, handleBlur, errors, touched, handleSubmit } =
@@ -50,15 +67,14 @@ const Checkout = () => {
       onSubmit,
     });
 
-  //   useEffect(() => {
-  //     console.log(Object.keys(errors).length > 0);
-  //     if (Object.keys(errors).length > 0) {
-  //       return toast.error("Complete all fields");
-  //     }
-  //     console.log("todo bien");
-  //   }, []);
+  useEffect(() => {
+    console.log(Object.keys(errors).length > 0);
+    if (Object.keys(errors).length > 0) {
+      toast.error("Complete all fields");
+    }
+  }, [touched, errors]);
 
-  console.log(errors);
+  const [createOrder, { data, error, isLoading }] = useCreateOrderMutation();
 
   return (
     <section className="min-height flex justify-center items-center bg-gray gap-4  ">
@@ -71,9 +87,6 @@ const Checkout = () => {
             Checkout
           </h2>
           <h3 className="flex items-center text-sm text-dark font-black mb-4 gap-2 uppercase">
-            <span className="flex justify-center items-center bg-dark text-white w-6 h-6 rounded-full  ">
-              1
-            </span>{" "}
             Your personal information
           </h3>
           <div className="grid grid-cols-2 gap-4 mb-4">
@@ -120,7 +133,7 @@ const Checkout = () => {
               onChange={handleChange}
               onBlur={handleBlur}
             >
-              {countries.map((option, index) => (
+              {countries.map((option) => (
                 <MenuItem key={option.value} value={option.value}>
                   {option.label}
                 </MenuItem>
@@ -156,20 +169,16 @@ const Checkout = () => {
               className=" scale-150 "
               onChange={() => setChecked((prev) => !prev)}
             />
-            <p className="text-dark   text-sm ">
+            <p className="text-dark text-sm mb-2 ">
               I agree to my email adress being stored and used to recive monthly
               newsletter
             </p>
           </div>
           <button
             type="submit"
-            className={
-              `${Object.keys(errors).length > 0}`
-                ? "w-[100%]  bg-slate text-white rounded-md py-2"
-                : " w-[100%]  bg-orange text-white rounded-md py-2    "
-            }
+            className={" w-[100%]  bg-orange text-white rounded-md py-2    "}
           >
-            {false ? (
+            {isLoading ? (
               <>
                 <CircularProgress
                   sx={{ color: "rgba(255,255,255)" }}
@@ -186,7 +195,7 @@ const Checkout = () => {
             Order Summary
           </h3>
           <div className=" divide-y divide-slate mb-2 max-h-[320px] overflow-y-scroll">
-            {cart?.items?.map((item) => (
+            {cartData?.result?.items?.map((item) => (
               <div key={item?.item.id} className="flex gap-4 py-2 px-2  ">
                 <img
                   className="w-20 bg-fit "
@@ -211,11 +220,15 @@ const Checkout = () => {
           <div className=" flex-col w-full items-end mb-4 px-4">
             <h4 className="flex w-full justify-between text-dark/90 font-bold text-md">
               Total Quantity:{" "}
-              <span className="text-dark font-bold ">x {cart.totalQty}</span>
+              <span className="text-dark font-bold ">
+                x {cartData?.result.totalQty}
+              </span>
             </h4>
             <h4 className="flex w-full justify-between text-dark/90 font-bold text-md">
               Cart Total:{" "}
-              <span className="text-dark font-bold ">$ {cart.subTotal}</span>
+              <span className="text-dark font-bold ">
+                $ {cartData?.result.subTotal}
+              </span>
             </h4>
           </div>
         </div>

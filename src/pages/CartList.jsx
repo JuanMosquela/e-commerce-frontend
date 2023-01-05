@@ -26,25 +26,8 @@ const CartList = () => {
 
   const [removeFromCart] = useRemoveFromCartMutation();
 
-  const [
-    createPayment,
-    { data: dataPayment, error: paymentError, isLoading: loadingPayment },
-  ] = useCreatePaymentMutation();
-
-  const handlePayment = async () => {
-    const { data } = await createPayment();
-
-    console.log(data);
-
-    if (data) {
-      window.location.href = data.init_point;
-    }
-  };
-
-  console.log(paymentError);
-
   return (
-    <section className="flex-col justify-center min-h-screen  bg-white md:container pt-10">
+    <section className="flex-col justify-center min-h-screen  bg-white md:container pt-10 mb-10">
       {data?.result?.items?.length === 0 ? (
         <EmptyComponent title="Your cart it's empty" />
       ) : (
@@ -108,19 +91,22 @@ const CartList = () => {
                 Taxes and shipping calculated at checkout
               </p>
 
-              <button
-                onClick={handlePayment}
-                className="flex justify-center bg-orange text-white font-bold px-3 py-3 rounded-md uppercase cursor-pointer w-full hover:shadow-lg hover:duration-150 "
-              >
-                {loadingPayment ? (
-                  <CircularProgress
-                    sx={{ color: "rgba(255,255,255,.8)" }}
-                    size="1.5rem"
-                  />
-                ) : (
-                  "Check Out"
-                )}
-              </button>
+              <Link to="/checkout">
+                <button
+                  // onClick={handlePayment}
+                  className="flex justify-center bg-orange text-white font-bold px-3 py-3 rounded-md uppercase cursor-pointer w-full hover:shadow-lg hover:duration-150 "
+                >
+                  {/* {loadingPayment ? (
+                    <CircularProgress
+                      sx={{ color: "rgba(255,255,255,.8)" }}
+                      size="1.5rem"
+                    />
+                  ) : (
+                    "Check Out"
+                  )} */}
+                  Checkout
+                </button>
+              </Link>
             </div>
           </div>
         </>
