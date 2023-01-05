@@ -3,15 +3,11 @@ import { useFormik } from "formik";
 import { useContext, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import { setCredentials, signIn } from "../redux/slices/authSliceRedux";
+import { setCredentials } from "../redux/slices/authSliceRedux";
 import { loginSchemas } from "../schemas/loginSchemas";
 
-import { FcGoogle } from "react-icons/fc";
 import { AiFillEye, AiFillEyeInvisible } from "react-icons/ai";
-import { useGoogleLogin } from "@react-oauth/google";
 
-import publicRequest from "../utils/request-methods";
-import axios from "axios";
 import { GoogleContext } from "../context/GoogleProvider";
 import { useSignInMutation } from "../redux/api/productsApi";
 import { toast } from "react-toastify";

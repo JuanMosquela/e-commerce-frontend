@@ -28,6 +28,7 @@ import ProfileEdit from "./pages/ProfileEdit";
 import MyProducts from "./pages/MyProducts";
 import UserProductView from "./pages/UserProductView";
 import ScrollToTop from "./components/ScrollToTop";
+import Checkout from "./pages/Checkout";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
@@ -59,6 +60,7 @@ root.render(
                     element={<UserProductView />}
                   />
                 </Route>
+                <Route path="/checkout" element={<Checkout />} />
               </Route>
               <Route path="/login" element={<Login />} />
               <Route path="/register" element={<Register />} />

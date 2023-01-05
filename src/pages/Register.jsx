@@ -25,8 +25,6 @@ const Register = () => {
   const auth = useSelector((state) => state.auth);
   const from = location.state?.from?.pathname || "/";
 
-  console.log(auth.isSuccess);
-
   const [signUp, { data, error, isLoading }] = useSignUpMutation();
 
   useEffect(() => {
