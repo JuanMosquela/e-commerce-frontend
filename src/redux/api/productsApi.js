@@ -152,6 +152,14 @@ export const productsApi = createApi({
       }),
       invalidatesTags: ["Cart"],
     }),
+    createMercadoPagoButton: builder.mutation({
+      query: ({ id, ...rest }) => ({
+        url: `/order/create-payment/${id}`,
+        body: rest,
+        method: "POST",
+      }),
+    }),
+
     createOrder: builder.mutation({
       query: (body) => ({
         url: `/order`,
@@ -193,4 +201,5 @@ export const {
   useRemoveFromCartMutation,
   useCreateOrderMutation,
   useCreatePaymentMutation,
+  useCreateMercadoPagoButtonMutation,
 } = productsApi;

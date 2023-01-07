@@ -5,6 +5,7 @@ import { useState } from "react";
 import { useSelector } from "react-redux";
 import { toast } from "react-toastify";
 import {
+  useCreateMercadoPagoButtonMutation,
   useCreateOrderMutation,
   useGetCartQuery,
 } from "../redux/api/productsApi";
@@ -13,11 +14,20 @@ import { checkoutSchemas } from "../schemas/checkoutSchema";
 const Checkout = () => {
   const { id } = useSelector((state) => state.auth.user);
 
+  const cart = useSelector((state) => state.auth.user.cart);
+
+  console.log(cart);
+
   const { data: cartData } = useGetCartQuery(id);
 
   console.log(cartData);
 
   const [checked, setChecked] = useState(false);
+
+  const [createMercadoPagoButton, { data: mpData, error: mpError }] =
+    useCreateMercadoPagoButtonMutation();
+
+  console.log(mpData, mpError);
 
   const countries = [
     {
@@ -37,18 +47,43 @@ const Checkout = () => {
       label: "Chile",
     },
   ];
+
+  const identifications = [
+    {
+      value: "DNI",
+      label: "DNI",
+    },
+    {
+      value: "L.E",
+      label: "L.E",
+    },
+    {
+      value: "L.C",
+      label: "L.c",
+    },
+  ];
   const onSubmit = async () => {
     if (!checked) {
       return console.log("marca");
     }
 
-    // const newOrder = {
-    //   name: values.firstName,
-    //   email: values.email,
-    //   country: values.country,
-    //   postalCode: values.postalCode,
-    //   adress: "Calle falsa",
-    // };
+    const newOrder = {
+      name: values.firstName,
+      lastName: values.lastName,
+      email: values.email,
+      streetName: values.streetName,
+      streetNumber: values.streetNumber,
+      areaCode: values.areaCode,
+      identification: values.identification,
+      identificationNumber: values.identificationNumber,
+      phone: values.phone,
+      postalCode: values.postalCode,
+    };
+
+    createMercadoPagoButton({
+      id: cart._id,
+      body: newOrder,
+    });
 
     // createOrder(newOrder);
   };
@@ -59,15 +94,20 @@ const Checkout = () => {
         firstName: "",
         lastName: "",
         email: "",
-        country: "",
-        postalCode: "",
+        streetName: "",
+        streetNumber: "",
+        zipCode: "",
+        identification: "",
+        identificationNumber: "",
         phone: "",
+        areaCode: "",
       },
       validationSchema: checkoutSchemas,
       onSubmit,
     });
 
   useEffect(() => {
+    console.log(Object.keys(errors));
     console.log(Object.keys(errors).length > 0);
     if (Object.keys(errors).length > 0) {
       toast.error("Complete all fields");
@@ -87,6 +127,9 @@ const Checkout = () => {
             Checkout
           </h2>
           <h3 className="flex items-center text-sm text-dark font-black mb-4 gap-2 uppercase">
+            <span className="flex justify-center items-center bg-dark/90 w-6 h-6 rounded-full text-xs text-white">
+              1
+            </span>{" "}
             Your personal information
           </h3>
           <div className="grid grid-cols-2 gap-4 mb-4">
@@ -123,29 +166,74 @@ const Checkout = () => {
               onBlur={handleBlur}
             />
             <TextField
-              id="outlined-select-country"
+              type="text"
+              id="filled-basic"
+              label="Street Name"
+              variant="filled"
+              name="streetName"
+              value={values.streetName}
+              onChange={handleChange}
+              onBlur={handleBlur}
+            />
+
+            <TextField
+              type="number"
+              id="filled-basic"
+              label="Street Number"
+              variant="filled"
+              name="streetNumber"
+              value={values.streetNumber}
+              onChange={handleChange}
+              onBlur={handleBlur}
+            />
+            <TextField
+              type="number"
+              id="filled-basic"
+              label="Zip Code"
+              variant="filled"
+              className="col-span-2"
+              name="zipCode"
+              value={values.zipCode}
+              onChange={handleChange}
+              onBlur={handleBlur}
+            />
+            <TextField
+              id="outlined-select-identification"
               select
-              label="Country"
+              label="ID"
               defaultValue=""
-              helperText="Please select your country"
-              name="country"
-              value={values.country}
+              helperText="Please select your ID"
+              name="identification"
+              value={values.identification}
               onChange={handleChange}
               onBlur={handleBlur}
             >
-              {countries.map((option) => (
-                <MenuItem key={option.value} value={option.value}>
-                  {option.label}
+              {identifications.map((identification) => (
+                <MenuItem
+                  key={identification.value}
+                  value={identification.value}
+                >
+                  {identification.label}
                 </MenuItem>
               ))}
             </TextField>
             <TextField
               type="number"
               id="filled-basic"
-              label="Postal Code"
+              label="Identification Number"
               variant="filled"
-              name="postalCode"
-              value={values.postalCode}
+              name="identificationNumber"
+              value={values.identificationNumber}
+              onChange={handleChange}
+              onBlur={handleBlur}
+            />
+            <TextField
+              type="number"
+              id="filled-basic"
+              label="Area Code"
+              variant="filled"
+              name="areaCode"
+              value={values.areaCode}
               onChange={handleChange}
               onBlur={handleBlur}
             />
@@ -154,7 +242,6 @@ const Checkout = () => {
               id="filled-basic"
               label="Phone Number"
               variant="filled"
-              className="col-span-2"
               name="phone"
               value={values.phone}
               onChange={handleChange}
@@ -190,9 +277,15 @@ const Checkout = () => {
             )}
           </button>
         </form>
-        <div className="flex flex-col justify-between bg-white p-2 rounded-md shadow-md   ">
-          <h3 className="text-md text-center font-bold  text-dark/90 border-b border-slate pb-2">
+        <div className="justify-between bg-white p-2 rounded-md shadow-md   ">
+          <h2 className="text-dark text-2xl font-bold mb-6 uppercase">
             Order Summary
+          </h2>
+          <h3 className="flex items-center text-sm text-dark font-black mb-4 gap-2 uppercase">
+            <span className="flex justify-center items-center bg-dark/90 w-6 h-6 rounded-full text-xs text-white">
+              2
+            </span>{" "}
+            Confirm your order
           </h3>
           <div className=" divide-y divide-slate mb-2 max-h-[320px] overflow-y-scroll">
             {cartData?.result?.items?.map((item) => (
