@@ -64,6 +64,8 @@ const Login = () => {
       onSubmit,
     });
 
+  console.log(errors, touched);
+
   return (
     <div className="flex justify-center items-center min-h-[100vh] bg-gray  ">
       <div className="flex  rounded-lg overflow-hidden relative   shadow-md ">
