@@ -1,11 +1,12 @@
+import { MdKeyboardArrowLeft, MdKeyboardArrowRight } from "react-icons/md";
+
 const FormControllers = (props) => {
-  console.log(props);
   return (
-    <div className=" col-span-2 flex justify-between items-center bg-gray   ">
+    <div className=" col-span-2 flex justify-between items-center  ">
       <div>
         {props.hasPrevious && (
           <button
-            className="bg-dark text-white rounded-md w-[100px] h-[40px]"
+            className="bg-slate/30 text-dark font-black rounded-sm  w-[85px] h-[45px] flex justify-center items-center gap-2"
             onClick={props.onBackClick}
             type="button"
           >
@@ -15,7 +16,7 @@ const FormControllers = (props) => {
       </div>
       <div>
         <button
-          className="bg-orange text-white rounded-md w-[100px] h-[40px]"
+          className="bg-orange text-white  font-black rounded-sm  w-[85px] h-[45px] flex justify-center items-center gap-2"
           disabled={props.isSubmitting}
           type="submit"
         >

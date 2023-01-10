@@ -12,6 +12,7 @@ module.exports = {
       gray: "#F5F5F5",
       text: "#808080",
       blue: "#98CAFB",
+      green: "#26B887",
     },
     fontFamily: {
       nunito: ["Nunito", "sans-serif"],

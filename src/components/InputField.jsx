@@ -4,7 +4,6 @@ import { useField } from "formik";
 const InputField = ({ label, ...props }) => {
   const [field, meta] = useField(props);
 
-  console.log(meta);
   return (
     <TextField
       fullWidth

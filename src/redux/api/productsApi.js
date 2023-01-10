@@ -168,8 +168,9 @@ export const productsApi = createApi({
       }),
     }),
     createPayment: builder.mutation({
-      query: () => ({
-        url: "/order/payment",
+      query: ({ id, ...rest }) => ({
+        url: `/order/create-payment/${id}`,
+        body: rest,
         method: "POST",
       }),
     }),

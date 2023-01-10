@@ -1,9 +1,18 @@
 import { Stepper, Step, StepLabel } from "@mui/material";
 import { Form, Formik } from "formik";
 import React, { useState } from "react";
+import { useEffect } from "react";
+import { useSelector } from "react-redux";
+import { useCreatePaymentMutation } from "../redux/api/productsApi";
 import FormControllers from "./FormControllers";
 
-const MultiStepForm = ({ children, initialValues, onSubmit }) => {
+const MultiStepForm = ({ children, initialValues }) => {
+  const { cart } = useSelector((state) => state.auth.user);
+
+  const [createPayment, { data, error }] = useCreatePaymentMutation();
+
+  console.log(data, error);
+
   const [stepNumber, setStepNumber] = useState(0);
   const steps = React.Children.toArray(children);
   const [snapshot, setSnapshot] = useState(initialValues);
@@ -23,16 +32,42 @@ const MultiStepForm = ({ children, initialValues, onSubmit }) => {
   };
 
   const handleSubmit = async (values, bag) => {
+    console.log(values);
     if (step.props.onSubmit) {
       await step.props.onSubmit(values, bag);
     }
     if (isLastStep) {
-      return onSubmit(values, bag);
+      const body = {
+        name: values.firstName,
+        lastName: values.lastName,
+        email: values.email,
+        streetName: values.streetName,
+        streetNumber: values.streetNumber,
+        zipCode: values.zipCode,
+        areaCode: values.phone,
+        phone: values.phone,
+        identification: values.identification,
+        identificationNumber: values.identificationNumber,
+      };
+
+      return createPayment({
+        id: cart._id,
+        body,
+      });
     } else {
       bag.setTouched({});
       next(values);
     }
   };
+
+  console.log(data);
+
+  useEffect(() => {
+    if (data) {
+      console.log(data?.body.init_point);
+      window.location.href = data?.body.init_point;
+    }
+  }, [data]);
 
   return (
     <Formik
@@ -42,7 +77,7 @@ const MultiStepForm = ({ children, initialValues, onSubmit }) => {
     >
       {(formik) => (
         <Form>
-          <Stepper sx={{ mb: "4rem" }} activeStep={stepNumber}>
+          <Stepper sx={{ mb: "2rem" }} activeStep={stepNumber}>
             {steps.map((currentStep) => {
               const label = currentStep.props.stepName;
 

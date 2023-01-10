@@ -31,6 +31,8 @@ import ScrollToTop from "./components/ScrollToTop";
 import Checkout from "./pages/Checkout";
 import Checkout2 from "./pages/Checkout2";
 
+import Success from "./pages/Success";
+
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <BrowserRouter>
@@ -63,6 +65,7 @@ root.render(
                 </Route>
                 <Route path="/checkout" element={<Checkout />} />
                 <Route path="/checkout2" element={<Checkout2 />} />
+                <Route path="/success" element={<Success />} />
               </Route>
               <Route path="/login" element={<Login />} />
               <Route path="/register" element={<Register />} />
