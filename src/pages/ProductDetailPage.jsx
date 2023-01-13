@@ -5,6 +5,7 @@ import { CircularProgress } from "@mui/material";
 import ProductDetail from "../components/ProductDetail";
 
 import { useFetchSingleProductQuery } from "../redux/api/productsApi";
+import { useSelector } from "react-redux";
 
 const ProductDetailPage = () => {
   const location = useLocation();

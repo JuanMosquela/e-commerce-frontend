@@ -15,7 +15,7 @@ import { BsBagX } from "react-icons/bs";
 import TitleComponent from "../components/TitleComponent";
 
 const CartList = () => {
-  const { data, isLoading } = useGetCartQuery();
+  const { data, error, isLoading } = useGetCartQuery();
 
   const [clearCart] = useClearCartMutation();
 
@@ -24,8 +24,10 @@ const CartList = () => {
   return (
     <section className="min-height md:container pt-10 mb-10">
       {isLoading ? (
-        <CircularProgress sx={{ color: "var(--color-orange)" }} size="5rem" />
-      ) : data?.result?.items?.length === 0 ? (
+        <div className="min-h-screen">
+          <CircularProgress sx={{ color: "var(--color-orange)" }} size="5rem" />
+        </div>
+      ) : data?.result?.items?.length === 0 || !data ? (
         <TitleComponent
           title="Your cart it´s empty"
           text="Start buying products to see your cart bag"
