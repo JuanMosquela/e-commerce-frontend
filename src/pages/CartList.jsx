@@ -1,37 +1,39 @@
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 import { removeItem } from "../redux/shoppingCartRedux";
 import { Link } from "react-router-dom";
 
-import EmptyComponent from "../components/EmptyComponent";
 import {
   useClearCartMutation,
-  useCreatePaymentMutation,
   useGetCartQuery,
   useRemoveFromCartMutation,
 } from "../redux/api/productsApi";
 
 import CounterButton from "../components/CounterButton";
 import { CircularProgress } from "@mui/material";
-import axios from "axios";
+import { BsBagX } from "react-icons/bs";
+import TitleComponent from "../components/TitleComponent";
 
 const CartList = () => {
-  const { data, isLoading, error } = useGetCartQuery();
+  const { data, isLoading } = useGetCartQuery();
 
   const [clearCart] = useClearCartMutation();
-
-  console.log(data?.result);
-
-  const dispatch = useDispatch();
 
   const [removeFromCart] = useRemoveFromCartMutation();
 
   return (
-    <section className="flex-col justify-center min-h-screen  bg-white md:container pt-10 mb-10">
-      {data?.result?.items?.length === 0 ? (
-        <EmptyComponent title="Your cart it's empty" />
+    <section className="min-height md:container pt-10 mb-10">
+      {isLoading ? (
+        <CircularProgress sx={{ color: "var(--color-orange)" }} size="5rem" />
+      ) : data?.result?.items?.length === 0 ? (
+        <TitleComponent
+          title="Your cart it´s empty"
+          text="Start buying products to see your cart bag"
+          icon={<BsBagX />}
+          status={false}
+        />
       ) : (
-        <>
+        <div className="flex-col justify-center">
           <div className="grid grid-cols-4 text-center border-b border-slate/50 text-lg text-dark font-bold uppercase pb-2">
             <h3>Product</h3>
             <h3>Amount</h3>
@@ -92,24 +94,13 @@ const CartList = () => {
               </p>
 
               <Link to="/checkout">
-                <button
-                  // onClick={handlePayment}
-                  className="flex justify-center bg-orange text-white font-bold px-3 py-3 rounded-md uppercase cursor-pointer w-full hover:shadow-lg hover:duration-150 "
-                >
-                  {/* {loadingPayment ? (
-                    <CircularProgress
-                      sx={{ color: "rgba(255,255,255,.8)" }}
-                      size="1.5rem"
-                    />
-                  ) : (
-                    "Check Out"
-                  )} */}
+                <button className="flex justify-center bg-orange text-white font-bold px-3 py-3 rounded-md uppercase cursor-pointer w-full hover:shadow-lg hover:duration-150 ">
                   Checkout
                 </button>
               </Link>
             </div>
           </div>
-        </>
+        </div>
       )}
     </section>
   );

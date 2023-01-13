@@ -3,15 +3,18 @@ import { Form, Formik } from "formik";
 import React, { useState } from "react";
 import { useEffect } from "react";
 import { useSelector } from "react-redux";
-import { useCreatePaymentMutation } from "../redux/api/productsApi";
+import {
+  useCreatePaymentMutation,
+  useGetCartQuery,
+} from "../redux/api/productsApi";
 import FormControllers from "./FormControllers";
 
 const MultiStepForm = ({ children, initialValues }) => {
-  const { cart } = useSelector((state) => state.auth.user);
+  const { data: cartData } = useGetCartQuery();
 
   const [createPayment, { data, error }] = useCreatePaymentMutation();
 
-  console.log(data, error);
+  console.log(data);
 
   const [stepNumber, setStepNumber] = useState(0);
   const steps = React.Children.toArray(children);
@@ -51,7 +54,7 @@ const MultiStepForm = ({ children, initialValues }) => {
       };
 
       return createPayment({
-        id: cart._id,
+        id: cartData?.result._id,
         body,
       });
     } else {

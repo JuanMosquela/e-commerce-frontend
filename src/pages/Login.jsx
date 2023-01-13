@@ -48,7 +48,6 @@ const Login = () => {
   const onSubmit = async () => {
     try {
       await signIn(values);
-      console.log(data);
     } catch (error) {
       console.log(error);
     }
@@ -63,8 +62,6 @@ const Login = () => {
       validationSchema: loginSchemas,
       onSubmit,
     });
-
-  console.log(errors, touched);
 
   return (
     <div className="flex justify-center items-center min-h-[100vh] bg-gray  ">

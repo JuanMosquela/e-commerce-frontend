@@ -29,7 +29,6 @@ import MyProducts from "./pages/MyProducts";
 import UserProductView from "./pages/UserProductView";
 import ScrollToTop from "./components/ScrollToTop";
 import Checkout from "./pages/Checkout";
-import Checkout2 from "./pages/Checkout2";
 
 import Success from "./pages/Success";
 
@@ -64,7 +63,6 @@ root.render(
                   />
                 </Route>
                 <Route path="/checkout" element={<Checkout />} />
-                <Route path="/checkout2" element={<Checkout2 />} />
                 <Route path="/success" element={<Success />} />
               </Route>
               <Route path="/login" element={<Login />} />
