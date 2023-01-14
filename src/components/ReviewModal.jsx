@@ -34,7 +34,7 @@ const ReviewModal = ({ data, auth }) => {
     top: "50%",
     left: "50%",
     transform: "translate(-50%, -50%)",
-    width: 900,
+
     bgcolor: "#FFF",
     borderRadius: "12px",
 
@@ -94,7 +94,7 @@ const ReviewModal = ({ data, auth }) => {
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
       >
-        <Box sx={style}>
+        <Box sx={style} className="w-[85%]  md:w-[700px]">
           <form action="" onSubmit={handleSubmit}>
             <h3 className="text-md text-slate font-semibold">
               Deja un comentario
