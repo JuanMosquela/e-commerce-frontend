@@ -15,6 +15,8 @@ import Reviews from "./Reviews";
 const ProductDetail = ({ data }) => {
   const [pictureIndex, setPictureIndex] = useState(0);
 
+  console.log(data);
+
   const [counter, setCounter] = useState(1);
 
   const dispatch = useDispatch();
@@ -153,7 +155,7 @@ const ProductDetail = ({ data }) => {
 
         <div className="flex gap-4">
           <button
-            className="flex items-center justify-center gap-2 min-w-[180px]  py-2 text-white text-md  uppercase bg-orange hover:shadow-lg ease-in duration-100 rounded-md"
+            className="flex items-center justify-center gap-2 w-[160px] h-[50px] text-white text-md  uppercase bg-orange hover:shadow-lg ease-in duration-100 rounded-md"
             onClick={() => handleClick(obj)}
           >
             {addProductLoading ? (
@@ -187,7 +189,7 @@ const ProductDetail = ({ data }) => {
         </div>
       </div>
 
-      {auth.user._id === data.boughtBy && <Reviews data={data} auth={auth} />}
+      <Reviews data={data} auth={auth} />
     </div>
   );
 };
