@@ -17,7 +17,7 @@ const Navbar = () => {
 
   return (
     <header className="w-full z-50 top-0 bg-white  ">
-      <div className="container flex justify-between items-center py-2   ">
+      <div className="md:container flex justify-between items-center py-2   ">
         <Link
           className=" py-1  font-black uppercase text-sm md:text-md lg:text-xl text-dark   "
           to="/"
@@ -34,28 +34,28 @@ const Navbar = () => {
           <DropDownMenu />
         </div>
       </div>
-      <nav className="flex bg-dark ">
-        <ul className="container flex py-2 gap-8   ">
+      <nav className=" bg-dark ">
+        <ul className="md:container flex py-2 gap-8   ">
           <Link
-            className="text-white/80 hover:text-white hidden md:block text-lg  capitalize font-thin "
+            className="text-white/80 hover:text-white  md:block text-lg  capitalize font-thin "
             to="/"
           >
             home
           </Link>
           <Link
-            className="text-white/80 hover:text-white hidden md:block text-lg  capitalize font-thin "
+            className="text-white/80 hover:text-white  md:block text-lg  capitalize font-thin "
             to="/products"
           >
             shop
           </Link>
           <Link
-            className="text-white/80 hover:text-white hidden md:block text-lg  capitalize font-thin "
+            className="text-white/80 hover:text-white  md:block text-lg  capitalize font-thin "
             to="/about"
           >
             about us
           </Link>
           <Link
-            className="text-white/80 hover:text-white hidden md:block text-lg  capitalize font-thin "
+            className="text-white/80 hover:text-white  md:block text-lg  capitalize font-thin "
             to="/contact"
           >
             contact us

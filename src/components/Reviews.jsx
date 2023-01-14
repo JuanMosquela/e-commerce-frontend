@@ -11,7 +11,7 @@ const Reviews = ({ data, auth }) => {
         <h2 className="font-bold text-xl mb-4 ">Customer Reviews</h2>
 
         <div className="flex justify-between">
-          <div className="flex items-center gap-4 ">
+          <div className="flex flex-col md:flex-row items-center gap-4 ">
             <Rating
               sx={{ fontSize: "2.5rem" }}
               name="size-large"
@@ -36,9 +36,9 @@ const Reviews = ({ data, auth }) => {
               {dataReviews?.productReviews?.map((review, index) => (
                 <div
                   key={index}
-                  className="flex border-t border-slate/50 p-2 pt-6"
+                  className=" md:flex border-t border-slate/50 p-2 pt-6"
                 >
-                  <div className="flex-1 space-y-1 ">
+                  <div className="flex-1 space-y-1 mb-4 md:mb-0  ">
                     <Rating
                       className="read-only"
                       value={review.ratings}

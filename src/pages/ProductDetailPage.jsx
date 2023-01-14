@@ -20,7 +20,7 @@ const ProductDetailPage = () => {
 
   return (
     <section>
-      <div className="min-height flex justify-center items-center my-7">
+      <div className="min-height flex justify-center items-center ">
         {isLoading ? (
           <CircularProgress sx={{ color: "var(--color-orange)" }} size="5rem" />
         ) : (

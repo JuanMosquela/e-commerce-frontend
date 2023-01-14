@@ -21,11 +21,11 @@ const categories = [
 
 const Categories = () => {
   return (
-    <section className="container">
+    <section className="md:container px-4">
       <h2 className="text-dark text-xl font-bold font-montserrat mb-4 uppercase">
         Categories
       </h2>
-      <div className="grid grid-cols-4 gap-4">
+      <div className="grid grid-cols-2  md:grid-cols-4  gap-4">
         {categories.map((cat, index) => (
           <Link key={index} to="/products">
             <div className="overflow-hidden group relative  w-full rounded-lg cursor-pointer hover:shadow-xl ">

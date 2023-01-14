@@ -18,6 +18,8 @@ import RatingComponent from "./RatingComponent";
 const ReviewModal = ({ data, auth }) => {
   const [open, setOpen] = useState(false);
 
+  console.log(data.boughtBy, auth.user._id);
+
   const [value, setValue] = useState(2);
   const [hover, setHover] = useState(-1);
   const [comment, setComment] = useState("");
@@ -32,10 +34,10 @@ const ReviewModal = ({ data, auth }) => {
     top: "50%",
     left: "50%",
     transform: "translate(-50%, -50%)",
-    width: 1200,
+    width: 900,
     bgcolor: "#FFF",
-    border: "2px solid #000",
-    boxShadow: 24,
+    borderRadius: "12px",
+
     p: 4,
   };
 
@@ -63,7 +65,7 @@ const ReviewModal = ({ data, auth }) => {
       value,
     });
 
-    if (!isLoading) e.target.reset();
+    if (!isLoading) setOpen(false);
   };
 
   useEffect(() => {
@@ -78,12 +80,14 @@ const ReviewModal = ({ data, auth }) => {
 
   return (
     <div className="">
-      <button
-        onClick={handleOpen}
-        className=" bg-dark text-white rounded-sm  px-4 py-2 font-bold text-md capitalize"
-      >
-        write a review
-      </button>
+      {auth.user._id === data.boughtBy && (
+        <button
+          onClick={handleOpen}
+          className=" bg-dark text-white rounded-sm  px-4 py-2 font-bold text-md capitalize"
+        >
+          write a review
+        </button>
+      )}
       <Modal
         open={open}
         onClose={handleClose}
