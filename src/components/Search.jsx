@@ -14,7 +14,7 @@ const Search = () => {
   };
 
   return (
-    <div className="w-[600px] flex justify-between items-center">
+    <div className="hidden md:flex md:w-[600px] justify-between items-center">
       <input
         onChange={(e) => handleInput(e.target.value)}
         className="rounded-sm w-full border-1 bg-gray/10 ease-in duration-100  text-slate-900 p-2 outline-none "

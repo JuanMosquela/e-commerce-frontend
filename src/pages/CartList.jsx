@@ -35,8 +35,8 @@ const CartList = () => {
           status={false}
         />
       ) : (
-        <div className="flex-col justify-center">
-          <div className="grid grid-cols-4 text-center border-b border-slate/50 text-lg text-dark font-bold uppercase pb-2">
+        <div className="  flex-col justify-center">
+          <div className="hidden md:grid grid-cols-4 text-center border-b border-slate/50 text-lg text-dark font-bold uppercase pb-2">
             <h3>Product</h3>
             <h3>Amount</h3>
             <h3>Quantity</h3>
@@ -45,16 +45,16 @@ const CartList = () => {
 
           {data?.result?.items.map((product) => (
             <div
-              className="grid grid-cols-4 text-center items-center justify-center border-b border-slate/50 py-4 "
+              className="grid grid-cols-2 md:grid-cols-4 text-center items-center justify-center border-b border-slate/50 py-4 "
               key={product?._id}
             >
-              <div className="flex text-left gap-4">
+              <div className="flex md:text-left gap-4 col-span-2 md:col-span-1 ">
                 <img
-                  className="h-[150px] w-[90px] object-contain"
+                  className="h-[150px] w-[90px] object-contain flex-1"
                   src={product?.item.pictureURL[0]}
                   alt={product?.item.title}
                 />
-                <div>
+                <div className="flex-1 text-left">
                   <h4 className="text-dark pt-4 font-semibold text-md  ">
                     {product?.item.title}
                   </h4>
@@ -69,7 +69,7 @@ const CartList = () => {
                   </button>
                 </div>
               </div>
-              <span className="text-lg text-dark ">{product?.quantity}</span>
+              <span className="text-lg text-dark ">x {product?.quantity}</span>
               <CounterButton product={product} />
 
               <span className="text-lg text-dark  font-bold">
@@ -77,14 +77,14 @@ const CartList = () => {
               </span>
             </div>
           ))}
-          <div className="flex justify-between flex-wrap gap-2 items-center mt-4">
+          <div className="flex justify-between flex-wrap gap-6 md:gap-2 items-center mt-4 p-4">
             <button
               className="text-slate border border-slate bg-white text-lg rounded-sm px-4 py-1 cursor-pointer font-thin"
               onClick={() => clearCart()}
             >
               Clear Cart
             </button>
-            <div className="cart-checkout">
+            <div className="w-full md:w-fit">
               <div className="flex justify-between w-64 mb-4 items-center">
                 <h3 className="text-dark text-xl font-bold">Subtotal:</h3>
                 <span className="text-dark text-xl font-bold">
