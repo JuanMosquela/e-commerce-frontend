@@ -19,6 +19,7 @@ const Success = () => {
         title="Thank you for your purchase"
         text="We´ll email you an order confirmation with details and tracking information"
         icon={<AiOutlineCheckCircle />}
+        status={true}
       />
     </section>
   );
