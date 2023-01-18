@@ -44,7 +44,7 @@ const Navbar = () => {
           </Link>
           <Link
             className="text-white/80 hover:text-white  md:block text-lg  capitalize font-thin "
-            to="/products"
+            to="/products/shop"
           >
             shop
           </Link>
