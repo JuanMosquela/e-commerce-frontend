@@ -2,35 +2,41 @@ import { Rating, Slider } from "@mui/material";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { addPrice, addRating, reset } from "../redux/searchFilterRedux";
+import {
+  addMaxPrice,
+  addMinPrice,
+  addPrice,
+  addRating,
+  reset,
+} from "../redux/searchFilterRedux";
 import publicRequest from "../utils/request-methods";
 import { CheckboxBranch, CheckboxCategory } from "./CheckboxComponent";
 import { IoIosOptions } from "react-icons/io";
 
-const Aside = ({ data, setFilterProducts, loading, setLoading }) => {
-  const [price, setPrice] = useState([20, 100]);
-
+const Aside = () => {
   const dispatch = useDispatch();
 
   const filters = useSelector((state) => state.filter);
 
-  const handleChange = (event, newValue) => {
-    setPrice(newValue);
-    dispatch(addPrice(newValue));
-  };
+  const [price, setPrice] = useState({
+    min_price: 0,
+    max_price: 200000,
+  });
 
-  const handleFilters = async () => {
-    setLoading(true);
-    try {
-      const { findProducts } = await publicRequest.getFilterProducts(filters);
-
-      setFilterProducts(findProducts);
-    } catch (error) {
-      console.log(error);
-    } finally {
-      setLoading(false);
-    }
-  };
+  const categories = ["zapatillas", "suplementos", "bolsos", "accesorios"];
+  const branches = [
+    "nike",
+    "topper",
+    "ena sport",
+    "puma",
+    "dribbling",
+    "gilbert",
+    "under armor",
+    "m-wave",
+    "aurora",
+    "nutrilab",
+    "muscletech",
+  ];
 
   return (
     <div className="col-span-1 bg-white rounded-sm shadow-lg overflow-hidden h-fit ">
@@ -43,21 +49,33 @@ const Aside = ({ data, setFilterProducts, loading, setLoading }) => {
           <h3 className="text-dark font-bold uppercase mb-4 pt-6">
             By Categories
           </h3>
-          <CheckboxCategory products={data?.products} />
+          <CheckboxCategory items={categories} />
         </div>
         <div>
           <h3 className="text-dark font-bold uppercase mb-4 pt-6">By Branch</h3>
-          <CheckboxBranch products={data?.products} />
+          <CheckboxBranch items={branches} />
         </div>
         <div>
           <h3 className="text-dark font-bold uppercase mb-4 pt-6">By price</h3>
-          <div className="flex items-center mb-3 gap-4">
-            <Slider
-              defaultValue={200}
-              getAriaLabel={() => "Price range"}
-              value={filters?.price}
-              onChange={handleChange}
-              valueLabelDisplay="auto"
+          <div className="flex items-center gap-2  ">
+            <input
+              type="text"
+              name="min_price"
+              className="bg-gray w-full p-1"
+              onChange={(e) => {
+                setPrice({ ...price, [e.target.name]: e.target.value });
+                dispatch(addMinPrice(e.target.value));
+              }}
+            />
+            to
+            <input
+              type="text"
+              name="max_price"
+              className="bg-gray w-full p-1"
+              onChange={(e) => {
+                setPrice({ ...price, [e.target.name]: e.target.value });
+                dispatch(addMaxPrice(e.target.value));
+              }}
             />
           </div>
         </div>
@@ -69,15 +87,7 @@ const Aside = ({ data, setFilterProducts, loading, setLoading }) => {
             onChange={(event, newValue) => dispatch(addRating(newValue))}
           />
         </div>
-      </div>
-
-      <div className="flex">
-        <button
-          onClick={handleFilters}
-          className="bg-orange px-4 py-2 rounded-md text-white font-bold block mx-auto mb-4"
-        >
-          Aplicar
-        </button>
+        <button onClick={() => dispatch(reset())}>Limpiar campos</button>
       </div>
     </div>
   );

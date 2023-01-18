@@ -31,7 +31,8 @@ export const productsApi = createApi({
       }),
     }),
     fetchAllProducts: builder.query({
-      query: () => "/products",
+      query: ({ category, branch, max_price, min_price }) =>
+        `/products?category=${category}&branch=${branch}&price[lte]=${max_price}&price[gte]=${min_price}`,
     }),
     fetchTopRatedProducts: builder.query({
       query: () => "/products/rated",

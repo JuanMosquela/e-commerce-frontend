@@ -65,14 +65,8 @@ function BpRadio(props) {
   );
 }
 
-export function CheckboxBranch({ products }) {
+export function CheckboxBranch({ items }) {
   const dispatch = useDispatch();
-
-  const branchesArr = products?.map((product) => {
-    return product.branch;
-  });
-
-  const myBranches = [...new Set(branchesArr)];
 
   const handleChange = (e) => {
     dispatch(addBranch(e.target.value));
@@ -85,7 +79,7 @@ export function CheckboxBranch({ products }) {
         aria-labelledby="demo-customized-radios"
         name="customized-radios"
       >
-        {myBranches.map((branch, index) => (
+        {items.map((branch, index) => (
           <FormControlLabel
             key={index}
             onChange={handleChange}
@@ -99,17 +93,10 @@ export function CheckboxBranch({ products }) {
   );
 }
 
-export function CheckboxCategory({ products }) {
+export function CheckboxCategory({ items }) {
   const dispatch = useDispatch();
 
-  const categoriesArr = products?.map((product) => {
-    return product.category;
-  });
-
-  const myCategories = [...new Set(categoriesArr)];
-
   const handleChange = (e) => {
-    console.log(e.target.value);
     dispatch(addCategory(e.target.value));
   };
 
@@ -120,7 +107,7 @@ export function CheckboxCategory({ products }) {
         aria-labelledby="demo-customized-radios"
         name="customized-radios"
       >
-        {myCategories?.map((category, index) => (
+        {items?.map((category, index) => (
           <FormControlLabel
             key={index}
             onChange={handleChange}
