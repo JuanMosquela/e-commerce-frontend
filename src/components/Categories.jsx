@@ -27,7 +27,7 @@ const Categories = () => {
       </h2>
       <div className="grid grid-cols-2  md:grid-cols-4  gap-4">
         {categories.map((cat, index) => (
-          <Link key={index} to={`/products/${cat.name}`}>
+          <Link key={index} to={`/products?category=${cat.name}`}>
             <div className="overflow-hidden group relative  w-full rounded-lg cursor-pointer hover:shadow-xl ">
               <img
                 className="group-hover:scale-110  ease-in duration-100  "

@@ -45,7 +45,7 @@ root.render(
               <Route path="/" exact element={<App />}>
                 <Route index element={<Home />} />
                 <Route path="/users" element={<User />} />
-                <Route path="/products/:category" element={<Products />} />
+                <Route path="/products" element={<Products />} />
                 <Route path="/products/:id" element={<ProductDetailPage />} />
                 <Route path="/contact" element={<Contact />} />
                 <Route path="/about" element={<About />} />

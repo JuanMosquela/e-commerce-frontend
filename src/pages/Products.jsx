@@ -1,7 +1,12 @@
 import { CircularProgress, MenuItem, Select } from "@mui/material";
 import { useContext, useEffect } from "react";
 import CardProduct from "../components/CardProduct";
-import { Link, useParams, useSearchParams } from "react-router-dom";
+import {
+  Link,
+  useLocation,
+  useParams,
+  useSearchParams,
+} from "react-router-dom";
 import { ProductsContext } from "../context/SearchProductsProvider";
 import {
   useFetchAllProductsByNameOrCategoryQuery,
@@ -38,7 +43,9 @@ const Products = () => {
 
   const dispatch = useDispatch();
 
-  const { category: catParams } = useParams();
+  const location = useLocation();
+
+  const query = location.search.split("=")[1];
 
   useEffect(() => {
     const fetchProducts = async () => {
@@ -46,7 +53,7 @@ const Products = () => {
 
       const { data } = await axios.get(
         `https://e-commerce-backend-production-e980.up.railway.app/api/products?category=${
-          category || catParams
+          category || query
         }&branch=${branch}&rating=${rating}&min_price=${min_price}&max_price=${max_price}&sort=${sort}&page=${page}&limit=6`
       );
       setData(data);
