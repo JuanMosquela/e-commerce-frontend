@@ -79,7 +79,7 @@ const MultiStepForm = ({ children, initialValues }) => {
       validationSchema={step.props.validationSchema}
     >
       {(formik) => (
-        <Form>
+        <Form className="">
           <Stepper sx={{ mb: "2rem" }} activeStep={stepNumber}>
             {steps.map((currentStep) => {
               const label = currentStep.props.stepName;

@@ -10,7 +10,7 @@ const Checkout = () => {
 
   return (
     <section className="flex justify-center items-center min-height bg-gray ">
-      <div className="bg-white rounded-md shadow-md px-4 py-2 w-[600px] min-h-[540px]">
+      <div className="bg-white rounded-md shadow-md px-4 py-2 w-[600px] min-h-[540px]  relative">
         <h2 className=" py-1  font-black uppercase text-sm md:text-md lg:text-xl text-dark mb-6   ">
           Checkout
         </h2>

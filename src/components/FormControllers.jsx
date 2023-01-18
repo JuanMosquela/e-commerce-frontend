@@ -2,7 +2,7 @@ import { MdKeyboardArrowLeft, MdKeyboardArrowRight } from "react-icons/md";
 
 const FormControllers = (props) => {
   return (
-    <div className=" col-span-2 flex justify-between items-center  ">
+    <div className=" col-span-2 flex justify-between items-center  absolute bottom-4 right-2 left-2   ">
       <div>
         {props.hasPrevious && (
           <button
