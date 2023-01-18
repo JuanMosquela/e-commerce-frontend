@@ -53,7 +53,7 @@ const Products = () => {
 
       const { data } = await axios.get(
         `https://e-commerce-backend-production-e980.up.railway.app/api/products?category=${
-          category || query
+          query || category
         }&branch=${branch}&rating=${rating}&min_price=${min_price}&max_price=${max_price}&sort=${sort}&page=${page}&limit=6`
       );
       setData(data);
