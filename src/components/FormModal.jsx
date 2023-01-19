@@ -33,6 +33,8 @@ export default function FormModal({ data }) {
   const [updateUser, { data: user, error, isLoading }] =
     useUpdateUserMutation();
 
+  console.log(user, error);
+
   const handlePicture = (e) => {
     const file = e.target.files[0];
     setPicture(file);

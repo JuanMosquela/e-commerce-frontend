@@ -21,7 +21,7 @@ const categories = [
 
 const Categories = () => {
   return (
-    <section className="md:container px-4">
+    <section className="md:container px-4 mb-10">
       <h2 className="text-dark text-xl font-bold font-montserrat mb-4 uppercase">
         Categories
       </h2>

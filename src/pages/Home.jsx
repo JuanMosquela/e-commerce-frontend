@@ -37,12 +37,8 @@ const Home = () => {
 
       <Services />
       <Categories />
-
-      <Banner />
-
       <Carrusel data={data} title="Top Rated Products" />
-
-      <Suscribe />
+      <Banner />
     </>
   );
 };

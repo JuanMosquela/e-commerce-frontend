@@ -6,6 +6,8 @@ import FormModal from "../components/FormModal";
 const Profile = () => {
   const user = useSelector((state) => state.auth.user);
 
+  console.log(user._id);
+
   const { data: userInfo, error, isError } = useGetUserQuery(user._id);
 
   return (

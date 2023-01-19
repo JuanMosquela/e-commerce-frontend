@@ -87,6 +87,8 @@ export default function ProductModal({ data }) {
     }
   }, [productData]);
 
+  console.log(productData, error);
+
   return (
     <div>
       <FiEdit onClick={handleOpen} className=" text-white text-xl  " />
