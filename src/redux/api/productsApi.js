@@ -175,6 +175,9 @@ export const productsApi = createApi({
         method: "POST",
       }),
     }),
+    getOrders: builder.query({
+      query: (id) => `/order/${id}`,
+    }),
   }),
 });
 
@@ -204,4 +207,5 @@ export const {
   useCreateOrderMutation,
   useCreatePaymentMutation,
   useCreateMercadoPagoButtonMutation,
+  useGetOrdersQuery,
 } = productsApi;

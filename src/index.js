@@ -31,6 +31,7 @@ import ScrollToTop from "./components/ScrollToTop";
 import Checkout from "./pages/Checkout";
 
 import Success from "./pages/Success";
+import Orders from "./pages/Orders";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
@@ -54,6 +55,7 @@ root.render(
                   <Route path="/cartList" element={<CartList />} />
                   <Route path="/wishList" element={<WishListPage />} />
                   <Route path="/profile" element={<Profile />} />
+                  <Route path="/orders" element={<Orders />} />
                   <Route path="/profile-edit" element={<ProfileEdit />} />
                   <Route path="/user-products" element={<MyProducts />} />
                   <Route path="/create-product" element={<CreateProduct />} />

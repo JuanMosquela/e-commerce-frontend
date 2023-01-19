@@ -96,6 +96,18 @@ const DropDownMenu = () => {
           </Link>
           <MdOutlineKeyboardArrowRight className="hidden group-hover/list:block text-xl font-thin text-slate/90" />
         </li>
+        <li className="flex justify-between items-center w-full my-3 group/list">
+          <Link
+            className="flex gap-4 items-center  hover:cursor-pointer  "
+            to="/orders"
+          >
+            <BsBagCheck className="text-2xl bg-gray/50 text-slate rounded-full p-1 " />{" "}
+            <p className="text-sm text-slate font-thin  hover:text-slate/90">
+              Orders
+            </p>
+          </Link>
+          <MdOutlineKeyboardArrowRight className="hidden group-hover/list:block text-xl font-thin text-slate  " />
+        </li>
         {user?.token ? (
           <li
             className="flex justify-between items-center w-full my-3 group/list"
