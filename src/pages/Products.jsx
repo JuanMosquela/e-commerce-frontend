@@ -47,16 +47,23 @@ const Products = () => {
 
   const query = location.search.split("=")[1];
 
+  const [error, setError] = useState("");
+
   useEffect(() => {
     const fetchProducts = async () => {
       setLoading(true);
 
-      const { data } = await axios.get(
-        `https://e-commerce-backend-production-e980.up.railway.app/api/products?category=${
-          query || category
-        }&branch=${branch}&rating=${rating}&min_price=${min_price}&max_price=${max_price}&sort=${sort}&page=${page}&limit=6`
-      );
-      setData(data);
+      try {
+        const { data } = await axios.get(
+          `https://e-commerce-backend-production-e980.up.railway.app/api/products?category=${
+            query || category
+          }&branch=${branch}&rating=${rating}&min_price=${min_price}&max_price=${max_price}&sort=${sort}&page=${page}&limit=6`
+        );
+        setData(data);
+      } catch (error) {
+        console.log(error);
+        setError(error.response.data.errorMsg);
+      }
 
       setLoading(false);
     };
@@ -99,6 +106,8 @@ const Products = () => {
 
         {loading ? (
           <LoadingSkeletonProducts />
+        ) : error ? (
+          <p className="text-xl capitalize">{error}</p>
         ) : (
           <div className="col-span-3 grid grid-cols-3 gap-4 ">
             <div className="col-span-3 grid grid-cols-3 bg-white py-2">
