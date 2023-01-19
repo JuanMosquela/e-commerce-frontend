@@ -1,7 +1,9 @@
 import { useState } from "react";
+import { AiOutlineHeart } from "react-icons/ai";
 import { useSelector } from "react-redux";
 import CardProduct from "../components/CardProduct";
 import EmptyComponent from "../components/EmptyComponent";
+import TitleComponent from "../components/TitleComponent";
 import { useGetFavProductsQuery } from "../redux/api/productsApi";
 
 const WishListPage = () => {
@@ -16,11 +18,16 @@ const WishListPage = () => {
   console.log(data);
 
   return (
-    <section className="md:container pt-10 ">
+    <section className="md:container  ">
       {data?.result?.length === 0 ? (
-        <EmptyComponent title="No favorites products added yet" />
+        <TitleComponent
+          title="Your wishlist it´s empty"
+          text="Start adding products to favorites and see your wishlist"
+          icon={<AiOutlineHeart />}
+          status={false}
+        />
       ) : (
-        <>
+        <div className="mt-10">
           <h2 className="text-slate text-md font-semibold mb-4">
             Your Wishlist
           </h2>
@@ -33,7 +40,7 @@ const WishListPage = () => {
               />
             ))}
           </div>
-        </>
+        </div>
       )}
     </section>
   );

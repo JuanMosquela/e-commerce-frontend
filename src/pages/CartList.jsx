@@ -22,9 +22,9 @@ const CartList = () => {
   const [removeFromCart] = useRemoveFromCartMutation();
 
   return (
-    <section className="min-height md:container pt-10 mb-10">
+    <section className="min-height  md:container  mb-10">
       {isLoading ? (
-        <div className="min-h-screen">
+        <div className="min-h-screen flex justify-center items-center">
           <CircularProgress sx={{ color: "var(--color-orange)" }} size="5rem" />
         </div>
       ) : data?.result?.items?.length === 0 || !data ? (
