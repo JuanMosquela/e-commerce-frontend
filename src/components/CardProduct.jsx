@@ -71,8 +71,8 @@ const CardProduct = ({ product, row, grid, addedToFavs }) => {
     <div
       className={
         row
-          ? `flex items-center shadow-md rounded overflow-hidden bg-white h-[450px]`
-          : "shadow-md rounded overflow-hidden bg-white  h-[450px]"
+          ? `  flex items-center shadow-md rounded overflow-hidden bg-white h-[450px]`
+          : "  shadow-md rounded overflow-hidden bg-white  h-[450px]"
       }
     >
       <div className="relative flex-1">

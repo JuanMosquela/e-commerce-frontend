@@ -38,21 +38,19 @@ const Aside = () => {
     "muscletech",
   ];
 
+  const [open, setOpen] = useState(false);
+
   return (
-    <div className="col-span-1 bg-white rounded-sm shadow-lg overflow-hidden h-fit ">
-      <div className=" divide-y divide-gray/30 px-6 py-4 ">
+    <div className="col-span-4 md:col-span-1 bg-white rounded-sm shadow-lg overflow-hidden h-fit ">
+      <div className="  divide-y divide-gray/30 px-6 py-4 ">
         <h3 className="flex  items-center justify-between text-dark font-bold uppercase mb-4 pt-6">
           search filters
           <IoIosOptions />
         </h3>
         <div>
-          <h3 className="text-dark font-bold uppercase mb-4 pt-6">
-            By Categories
-          </h3>
-          <CheckboxCategory items={categories} />
+          <CheckboxCategory open={open} items={categories} />
         </div>
         <div>
-          <h3 className="text-dark font-bold uppercase mb-4 pt-6">By Branch</h3>
           <CheckboxBranch items={branches} />
         </div>
         <div>

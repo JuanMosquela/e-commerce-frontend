@@ -19,7 +19,7 @@ const Pagination = ({
   return (
     <div className="flex gap-1 items-center">
       <button
-        className="mr-1 py-2 px-4  bg-orange text-white rounded-md font-bold disabled:opacity-75"
+        className="mr-1 py-1 md:py-2 md:px-4  bg-orange text-white rounded-md font-bold disabled:opacity-75"
         onClick={() => setCurrentPage(currentPage - 1)}
         disabled={currentPage === 1}
       >
@@ -30,7 +30,7 @@ const Pagination = ({
       {pages.map((page, index) => {
         return (
           <button
-            className="py-2  px-4  bg-orange text-white rounded-md font-bold"
+            className="py-1 md:py-2 px-2 md:px-4  bg-orange text-white rounded-md font-bold"
             key={index}
             onClick={() => {
               dispatch(addPage(page));
@@ -42,7 +42,7 @@ const Pagination = ({
         );
       })}
       <button
-        className="ml-1 py-2 px-4  bg-orange text-white rounded-md font-bold disabled:opacity-75"
+        className="ml-1 py-1 md:py-2 md:px-4  bg-orange text-white rounded-md font-bold disabled:opacity-75"
         onClick={() => setCurrentPage(currentPage + 1)}
         disabled={currentPage === pages.length}
       >

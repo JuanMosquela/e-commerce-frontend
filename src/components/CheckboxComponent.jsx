@@ -5,6 +5,11 @@ import {
   RadioGroup,
 } from "@mui/material";
 import { styled } from "@mui/material/styles";
+import { useState } from "react";
+import {
+  MdOutlineKeyboardArrowDown,
+  MdOutlineKeyboardArrowUp,
+} from "react-icons/md";
 import { useDispatch } from "react-redux";
 import { addBranch, addCategory } from "../redux/searchFilterRedux";
 
@@ -72,24 +77,46 @@ export function CheckboxBranch({ items }) {
     dispatch(addBranch(e.target.value));
   };
 
+  const [open, setOpen] = useState(false);
+
+  const handleOpen = () => {
+    setOpen((prev) => !prev);
+  };
+
   return (
-    <FormControl>
-      <RadioGroup
-        defaultValue=""
-        aria-labelledby="demo-customized-radios"
-        name="customized-radios"
-      >
-        {items.map((branch, index) => (
-          <FormControlLabel
-            key={index}
-            onChange={handleChange}
-            value={`${branch}`}
-            control={<BpRadio />}
-            label={`${branch}`}
-          />
-        ))}
-      </RadioGroup>
-    </FormControl>
+    <>
+      <div className="flex justify-between items-center">
+        <h3
+          onClick={handleOpen}
+          className="text-dark font-bold uppercase mb-4 pt-6"
+        >
+          By Branch
+        </h3>
+
+        <button onClick={handleOpen}>
+          {open ? <MdOutlineKeyboardArrowUp /> : <MdOutlineKeyboardArrowDown />}
+        </button>
+      </div>
+      {open && (
+        <FormControl>
+          <RadioGroup
+            defaultValue=""
+            aria-labelledby="demo-customized-radios"
+            name="customized-radios"
+          >
+            {items.map((branch, index) => (
+              <FormControlLabel
+                key={index}
+                onChange={handleChange}
+                value={`${branch}`}
+                control={<BpRadio />}
+                label={`${branch}`}
+              />
+            ))}
+          </RadioGroup>
+        </FormControl>
+      )}
+    </>
   );
 }
 
@@ -99,24 +126,44 @@ export function CheckboxCategory({ items }) {
   const handleChange = (e) => {
     dispatch(addCategory(e.target.value));
   };
+  const [open, setOpen] = useState(false);
+  const handleOpen = () => {
+    setOpen((prev) => !prev);
+  };
 
   return (
-    <FormControl>
-      <RadioGroup
-        defaultValue=""
-        aria-labelledby="demo-customized-radios"
-        name="customized-radios"
-      >
-        {items?.map((category, index) => (
-          <FormControlLabel
-            key={index}
-            onChange={handleChange}
-            value={`${category}`}
-            control={<BpRadio />}
-            label={`${category}`}
-          />
-        ))}
-      </RadioGroup>
-    </FormControl>
+    <>
+      <div className="flex justify-between items-center">
+        <h3
+          onClick={handleOpen}
+          className="text-dark font-bold uppercase mb-4 pt-6"
+        >
+          By Categories
+        </h3>
+
+        <button onClick={handleOpen}>
+          {open ? <MdOutlineKeyboardArrowUp /> : <MdOutlineKeyboardArrowDown />}
+        </button>
+      </div>
+      {open && (
+        <FormControl>
+          <RadioGroup
+            defaultValue=""
+            aria-labelledby="demo-customized-radios"
+            name="customized-radios"
+          >
+            {items?.map((category, index) => (
+              <FormControlLabel
+                key={index}
+                onChange={handleChange}
+                value={`${category}`}
+                control={<BpRadio />}
+                label={`${category}`}
+              />
+            ))}
+          </RadioGroup>
+        </FormControl>
+      )}
+    </>
   );
 }

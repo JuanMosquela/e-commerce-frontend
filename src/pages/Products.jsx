@@ -49,6 +49,8 @@ const Products = () => {
 
   const [error, setError] = useState("");
 
+  console.log(filters);
+
   useEffect(() => {
     const fetchProducts = async () => {
       setLoading(true);
@@ -62,7 +64,6 @@ const Products = () => {
         setData(data);
       } catch (error) {
         console.log(error);
-        setError(error.response.data.errorMsg);
       }
 
       setLoading(false);
@@ -99,21 +100,21 @@ const Products = () => {
     },
   ];
 
+  console.log(data);
+
   return (
     <section className="min-height bg-gray flex justify-center py-7 ">
-      <div className="container grid grid-cols-4 gap-4  sm:grid-cols-2  md:grid-cols-3 lg:grid-cols-4 items-start ">
+      <div className="px-4 md:px-0 md:container grid  md:grid-cols-4 gap-4  sm:grid-cols-2  md:grid-cols-3 lg:grid-cols-4 items-start ">
         <Aside />
 
         {loading ? (
           <LoadingSkeletonProducts />
-        ) : error ? (
-          <p className="text-xl capitalize">{error}</p>
         ) : (
-          <div className="col-span-3 grid grid-cols-3 gap-4 ">
-            <div className="col-span-3 grid grid-cols-3 bg-white py-2">
-              <div className="flex px-2 items-center ">
+          <div className=" col-span-4 md:col-span-3 md:grid md:grid-cols-3 md:gap-4 ">
+            <div className="col-span-4 md:col-span-3 grid grid-cols-3 bg-white py-2 md:px-2">
+              <div className="flex flex-col md:flex-row px-2 md:items-center md:gap-2 ">
                 View as:
-                <div className="flex  gap-2 ml-4 ">
+                <div className="flex  md:gap-2  ">
                   <CgMenuGridO
                     onClick={handleGrid}
                     className="bg-orange text-white text-3xl px-1"
@@ -131,6 +132,7 @@ const Products = () => {
                 currentPage={currentPage}
               />
               <Select
+                className="w-[200px] ml-auto "
                 labelId="demo-select-small"
                 id="demo-select-small"
                 label="Sort By"
@@ -150,7 +152,7 @@ const Products = () => {
 
             {data &&
               data?.products?.map((product) => (
-                <div key={product._id} className={row ? `col-span-3` : ""}>
+                <div key={product._id} className={row ? `  md:col-span-3` : ""}>
                   <Link to={`/products/${product._id}`}>
                     <CardProduct grid={grid} product={product} row={row} />
                   </Link>
