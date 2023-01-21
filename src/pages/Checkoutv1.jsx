@@ -55,9 +55,15 @@ const Checkoutv1 = () => {
   return (
     <section className="h-screen  flex justify-center items-center bg-gray">
       <div className="bg-white w-[70%] p-4">
-        <h1 className=" py-1  font-black uppercase text-sm md:text-md lg:text-xl text-dark mb-6   ">
+        <h1 className=" py-1  font-black uppercase text-sm md:text-md lg:text-xl text-dark mb-2   ">
           Checkout
         </h1>
+        <p className="text-dark text-md mb-4 flex gap-2 items-center">
+          <span className="bg-dark text-white rounded-full  w-[20px] h-[20px] flex justify-center items-center ">
+            1
+          </span>{" "}
+          Complete your personal information
+        </p>
 
         <Formik
           innerRef={formRef}

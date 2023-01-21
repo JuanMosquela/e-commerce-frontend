@@ -17,10 +17,17 @@ const Checkoutv2 = () => {
   return (
     <section className="h-screen flex justify-center md:pt-10 bg-gray    ">
       <div className="md:container  w-full  px-4  flex gap-4 h-fit ">
-        <div className=" flex-1 border border-slate/40 p-4 bg-white">
+        <div className=" flex-1 border border-slate/40 p-4 bg-white mb-2">
           <h1 className="text-dark text-xl mb-4 uppercase font-bold">
             Checkout
           </h1>
+          <p className="text-dark text-md mb-4 flex gap-2 items-center">
+            <span className="bg-dark text-white rounded-full  w-[20px] h-[20px] flex justify-center items-center ">
+              2
+            </span>{" "}
+            Confirm your purchase and go buy
+          </p>
+
           <h2 className="text-dark text-md mb-4 uppercase font-bold">
             Order Summary
           </h2>
@@ -46,6 +53,7 @@ const Checkoutv2 = () => {
           <h2 className="text-dark text-md mb-4 uppercase font-bold">
             Checkout Confirmation
           </h2>
+
           <ul className="mb-4">
             {Object.entries(values).map((value, index) => (
               <li className="flex gap-2 text-md text-slate">
