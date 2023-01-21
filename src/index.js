@@ -28,10 +28,11 @@ import ProfileEdit from "./pages/ProfileEdit";
 import MyProducts from "./pages/MyProducts";
 import UserProductView from "./pages/UserProductView";
 import ScrollToTop from "./components/ScrollToTop";
-import Checkout from "./pages/Checkout";
 
 import Success from "./pages/Success";
 import Orders from "./pages/Orders";
+import Checkoutv1 from "./pages/Checkoutv1";
+import Checkoutv2 from "./pages/Checkoutv2";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
@@ -64,7 +65,9 @@ root.render(
                     element={<UserProductView />}
                   />
                 </Route>
-                <Route path="/checkout" element={<Checkout />} />
+
+                <Route path="/checkoutv1" element={<Checkoutv1 />} />
+                <Route path="/checkoutv2" element={<Checkoutv2 />} />
                 <Route path="/success" element={<Success />} />
               </Route>
               <Route path="/login" element={<Login />} />

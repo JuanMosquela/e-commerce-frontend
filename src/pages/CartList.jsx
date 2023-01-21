@@ -22,7 +22,7 @@ const CartList = () => {
   const [removeFromCart] = useRemoveFromCartMutation();
 
   return (
-    <section className="min-height  md:container  mb-10">
+    <section className="min-height  md:container md:pt-10  mb-10">
       {isLoading ? (
         <div className="min-h-screen flex justify-center items-center">
           <CircularProgress sx={{ color: "var(--color-orange)" }} size="5rem" />
@@ -95,7 +95,7 @@ const CartList = () => {
                 Taxes and shipping calculated at checkout
               </p>
 
-              <Link to="/checkout">
+              <Link to="/checkoutv1">
                 <button className="flex justify-center bg-orange text-white font-bold px-3 py-3 rounded-md uppercase cursor-pointer w-full hover:shadow-lg hover:duration-150 ">
                   Checkout
                 </button>
