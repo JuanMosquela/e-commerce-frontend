@@ -8,6 +8,7 @@ import {
   useGetCartQuery,
 } from "../redux/api/productsApi";
 import * as yup from "yup";
+import axios from "axios";
 
 const Checkoutv1 = () => {
   const navigate = useNavigate();
@@ -19,8 +20,9 @@ const Checkoutv1 = () => {
   const [createPayment, { data, error }] = useCreatePaymentMutation();
 
   const handleSubmit = async (values) => {
-    const body = {
-      name: values.firstName,
+    await createPayment({
+      id: cartData?.result._id,
+      name: values.name,
       lastName: values.lastName,
       email: values.email,
       streetName: values.streetName,
@@ -30,12 +32,29 @@ const Checkoutv1 = () => {
       phone: values.phone,
       identification: values.identification,
       identificationNumber: values.identificationNumber,
-    };
-
-    await createPayment({
-      id: cartData?.result._id,
-      body,
     });
+
+    // const { data } = await axios.post(
+    //   "http://localhost:5000/api/order/create-payment/63c9d803f87ef6c54de7c281",
+    //   body,
+    //   {
+    //     headers: {
+    //       Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzYzlkN2Y1Zjg3ZWY2YzU0ZGU3YzI3MSIsImlhdCI6MTY3NDQwOTY5OSwiZXhwIjoxNjc1MjczNjk5fQ.UVFZqljTrIQEEOyWU4ZK52yHsUp2y5yPPy-ln2kXe4Q`,
+    //     },
+    //   }
+    // );
+
+    // console.log(data);
+
+    // if (data) {
+    //   navigate("/checkoutv2", {
+    //     state: {
+    //       initPoint: data.body.init_point,
+    //       cart: cartData.result,
+    //       values: formRef.current.values,
+    //     },
+    //   });
+    // }
   };
 
   useEffect(() => {
@@ -96,6 +115,12 @@ const Checkoutv1 = () => {
               .string()
 
               .required("Zip Code is required"),
+            phone: yup.number().required("Phone is required"),
+            areaCode: yup.number().required("Area Code is required"),
+            identification: yup.string().required("ID is required"),
+            identificationNumber: yup
+              .number()
+              .required("This field is required"),
           })}
           onSubmit={handleSubmit}
         >
@@ -334,4 +359,5 @@ const Checkoutv1 = () => {
     </section>
   );
 };
+
 export default Checkoutv1;

@@ -8,12 +8,6 @@ const Checkoutv2 = () => {
 
   const { initPoint, cart, values } = location.state;
 
-  console.log(location);
-
-  console.log(cart);
-
-  const navigate = useNavigate();
-
   return (
     <section className="h-screen flex justify-center md:pt-10 bg-gray    ">
       <div className="md:container  w-full  px-4  flex gap-4 h-fit ">
