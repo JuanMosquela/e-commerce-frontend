@@ -4,8 +4,12 @@ import Banner from "../components/Banner";
 import { useFetchTopRatedProductsQuery } from "../redux/api/productsApi";
 import CardProduct from "../components/CardProduct";
 import { Link } from "react-router-dom";
-import Carrusel from "../components/Carrusel";
+
 import Suscribe from "../components/Suscribe";
+import React, { Suspense } from "react";
+import { ErrorBoundary } from "react-error-boundary";
+import ErrorFallback from "../components/ErrorFallback";
+const Carrusel = React.lazy(() => import("../components/Carrusel"));
 
 const Home = () => {
   const { data } = useFetchTopRatedProductsQuery();
@@ -35,10 +39,18 @@ const Home = () => {
         </div>
       </section>
 
-      <Services />
-      <Categories />
-      <Carrusel data={data} title="Top Rated Products" />
-      <Banner />
+      <main className="md:container">
+        <Services />
+        <Categories />
+
+        <ErrorBoundary FallbackComponent={ErrorFallback} onReset={() => {}}>
+          <Suspense fallback={<div>Loading...</div>}>
+            <Carrusel data={data} title="Top Rated Products" />
+          </Suspense>
+        </ErrorBoundary>
+
+        <Banner />
+      </main>
     </>
   );
 };

@@ -5,6 +5,10 @@ import { Link } from "react-router-dom";
 import CardProduct from "./CardProduct";
 
 const Carrusel = ({ title, data }) => {
+  if (Math.random() > 0.5) {
+    return new Error("Test Error Boundary");
+  }
+
   const settings = {
     infinite: true,
     lazyLoad: true,
@@ -50,7 +54,7 @@ const Carrusel = ({ title, data }) => {
   };
 
   return (
-    <div className=" md:container mb-10 ">
+    <div className="  mb-10 ">
       <h2 className="text-dark text-xl font-bold font-montserrat mb-4 uppercase">
         {title}
       </h2>

@@ -2,7 +2,7 @@ import banner from "../img/banner.jpg";
 
 const Banner = () => {
   return (
-    <section className="md:container min-h-[30vh] overflow-hidden relative mb-20 rounded-lg ">
+    <section className=" min-h-[30vh] overflow-hidden relative mb-20 rounded-lg ">
       <img
         className=" absolute w-full  h-[100%] object-cover"
         src={banner}

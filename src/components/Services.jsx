@@ -2,7 +2,7 @@ import servicesInfo from "../utils/servicesData";
 
 const Services = () => {
   return (
-    <div className=" md:container px-4 grid my-4 md:grid-cols-4 sm:grid-cols-2 items-center min-h-[20vh] gap-6">
+    <div className="  px-4 grid my-4 md:grid-cols-4 sm:grid-cols-2 items-center min-h-[20vh] gap-6">
       {servicesInfo.map((service, index) => (
         <div
           key={index}
