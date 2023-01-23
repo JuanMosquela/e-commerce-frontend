@@ -11,35 +11,25 @@ import EmptyComponent from "../components/EmptyComponent";
 import { useSelector } from "react-redux";
 import ProductModal from "../components/ProductModal";
 import { CircularProgress } from "@mui/material";
+import TitleComponent from "../components/TitleComponent";
 
 const MyProducts = () => {
   const id = useSelector((state) => state.auth.user._id);
 
   const [deleteProduct, { isLoading }] = useDeleteProductMutation();
 
-  const { data } = useGetUserQuery(id);
+  const { data, isLoading: userLoading } = useGetUserQuery(id);
+
+  console.log(data?.user?.products.length);
 
   return (
-    <section className=" md:container min-h-screen pt-10 ">
-      <div className="flex justify-between mb-6 ">
-        {data?.user?.products.length !== 0 ? (
-          <h2 className="text-slate text-md  font-semibold">My Products</h2>
-        ) : (
-          <div></div>
-        )}
-        <Link
-          to="/create-product"
-          className="flex gap-2 items-center bg-orange text-white py-2 px-4 rounded-md"
-        >
-          <MdOutlineAddCircle className="text-xl" />
-          Create product
-        </Link>
-      </div>
-
-      {data?.user.products.length === 0 ? (
-        <EmptyComponent title="You didn't published any products yet" />
-      ) : (
-        <table className=" table-auto w-full rounded-lg bg-white shadow-md">
+    <section className="h-screen md:container  ">
+      {userLoading ? (
+        <div className="min-h-screen flex justify-center items-center">
+          <CircularProgress sx={{ color: "var(--color-orange)" }} size="5rem" />
+        </div>
+      ) : data && data?.user?.products.length > 0 ? (
+        <table className=" table-auto w-full rounded-lg bg-white shadow-md mt-5 md:mt-10 ">
           <thead className=" border-b-2 bg-dark text-white">
             <tr className="">
               <th className="py-2">Product</th>
@@ -49,7 +39,7 @@ const MyProducts = () => {
               <th className="py-2">Actions</th>
             </tr>
           </thead>
-          <tbody className=" ">
+          <tbody>
             {data?.user?.products.map((product) => (
               <tr
                 key={product._id}
@@ -88,6 +78,22 @@ const MyProducts = () => {
             ))}
           </tbody>
         </table>
+      ) : (
+        <TitleComponent
+          title="You didn't published any products yet"
+          icon={<MdOutlineAddCircle />}
+          text="You didn't published any products yet"
+          status={false}
+          actionButton={
+            <Link
+              to="/create-product"
+              className="uppercase text-md text-orange hover:text-white hover:bg-orange flex items-center gap-2 justify-center font-bold p-1 px-2  rounded-md duration-150 "
+            >
+              <MdOutlineAddCircle className="text-xl" />
+              Create product
+            </Link>
+          }
+        />
       )}
     </section>
   );
