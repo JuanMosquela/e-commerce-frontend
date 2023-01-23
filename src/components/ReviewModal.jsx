@@ -18,8 +18,6 @@ import RatingComponent from "./RatingComponent";
 const ReviewModal = ({ data, auth }) => {
   const [open, setOpen] = useState(false);
 
-  console.log(data.boughtBy, auth.user._id);
-
   const [value, setValue] = useState(2);
   const [hover, setHover] = useState(-1);
   const [comment, setComment] = useState("");
@@ -34,10 +32,8 @@ const ReviewModal = ({ data, auth }) => {
     top: "50%",
     left: "50%",
     transform: "translate(-50%, -50%)",
-
     bgcolor: "#FFF",
     borderRadius: "12px",
-
     p: 4,
   };
 
@@ -51,24 +47,29 @@ const ReviewModal = ({ data, auth }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-
-    if (!auth.token) {
-      toast.error("Debes estar autenticado");
-      navigate("/login");
-      return;
+    try {
+      if (!auth.token) {
+        toast.error("Debes estar autenticado");
+        navigate("/login");
+        return;
+      }
+      createReview({
+        id: data._id,
+        user: auth?.user.name,
+        comment,
+        value,
+      });
+    } catch (error) {
+      console.log(error);
     }
-
-    createReview({
-      id: data._id,
-      user: auth?.user.name,
-      comment,
-      value,
-    });
-
-    if (!isLoading) setOpen(false);
+    console.log("se cierra");
   };
 
   useEffect(() => {
+    if (!isLoading) {
+      setOpen(false);
+    }
+
     if (reviewData && !isLoading) {
       toast.success("Product reviewed");
     }
@@ -83,19 +84,14 @@ const ReviewModal = ({ data, auth }) => {
       {auth.user._id === data.boughtBy && (
         <button
           onClick={handleOpen}
-          className=" bg-dark text-white rounded-sm  px-4 py-2 font-bold text-md capitalize"
+          className=" bg-dark text-white rounded-sm  px-4 py-2 font-bold text-sm uppercase"
         >
           write a review
         </button>
       )}
-      <Modal
-        open={open}
-        onClose={handleClose}
-        aria-labelledby="modal-modal-title"
-        aria-describedby="modal-modal-description"
-      >
+      <Modal open={open} onClose={handleClose}>
         <Box sx={style} className="w-[85%]  md:w-[700px]">
-          <form action="" onSubmit={handleSubmit}>
+          <form onSubmit={handleSubmit}>
             <h3 className="text-md text-slate font-semibold">
               Deja un comentario
             </h3>
