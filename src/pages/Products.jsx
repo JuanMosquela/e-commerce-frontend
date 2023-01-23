@@ -1,5 +1,5 @@
 import { CircularProgress, MenuItem, Select } from "@mui/material";
-import { useContext, useEffect } from "react";
+import React, { useContext, useEffect } from "react";
 import CardProduct from "../components/CardProduct";
 import {
   Link,
@@ -7,11 +7,7 @@ import {
   useParams,
   useSearchParams,
 } from "react-router-dom";
-import { ProductsContext } from "../context/SearchProductsProvider";
-import {
-  useFetchAllProductsByNameOrCategoryQuery,
-  useFetchAllProductsQuery,
-} from "../redux/api/productsApi";
+
 import { CgMenuGridO, CgMenu } from "react-icons/cg";
 import Aside from "../components/Aside";
 import { useState } from "react";
@@ -57,7 +53,7 @@ const Products = () => {
 
       try {
         const { data } = await axios.get(
-          `https://e-commerce-backend-production-e980.up.railway.app/api/products?category=${
+          `https://fit-commerce-api.onrender.com/api/products?category=${
             query || category
           }&branch=${branch}&rating=${rating}&min_price=${min_price}&max_price=${max_price}&sort=${sort}&page=${page}&limit=6`
         );

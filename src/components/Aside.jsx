@@ -9,7 +9,7 @@ import {
   addRating,
   reset,
 } from "../redux/searchFilterRedux";
-import publicRequest from "../utils/request-methods";
+
 import { CheckboxBranch, CheckboxCategory } from "./CheckboxComponent";
 import { IoIosOptions } from "react-icons/io";
 

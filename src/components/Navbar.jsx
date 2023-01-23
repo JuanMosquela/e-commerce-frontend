@@ -1,20 +1,12 @@
-import { Box } from "@mui/material";
 import { Link } from "react-router-dom";
 import CartWidget from "./CartWidget";
-import { useContext, useState } from "react";
-import { BiSearch } from "react-icons/bi";
-import { ProductsContext } from "../context/SearchProductsProvider";
 
-import { FaUserCircle } from "react-icons/fa";
 import DropDownMenu from "./DropDownMenu";
-import { AiOutlineHeart } from "react-icons/ai";
+
 import WishList from "./WishList";
 import Search from "./Search";
-import { GoogleContext } from "../context/GoogleProvider";
 
 const Navbar = () => {
-  const { handleClick, inputValue, handleInput } = useContext(ProductsContext);
-
   return (
     <header className="w-full z-50 top-0 bg-white  ">
       <div className="md:container flex justify-between items-center py-2   ">

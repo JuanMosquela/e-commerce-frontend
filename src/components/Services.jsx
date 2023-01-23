@@ -1,4 +1,4 @@
-import servicesInfo from "../utils/servicesData";
+import servicesInfo from "../data/services-data";
 
 const Services = () => {
   return (

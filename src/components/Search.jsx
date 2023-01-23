@@ -1,11 +1,7 @@
-import { useContext } from "react";
-
 import { AiOutlineSearch } from "react-icons/ai";
 import { useNavigate } from "react-router-dom";
-import { ProductsContext } from "../context/SearchProductsProvider";
 
 const Search = () => {
-  const { handleInput } = useContext(ProductsContext);
   const navigate = useNavigate();
 
   const handleSubmit = (e) => {
@@ -16,7 +12,6 @@ const Search = () => {
   return (
     <div className="hidden md:flex md:w-[600px] justify-between items-center">
       <input
-        onChange={(e) => handleInput(e.target.value)}
         className="rounded-sm w-full border-1 bg-gray/10 ease-in duration-100  text-slate-900 p-2 outline-none "
         type="text"
         placeholder="Search products ..."

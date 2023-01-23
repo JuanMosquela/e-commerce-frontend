@@ -3,11 +3,10 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { Link } from "react-router-dom";
 import CardProduct from "./CardProduct";
+import { useFetchTopRatedProductsQuery } from "../redux/api/productsApi";
 
-const Carrusel = ({ title, data }) => {
-  if (Math.random() > 0.5) {
-    return new Error("Test Error Boundary");
-  }
+const Carrusel = ({ title }) => {
+  const { data, error, isLoading } = useFetchTopRatedProductsQuery();
 
   const settings = {
     infinite: true,
@@ -54,7 +53,7 @@ const Carrusel = ({ title, data }) => {
   };
 
   return (
-    <div className="  mb-10 ">
+    <div className="  mb-10 min-h-[55vh]  ">
       <h2 className="text-dark text-xl font-bold font-montserrat mb-4 uppercase">
         {title}
       </h2>

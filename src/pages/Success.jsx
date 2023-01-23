@@ -3,16 +3,11 @@ import { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { Button } from "@mui/material";
 import { BsFillBagCheckFill } from "react-icons/bs";
-import { runConfetti } from "../utils/confetti";
 
 import { AiOutlineCheckCircle } from "react-icons/ai";
 import TitleComponent from "../components/TitleComponent";
 
 const Success = () => {
-  useEffect(() => {
-    runConfetti();
-  }, []);
-
   return (
     <section className="flex justify-center items-center min-height">
       <TitleComponent

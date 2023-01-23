@@ -3,7 +3,8 @@ import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 export const productsApi = createApi({
   reducerPath: "productsApi",
   baseQuery: fetchBaseQuery({
-    baseUrl: "https://e-commerce-backend-production-e980.up.railway.app/api",
+    baseUrl: "https://fit-commerce-api.onrender.com/api",
+    // "https://e-commerce-backend-production-e980.up.railway.app/api",
 
     prepareHeaders: (headers, { getState }) => {
       const token = getState().auth.token;

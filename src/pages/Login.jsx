@@ -8,7 +8,6 @@ import { loginSchemas } from "../schemas/loginSchemas";
 
 import { AiFillEye, AiFillEyeInvisible } from "react-icons/ai";
 
-import { GoogleContext } from "../context/GoogleProvider";
 import { useSignInMutation } from "../redux/api/productsApi";
 import { toast } from "react-toastify";
 
@@ -16,7 +15,7 @@ const Login = () => {
   const [visible, setVisible] = useState(false);
   const location = useLocation();
   const navigate = useNavigate();
-  const { handleLoginWithGoogle } = useContext(GoogleContext);
+
   const from = location.state?.from?.pathname || "/";
 
   const auth = useSelector((state) => state.auth);
