@@ -144,7 +144,7 @@ const Register = () => {
         <button
           type="submit"
           disabled={isSubmitting}
-          className=" block w-full bg-orange text-white rounded-md py-2 "
+          className="bloc flex items-center justify-center w-full h-12 bg-orange hover:bg-orange/90 text-white rounded-md py-2 font-bold  "
         >
           {isLoading ? (
             <CircularProgress

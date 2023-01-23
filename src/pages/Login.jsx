@@ -126,7 +126,7 @@ const Login = () => {
           <button
             type="submit"
             disabled={isLoading}
-            className="block w-full bg-orange text-white rounded-md py-2 "
+            className="bloc flex items-center justify-center w-full h-12 bg-orange hover:bg-orange/90 text-white rounded-md py-2 font-bold  "
           >
             {isLoading ? (
               <>
