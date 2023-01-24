@@ -9,6 +9,8 @@ import RatedSkeleton from "./RatedSkeleton";
 const Carrusel = ({ title }) => {
   const { data, error, isLoading } = useFetchTopRatedProductsQuery();
 
+  console.log(data, error);
+
   const settings = {
     infinite: true,
     lazyLoad: true,
