@@ -4,6 +4,7 @@ import "slick-carousel/slick/slick-theme.css";
 import { Link } from "react-router-dom";
 import CardProduct from "./CardProduct";
 import { useFetchTopRatedProductsQuery } from "../redux/api/productsApi";
+import RatedSkeleton from "./RatedSkeleton";
 
 const Carrusel = ({ title }) => {
   const { data, error, isLoading } = useFetchTopRatedProductsQuery();
@@ -58,15 +59,19 @@ const Carrusel = ({ title }) => {
         {title}
       </h2>
 
-      <Slider {...settings}>
-        {data?.results?.map((product) => (
-          <div key={product._id} className="">
-            <Link to={`products/${product._id}`}>
-              <CardProduct product={product} />
-            </Link>
-          </div>
-        ))}
-      </Slider>
+      {isLoading ? (
+        <RatedSkeleton />
+      ) : (
+        <Slider {...settings}>
+          {data?.results?.map((product) => (
+            <div key={product._id} className="">
+              <Link to={`products/${product._id}`}>
+                <CardProduct product={product} />
+              </Link>
+            </div>
+          ))}
+        </Slider>
+      )}
     </div>
   );
 };

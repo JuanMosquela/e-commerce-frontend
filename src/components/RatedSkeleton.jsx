@@ -3,8 +3,8 @@ const RatedSkeleton = () => {
     <div className="flex flex-wrap gap-2 ">
       {Array(4)
         .fill()
-        .map((item) => (
-          <div className="flex-1 shadow p-2">
+        .map((item, index) => (
+          <div key={index} className="flex-1 shadow p-2">
             <div className="animation-pulse bg-gray h-[320px] w-full mb-4"></div>
             <div className="flex flex-col gap-2">
               <div className="animation-puise w-64 h-4 bg-gray"></div>

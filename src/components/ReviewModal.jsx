@@ -62,7 +62,6 @@ const ReviewModal = ({ data, auth }) => {
     } catch (error) {
       console.log(error);
     }
-    console.log("se cierra");
   };
 
   useEffect(() => {
