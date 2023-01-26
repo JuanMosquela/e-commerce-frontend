@@ -7,6 +7,7 @@ import React from "react";
 import Hero from "../components/Hero";
 import ErrorBoundary from "../utilities/ErrorBoundary";
 import Carrusel from "../components/Carrusel";
+import Suscribe from "../components/Suscribe";
 
 const Home = () => {
   return (
@@ -22,6 +23,7 @@ const Home = () => {
         </ErrorBoundary>
 
         <Banner />
+        <Suscribe />
       </main>
     </>
   );

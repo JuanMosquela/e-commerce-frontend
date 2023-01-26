@@ -20,19 +20,14 @@ const Suscribe = () => {
   };
 
   return (
-    <section className="  min-h-[40vh] overflow-hidden relative  flex justify-center items-center mb-8 ">
-      <img
-        className=" absolute w-full h-[100%] object-cover "
-        src={suscribe}
-        alt="hombre haciendo curl de biceps con barra"
-      />
+    <section className="  min-h-[60vh] overflow-hidden relative  flex justify-center items-center mb-10 ">
       <div className=" md:container flex flex-col justify-center items-center z-20   ">
-        <div>
+        <div className="">
           <div>
-            <h3 className="  text-4xl text-white  font-bold mb-4">
+            <h3 className="  text-4xl text-dark  font-bold mb-4">
               Let's keep in touch
             </h3>
-            <p className="font-semibold text-white mb-4">
+            <p className="font-semibold text-slate mb-4">
               Suscribe to keep up with news and exciting updated
             </p>
           </div>
@@ -62,7 +57,7 @@ const Suscribe = () => {
                 className=" scale-150 "
                 onChange={() => setChecked((prev) => !prev)}
               />
-              <p className="text-white   text-sm ">
+              <p className="text-slate   text-sm ">
                 I agree to my email adress being stored and used to recive
                 monthly newsletter
               </p>

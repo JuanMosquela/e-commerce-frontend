@@ -24,7 +24,7 @@ const ProductDetailPage = () => {
         {isLoading ? (
           <CircularProgress sx={{ color: "var(--color-orange)" }} size="5rem" />
         ) : (
-          <ProductDetail data={data.product} />
+          <ProductDetail data={data?.product} />
         )}
       </div>
     </section>
