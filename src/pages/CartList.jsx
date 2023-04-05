@@ -3,16 +3,15 @@ import { useDispatch, useSelector } from "react-redux";
 import { removeItem } from "../redux/shoppingCartRedux";
 import { Link } from "react-router-dom";
 
-import {
-  useClearCartMutation,
-  useGetCartQuery,
-  useRemoveFromCartMutation,
-} from "../redux/api/productsApi";
-
 import CounterButton from "../components/CounterButton";
 import { CircularProgress } from "@mui/material";
 import { BsBagX } from "react-icons/bs";
 import TitleComponent from "../components/TitleComponent";
+import {
+  useClearCartMutation,
+  useGetCartQuery,
+  useRemoveFromCartMutation,
+} from "../redux/api/cartApi";
 
 const CartList = () => {
   const { data, error, isLoading } = useGetCartQuery();

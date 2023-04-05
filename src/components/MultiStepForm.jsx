@@ -1,13 +1,22 @@
-import { Step, StepLabel, Stepper } from "@mui/material";
+import { Stepper, Step, StepLabel } from "@mui/material";
 import { Form, Formik } from "formik";
 import React, { useState } from "react";
+import { useEffect } from "react";
+import { useSelector } from "react-redux";
+import { useCreatePaymentMutation } from "../redux/api/paymentApi";
 
-const MultiStepForm = ({ children, initialValues, onSubmit }) => {
+import FormControllers from "./FormControllers";
+
+const MultiStepForm = ({ children, initialValues }) => {
+  const { cart } = useSelector((state) => state.auth.user);
+
+  const [createPayment, { data, error }] = useCreatePaymentMutation();
+
+  console.log(data, error);
+
   const [stepNumber, setStepNumber] = useState(0);
   const steps = React.Children.toArray(children);
   const [snapshot, setSnapshot] = useState(initialValues);
-
-  console.log(steps);
 
   const step = steps[stepNumber];
   const totalSteps = steps.length;
@@ -24,15 +33,41 @@ const MultiStepForm = ({ children, initialValues, onSubmit }) => {
   };
 
   const handleSubmit = async (values, bag) => {
+    console.log(values);
     if (step.props.onSubmit) {
       await step.props.onSubmit(values, bag);
     }
     if (isLastStep) {
-      return onSubmit(values, bag);
+      const body = {
+        name: values.firstName,
+        lastName: values.lastName,
+        email: values.email,
+        streetName: values.streetName,
+        streetNumber: values.streetNumber,
+        zipCode: values.zipCode,
+        areaCode: values.phone,
+        phone: values.phone,
+        identification: values.identification,
+        identificationNumber: values.identificationNumber,
+      };
+
+      return createPayment({
+        id: cart._id,
+        body,
+      });
     } else {
+      bag.setTouched({});
       next(values);
     }
   };
+
+  console.log(data);
+
+  useEffect(() => {
+    if (data) {
+      window.location.href = data?.body.init_point;
+    }
+  }, [data]);
 
   return (
     <Formik
@@ -42,30 +77,33 @@ const MultiStepForm = ({ children, initialValues, onSubmit }) => {
     >
       {(formik) => (
         <Form>
-          <Stepper activeStep={stepNumber}>
+          <Stepper sx={{ mb: "2rem" }} activeStep={stepNumber}>
             {steps.map((currentStep) => {
               const label = currentStep.props.stepName;
 
               return (
                 <Step key={label}>
-                  <StepLabel>{label}</StepLabel>
+                  <StepLabel
+                    sx={{
+                      display: "flex",
+                      flexDirection: "column",
+                      gap: ".5rem",
+                      transform: "scale(1.2)",
+                    }}
+                  >
+                    {label}
+                  </StepLabel>
                 </Step>
               );
             })}
           </Stepper>
+
           {step}
-          <div style={{ display: "flex" }}>
-            {stepNumber > 0 && (
-              <button onClick={() => previous(formik.values)} type="button">
-                Back
-              </button>
-            )}
-            <div>
-              <button disabled={formik.isSubmitting} type="submit">
-                {isLastStep ? "Submit" : "Next"}
-              </button>
-            </div>
-          </div>
+          <FormControllers
+            isLastStep={isLastStep}
+            hasPrevious={stepNumber > 0}
+            onBackClick={() => previous(formik.values)}
+          />
         </Form>
       )}
     </Formik>

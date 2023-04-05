@@ -8,13 +8,14 @@ import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 import { useState } from "react";
 import { AiOutlineEdit } from "react-icons/ai";
-import { useUpdateUserMutation } from "../redux/api/productsApi";
+
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { setCredentials } from "../redux/slices/authSliceRedux";
 import { toast } from "react-toastify";
 import FileUpload from "./FileUpload";
 import { CircularProgress } from "@mui/material";
+import { useUpdateUserMutation } from "../redux/api/userApi";
 
 export default function FormModal({ data }) {
   const [open, setOpen] = useState(false);

@@ -4,7 +4,7 @@ import { useSelector } from "react-redux";
 import CardProduct from "../components/CardProduct";
 import EmptyComponent from "../components/EmptyComponent";
 import TitleComponent from "../components/TitleComponent";
-import { useGetFavProductsQuery } from "../redux/api/productsApi";
+import { useGetFavProductsQuery } from "../redux/api/favoriteApi";
 
 const WishListPage = () => {
   const id = useSelector((state) => state.auth.user._id);

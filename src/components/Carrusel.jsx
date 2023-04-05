@@ -3,8 +3,9 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { Link } from "react-router-dom";
 import CardProduct from "./CardProduct";
-import { useFetchTopRatedProductsQuery } from "../redux/api/productsApi";
+
 import RatedSkeleton from "./RatedSkeleton";
+import { useFetchTopRatedProductsQuery } from "../redux/api/productApi";
 
 const Carrusel = ({ title }) => {
   const { data, error, isLoading } = useFetchTopRatedProductsQuery();

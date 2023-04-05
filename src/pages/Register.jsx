@@ -4,7 +4,7 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import { registerSchemas } from "../schemas/registerSchemas";
 
 import { useDispatch, useSelector } from "react-redux";
-import { signUpUser } from "../redux/slices/authSliceRedux";
+import { setCredentials, signUpUser } from "../redux/slices/authSliceRedux";
 import { CircularProgress } from "@mui/material";
 import {
   AiFillEye,
@@ -15,7 +15,7 @@ import {
 import { useEffect, useState } from "react";
 
 import { toast } from "react-toastify";
-import { useSignUpMutation } from "../redux/api/productsApi";
+import { useSignUpMutation } from "../redux/api/authApi";
 
 const Register = () => {
   const [visible, setVisible] = useState(false);
@@ -27,10 +27,14 @@ const Register = () => {
 
   const [signUp, { data, error, isLoading }] = useSignUpMutation();
 
+  console.log(data, error);
+
   useEffect(() => {
     console.log(error);
-    if (data?.user) {
-      navigate("/login");
+    if (data?.token) {
+      dispatch(setCredentials(data));
+      navigate("/");
+      toast.success("Logeado correctamente");
     }
 
     if (error?.status === 401) {

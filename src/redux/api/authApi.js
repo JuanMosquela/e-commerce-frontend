@@ -1,13 +1,14 @@
-import { apiSlice } from "../api/apiSlice";
+import emptyApi from "./emptyApi";
 
-export const authApiSlice = apiSlice.injectEndpoints({
+const extendedAuthApi = emptyApi.injectEndpoints({
   endpoints: (builder) => ({
     signIn: builder.mutation({
-      query: (credentials) => ({
+      query: (body) => ({
         url: "/auth/login",
         method: "POST",
-        body: credentials,
+        body: body,
       }),
+      invalidatesTags: ["Cart"],
     }),
     signUp: builder.mutation({
       query: (body) => ({
@@ -18,3 +19,5 @@ export const authApiSlice = apiSlice.injectEndpoints({
     }),
   }),
 });
+
+export const { useSignInMutation, useSignUpMutation } = extendedAuthApi;

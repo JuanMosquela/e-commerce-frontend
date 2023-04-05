@@ -8,8 +8,8 @@ import { loginSchemas } from "../schemas/loginSchemas";
 
 import { AiFillEye, AiFillEyeInvisible } from "react-icons/ai";
 
-import { useSignInMutation } from "../redux/api/productsApi";
 import { toast } from "react-toastify";
+import { useSignInMutation } from "../redux/api/authApi";
 
 const Login = () => {
   const [visible, setVisible] = useState(false);

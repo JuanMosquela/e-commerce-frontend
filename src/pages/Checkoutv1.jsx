@@ -3,12 +3,11 @@ import { Field, Form, Formik, useFormik } from "formik";
 
 import { useEffect, useRef, useState } from "react";
 import { Navigate, useNavigate } from "react-router-dom";
-import {
-  useCreatePaymentMutation,
-  useGetCartQuery,
-} from "../redux/api/productsApi";
+
 import * as yup from "yup";
 import axios from "axios";
+import { useCreatePaymentMutation } from "../redux/api/paymentApi";
+import { useGetCartQuery } from "../redux/api/cartApi";
 
 const Checkoutv1 = () => {
   const navigate = useNavigate();

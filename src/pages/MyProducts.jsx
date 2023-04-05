@@ -1,9 +1,5 @@
 import { AiOutlineDelete } from "react-icons/ai";
 import { Link } from "react-router-dom";
-import {
-  useDeleteProductMutation,
-  useGetUserQuery,
-} from "../redux/api/productsApi";
 
 import { MdOutlineAddCircle } from "react-icons/md";
 
@@ -12,6 +8,8 @@ import { useSelector } from "react-redux";
 import ProductModal from "../components/ProductModal";
 import { CircularProgress } from "@mui/material";
 import TitleComponent from "../components/TitleComponent";
+import { useGetUserQuery } from "../redux/api/userApi";
+import { useDeleteProductMutation } from "../redux/api/productApi";
 
 const MyProducts = () => {
   const id = useSelector((state) => state.auth.user._id);

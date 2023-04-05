@@ -2,15 +2,14 @@ import { useState } from "react";
 import { AiOutlineHeart } from "react-icons/ai";
 import { BsFillCartPlusFill } from "react-icons/bs";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  useAddProductToCartMutation,
-  useAddToFavMutation,
-} from "../redux/api/productsApi";
+
 import { addToCart } from "../redux/shoppingCartRedux";
 import { CircularProgress, Rating } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import Reviews from "./Reviews";
+import { useAddToFavMutation } from "../redux/api/favoriteApi";
+import { useAddProductToCartMutation } from "../redux/api/cartApi";
 
 const ProductDetail = ({ data }) => {
   const [pictureIndex, setPictureIndex] = useState(0);
@@ -58,6 +57,12 @@ const ProductDetail = ({ data }) => {
   const handleChange = (e) => setCounter(Number(e.target.value));
 
   const handleClick = (obj) => {
+    if (!auth.token) {
+      toast.error("Debes estar autenticado");
+      navigate("/login");
+      return;
+    }
+
     if (data.stock === 0) {
       toast.error("Product with no Stock");
       return;

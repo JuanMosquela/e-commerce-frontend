@@ -43,6 +43,8 @@ const Products = () => {
 
   const query = location.search.split("=")[1];
 
+  console.log(query);
+
   const [error, setError] = useState("");
 
   console.log(filters);

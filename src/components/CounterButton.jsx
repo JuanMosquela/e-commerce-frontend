@@ -1,5 +1,5 @@
 import { CircularProgress } from "@mui/material";
-import { useUpdateProductCartMutation } from "../redux/api/productsApi";
+import { useUpdateProductCartMutation } from "../redux/api/cartApi";
 
 const CounterButton = ({ product }) => {
   const [updateProductCart, { isLoading }] = useUpdateProductCartMutation();

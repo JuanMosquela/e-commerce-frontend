@@ -12,7 +12,8 @@ import {
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
-import { useCreateReviewMutation } from "../redux/api/productsApi";
+import { useCreateReviewMutation } from "../redux/api/reviewsApi";
+
 import RatingComponent from "./RatingComponent";
 
 const ReviewModal = ({ data, auth }) => {
@@ -80,7 +81,7 @@ const ReviewModal = ({ data, auth }) => {
 
   return (
     <div className="">
-      {auth.user._id === data.boughtBy && (
+      {auth?.user?._id === data?.boughtBy && (
         <button
           onClick={handleOpen}
           className=" bg-dark text-white rounded-sm  px-4 py-2 font-bold text-sm uppercase"

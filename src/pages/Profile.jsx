@@ -1,7 +1,8 @@
 import { useSelector } from "react-redux";
-import { useGetUserQuery } from "../redux/api/productsApi";
+
 import notFound from "../img/not-found.jpg";
 import FormModal from "../components/FormModal";
+import { useGetUserQuery } from "../redux/api/userApi";
 
 const Profile = () => {
   const user = useSelector((state) => state.auth.user);

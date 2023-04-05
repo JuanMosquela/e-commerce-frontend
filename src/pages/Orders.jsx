@@ -1,7 +1,7 @@
 import { CircularProgress } from "@mui/material";
 import { useSelector } from "react-redux";
 import OrderSkeleton from "../components/OrderSkeleton";
-import { useGetOrdersQuery } from "../redux/api/productsApi";
+import { useGetOrdersQuery } from "../redux/api/paymentApi";
 
 const Orders = () => {
   const { id } = useSelector((state) => state.auth.user);

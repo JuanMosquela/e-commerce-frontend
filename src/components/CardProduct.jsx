@@ -3,12 +3,13 @@ import { AiOutlineDelete, AiOutlineHeart } from "react-icons/ai";
 import { BiSearch } from "react-icons/bi";
 import { Rating } from "@mui/material";
 import { useSelector } from "react-redux";
+
+import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
 import {
   useAddToFavMutation,
   useRemoveFavMutation,
-} from "../redux/api/productsApi";
-import { toast } from "react-toastify";
-import { useNavigate } from "react-router-dom";
+} from "../redux/api/favoriteApi";
 
 const CardProduct = ({ product, row, grid, addedToFavs }) => {
   const [isHovered, setIsHovered] = useState(false);

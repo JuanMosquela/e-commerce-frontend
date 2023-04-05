@@ -1,12 +1,20 @@
+import { useState } from "react";
 import { AiOutlineSearch } from "react-icons/ai";
-import { useNavigate } from "react-router-dom";
+import { createSearchParams, useNavigate } from "react-router-dom";
 
 const Search = () => {
   const navigate = useNavigate();
 
+  const [search, setSearch] = useState("");
+
   const handleSubmit = (e) => {
     e.preventDefault();
-    navigate("/products");
+    navigate({
+      pathname: "products",
+      search: createSearchParams({
+        search,
+      }).toString(),
+    });
   };
 
   return (
@@ -14,6 +22,7 @@ const Search = () => {
       <input
         className="rounded-sm w-full border-1 bg-gray/10 ease-in duration-100  text-slate-900 p-2 outline-none "
         type="text"
+        onChange={(e) => setSearch(e.target.value)}
         placeholder="Search products ..."
       />
       <button

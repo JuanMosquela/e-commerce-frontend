@@ -1,5 +1,6 @@
 import { Rating } from "@mui/material";
-import { useFetchAllReviewsQuery } from "../redux/api/productsApi";
+import { useFetchAllReviewsQuery } from "../redux/api/reviewsApi";
+
 import ReviewModal from "./ReviewModal";
 
 const Reviews = ({ data, auth }) => {

@@ -1,22 +1,26 @@
-import { useLocation } from "react-router-dom";
+import { useLocation, useParams } from "react-router-dom";
 import { useState } from "react";
 
 import { CircularProgress } from "@mui/material";
 import ProductDetail from "../components/ProductDetail";
 
-import { useFetchSingleProductQuery } from "../redux/api/productsApi";
 import { useSelector } from "react-redux";
+import { useFetchSingleProductQuery } from "../redux/api/productApi";
 
 const ProductDetailPage = () => {
   const location = useLocation();
 
-  const id = location.pathname.split("/")[2];
+  const { id } = useParams();
+
+  console.log(id);
 
   const [loading, setLoading] = useState(true);
 
   const [productDetail, setProductDetail] = useState({});
 
-  const { data, isLoading } = useFetchSingleProductQuery(id);
+  const { data, error, isLoading } = useFetchSingleProductQuery(id);
+
+  console.log(data, error);
 
   return (
     <section>

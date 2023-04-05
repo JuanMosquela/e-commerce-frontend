@@ -1,6 +1,6 @@
 import { useParams } from "react-router-dom";
 import CardProduct from "../components/CardProduct";
-import { useFetchSingleProductQuery } from "../redux/api/productsApi";
+import { useFetchSingleProductQuery } from "../redux/api/productApi";
 
 const UserProductView = () => {
   const { id } = useParams();

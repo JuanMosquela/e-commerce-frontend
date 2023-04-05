@@ -2,7 +2,7 @@ import { AiOutlineShoppingCart } from "react-icons/ai";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { useCartSelector } from "../redux/shoppingCartRedux";
-import { useGetCartQuery } from "../redux/api/productsApi";
+import { useGetCartQuery } from "../redux/api/cartApi";
 
 const CartWidget = () => {
   const state = useSelector(useCartSelector);

@@ -10,7 +10,7 @@ import { useEffect } from "react";
 import { useState } from "react";
 import { toast } from "react-toastify";
 import FileUpload from "../components/FileUpload";
-import { useCreateProductMutation } from "../redux/api/productsApi";
+import { useCreateProductMutation } from "../redux/api/productApi";
 
 const CreateProduct = () => {
   const [createProduct, { data, isSuccess, isLoading }] =

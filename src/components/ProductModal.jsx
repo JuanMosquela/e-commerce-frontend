@@ -10,11 +10,12 @@ import { useState } from "react";
 import { FiEdit } from "react-icons/fi";
 
 import FileUpload from "./FileUpload";
-import { useUpdateProductMutation } from "../redux/api/productsApi";
+
 import { CircularProgress, Modal } from "@mui/material";
 import { Box } from "@mui/system";
 import { useEffect } from "react";
 import { toast } from "react-toastify";
+import { useUpdateProductMutation } from "../redux/api/productApi";
 
 export default function ProductModal({ data }) {
   const [open, setOpen] = useState(false);
