@@ -23,8 +23,6 @@ const Login = () => {
 
   const [signIn, { data, isLoading, error }] = useSignInMutation();
 
-  console.log(error);
-
   useEffect(() => {
     if (data?.token) {
       dispatch(setCredentials(data));

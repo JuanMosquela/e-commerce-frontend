@@ -1,5 +1,5 @@
 import { useFormik } from "formik";
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 import { registerSchemas } from "../schemas/registerSchemas";
 
@@ -18,8 +18,6 @@ const Register = () => {
   const navigate = useNavigate();
 
   const [signUp, { data, error, isLoading }] = useSignUpMutation();
-
-  console.log(data, error);
 
   useEffect(() => {
     console.log(error);

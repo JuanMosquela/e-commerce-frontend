@@ -8,7 +8,9 @@ import { useCreatePaymentMutation } from "../redux/api/paymentApi";
 import FormControllers from "./FormControllers";
 
 const MultiStepForm = ({ children, initialValues }) => {
-  const { cart } = useSelector((state) => state.auth.user);
+  const { cart } = useSelector((state) => state.auth);
+
+  console.log(cart);
 
   const [createPayment, { data, error }] = useCreatePaymentMutation();
 
@@ -52,7 +54,7 @@ const MultiStepForm = ({ children, initialValues }) => {
       };
 
       return createPayment({
-        id: cart._id,
+        id: cart.id,
         body,
       });
     } else {

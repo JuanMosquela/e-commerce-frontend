@@ -6,7 +6,7 @@ const extendedAuthApi = emptyApi.injectEndpoints({
       query: (body) => ({
         url: "/auth/login",
         method: "POST",
-        body: body,
+        body,
       }),
       invalidatesTags: ["Cart"],
     }),
@@ -14,7 +14,7 @@ const extendedAuthApi = emptyApi.injectEndpoints({
       query: (body) => ({
         url: "/auth/register",
         method: "POST",
-        body: body,
+        body,
       }),
     }),
   }),
