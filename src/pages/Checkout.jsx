@@ -13,9 +13,11 @@ import { useGetCartQuery } from "../redux/api/cartApi";
 const Checkout = () => {
   const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
-  const { _id } = useSelector((state) => state.auth.user);
+  const { id } = useSelector((state) => state.auth.user);
 
-  const { data, error, isLoading } = useGetCartQuery(_id);
+  console.log(id);
+
+  const { data, error, isLoading } = useGetCartQuery(id);
 
   return (
     <section className="h-screen md:container">

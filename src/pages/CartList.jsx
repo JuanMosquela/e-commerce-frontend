@@ -94,7 +94,7 @@ const CartList = () => {
                 Taxes and shipping calculated at checkout
               </p>
 
-              <Link to="/checkoutv1">
+              <Link to="/checkout">
                 <button className="flex justify-center bg-orange text-white font-bold px-3 py-3 rounded-md uppercase cursor-pointer w-full hover:shadow-lg hover:duration-150 ">
                   Checkout
                 </button>
