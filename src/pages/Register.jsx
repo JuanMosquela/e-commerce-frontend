@@ -3,15 +3,10 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 
 import { registerSchemas } from "../schemas/registerSchemas";
 
-import { useDispatch, useSelector } from "react-redux";
-import { setCredentials, signUpUser } from "../redux/slices/authSliceRedux";
+import { useDispatch } from "react-redux";
+import { setCredentials } from "../redux/slices/authSliceRedux";
 import { CircularProgress } from "@mui/material";
-import {
-  AiFillEye,
-  AiFillEyeInvisible,
-  AiOutlineEye,
-  AiOutlineEyeInvisible,
-} from "react-icons/ai";
+import { AiFillEye, AiFillEyeInvisible } from "react-icons/ai";
 import { useEffect, useState } from "react";
 
 import { toast } from "react-toastify";
@@ -20,10 +15,7 @@ import { useSignUpMutation } from "../redux/api/authApi";
 const Register = () => {
   const [visible, setVisible] = useState(false);
   const dispatch = useDispatch();
-  const location = useLocation();
   const navigate = useNavigate();
-  const auth = useSelector((state) => state.auth);
-  const from = location.state?.from?.pathname || "/";
 
   const [signUp, { data, error, isLoading }] = useSignUpMutation();
 
