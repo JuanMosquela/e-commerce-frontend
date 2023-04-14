@@ -4,12 +4,12 @@ import { Link, useNavigate } from "react-router-dom";
 import { registerSchemas } from "../schemas/registerSchemas";
 
 import { useDispatch } from "react-redux";
-import { setCredentials } from "../redux/slices/authSliceRedux";
+import { setCart, setCredentials } from "../redux/slices/authSliceRedux";
 import { CircularProgress } from "@mui/material";
 import { AiFillEye, AiFillEyeInvisible } from "react-icons/ai";
 import { useEffect, useState } from "react";
 
-import { toast } from "react-toastify";
+import { toast } from "sonner";
 import { useSignUpMutation } from "../redux/api/authApi";
 
 const Register = () => {
@@ -23,6 +23,7 @@ const Register = () => {
     console.log(error);
     if (data?.token) {
       dispatch(setCredentials(data));
+      console.log(data);
       navigate("/");
       toast.success("Logeado correctamente");
     }

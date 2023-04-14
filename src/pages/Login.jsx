@@ -8,7 +8,7 @@ import { loginSchemas } from "../schemas/loginSchemas";
 
 import { AiFillEye, AiFillEyeInvisible } from "react-icons/ai";
 
-import { toast } from "react-toastify";
+import { toast } from "sonner";
 import { useSignInMutation } from "../redux/api/authApi";
 
 const Login = () => {
@@ -22,6 +22,8 @@ const Login = () => {
   const dispatch = useDispatch();
 
   const [signIn, { data, isLoading, error }] = useSignInMutation();
+
+  console.log(data);
 
   useEffect(() => {
     if (data?.token) {

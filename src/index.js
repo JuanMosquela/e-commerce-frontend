@@ -32,6 +32,7 @@ import Success from "./pages/Success";
 import Orders from "./pages/Orders";
 
 import Checkout from "./pages/Checkout";
+import { Toaster } from "sonner";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
@@ -39,7 +40,7 @@ root.render(
     <Provider store={store}>
       <ScrollToTop />
 
-      <ToastContainer />
+      <Toaster position="top-right" richColors />
       <Routes>
         <Route path="/" exact element={<App />}>
           <Route index element={<Home />} />

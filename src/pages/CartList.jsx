@@ -1,8 +1,5 @@
-import { useDispatch, useSelector } from "react-redux";
-
-import { removeItem } from "../redux/shoppingCartRedux";
+import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
-
 import CounterButton from "../components/CounterButton";
 import { CircularProgress } from "@mui/material";
 import { BsBagX } from "react-icons/bs";
@@ -12,9 +9,19 @@ import {
   useGetCartQuery,
   useRemoveFromCartMutation,
 } from "../redux/api/cartApi";
+import { useEffect } from "react";
+import { setCart } from "../redux/slices/authSliceRedux";
 
 const CartList = () => {
-  const { data, error, isLoading } = useGetCartQuery();
+  const dispatch = useDispatch();
+  const { data, error, isLoading, isSuccess } = useGetCartQuery();
+
+  useEffect(() => {
+    console.log(data?.result);
+    dispatch(setCart(data?.result));
+
+    // dispatch(setCart(data?.result));
+  }, [isSuccess, data]);
 
   const [clearCart] = useClearCartMutation();
 

@@ -54,7 +54,7 @@ const MultiStepForm = ({ children, initialValues }) => {
       };
 
       return createPayment({
-        id: cart.id,
+        id: cart._id,
         body,
       });
     } else {

@@ -23,7 +23,8 @@ const authSlice = createSlice({
       localStorage.setItem("token", JSON.stringify(state.token));
     },
     setCart: (state, action) => {
-      const { cart } = action.payload;
+      const cart = action.payload;
+      console.log(cart);
       state.cart = cart;
 
       localStorage.setItem("cart", JSON.stringify(state.cart));
@@ -37,6 +38,6 @@ const authSlice = createSlice({
   },
 });
 
-export const { setCredentials, logout } = authSlice.actions;
+export const { setCredentials, logout, setCart } = authSlice.actions;
 
 export default authSlice.reducer;

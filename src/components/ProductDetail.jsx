@@ -2,11 +2,9 @@ import { useState } from "react";
 import { AiOutlineHeart } from "react-icons/ai";
 import { BsFillCartPlusFill } from "react-icons/bs";
 import { useDispatch, useSelector } from "react-redux";
-
-import { addToCart } from "../redux/shoppingCartRedux";
 import { CircularProgress, Rating } from "@mui/material";
 import { useNavigate } from "react-router-dom";
-import { toast } from "react-toastify";
+import { toast } from "sonner";
 import Reviews from "./Reviews";
 import { useAddToFavMutation } from "../redux/api/favoriteApi";
 import { useAddProductToCartMutation } from "../redux/api/cartApi";
@@ -34,6 +32,8 @@ const ProductDetail = ({ data }) => {
     counter: counter,
   };
 
+  console.log(data);
+
   const handleFav = async (e) => {
     e.preventDefault();
     setButtonClicked(true);
@@ -51,7 +51,13 @@ const ProductDetail = ({ data }) => {
 
     addToFav(newFavProduct);
 
-    toast.info("Product added to fav");
+    toast.promise(addToFav, {
+      loading: "Loading...",
+      success: (res) => {
+        return `${data?.title} added to fav`;
+      },
+      error: "Error",
+    });
   };
 
   const handleChange = (e) => setCounter(Number(e.target.value));
@@ -67,10 +73,18 @@ const ProductDetail = ({ data }) => {
       toast.error("Product with no Stock");
       return;
     }
-    dispatch(addToCart(obj));
+
     addProductToCart({
       product: data._id,
       quantity: counter,
+    });
+
+    toast.promise(addProductToCart, {
+      loading: "Loading...",
+      success: (res) => {
+        return `${data?.title} added to cart`;
+      },
+      error: "Error",
     });
   };
 

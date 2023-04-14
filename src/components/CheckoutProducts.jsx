@@ -20,7 +20,7 @@ const CheckoutProducts = ({ data }) => {
                   <h4 className="text-md text-dark font-semibold">
                     {product?.item?.title}
                   </h4>
-                  <span>$ {product?.total}</span>
+                  <span>$ {product?.total.toFixed(2)}</span>
                 </div>
                 <span className=" bg-orange text-white w-6 h-6 flex items-center justify-center p-2 rounded-full">
                   {product?.quantity}
@@ -32,7 +32,7 @@ const CheckoutProducts = ({ data }) => {
         <div className=" flex justify-between  items-center w-full ">
           <p className="text-semibold texzt-dark text-xl">SubTotal:</p>
           <span className="text-2xl font-bold text-dark">
-            $ {data?.result?.subTotal}
+            $ {data?.result?.subTotal.toFixed(2)}
           </span>
         </div>
       </div>
